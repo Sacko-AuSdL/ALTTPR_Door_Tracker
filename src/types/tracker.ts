@@ -13,6 +13,7 @@ export type SelectedDoor = {
 
 export type TrackerState = {
     dungeonId: string;
+    visibleRoomIds: string[];
     discoveredRoomIds: string[];
     connections: DoorConnection[];
     selectedDoorId?: string;
@@ -26,6 +27,7 @@ export type GraphPosition = {
 export type PersistedTrackerState = {
     version: 1;
     dungeonId: string;
+    visibleRoomIds: string[];
     connections: DoorConnection[];
     nodePositions: Record<string, GraphPosition>;
 };

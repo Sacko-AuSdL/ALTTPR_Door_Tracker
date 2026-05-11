@@ -17,6 +17,8 @@ import {
 } from "react";
 import type { DungeonDefinition, DungeonDoor } from "../../types/dungeon";
 import type { DoorConnection, GraphPosition, PersistedTrackerState } from "../../types/tracker";
+import { ConnectionPanel } from "./ConnectionPanel";
+import { TrackerStatusBar } from "./TrackerStatusBar";
 import { RoomNode, type RoomFlowNode } from "./RoomNode";
 
 type DungeonGraphProps = {
@@ -33,6 +35,14 @@ export function DungeonGraph({ dungeon }: DungeonGraphProps) {
         [dungeon.id],
     );
 
+    const initialVisibleRoomIds = useMemo(() => {
+        return persistedState?.visibleRoomIds ?? ["ep-lobby"];
+    }, [persistedState?.visibleRoomIds]);
+
+    const [visibleRoomIds, setVisibleRoomIds] = useState<string[]>(
+        () => initialVisibleRoomIds,
+    );
+
     const [selectedDoor, setSelectedDoor] = useState<DungeonDoor | undefined>();
 
     const [connections, setConnections] = useState<DoorConnection[]>(
@@ -40,8 +50,12 @@ export function DungeonGraph({ dungeon }: DungeonGraphProps) {
     );
 
     const initialNodes = useMemo<RoomFlowNode[]>(() => {
-        return createInitialRoomNodes(dungeon, persistedState?.nodePositions);
-    }, [dungeon, persistedState?.nodePositions]);
+        return createInitialRoomNodes(
+            dungeon,
+            visibleRoomIds,
+            persistedState?.nodePositions,
+        );
+    }, [dungeon, persistedState?.nodePositions, visibleRoomIds]);
 
     const [nodes, setNodes, onNodesChange] =
         useNodesState<RoomFlowNode>(initialNodes);
@@ -53,14 +67,19 @@ export function DungeonGraph({ dungeon }: DungeonGraphProps) {
         ]);
     }, [connections]);
 
+    const hiddenRooms = useMemo(() => {
+        return dungeon.rooms.filter((room) => !visibleRoomIds.includes(room.id));
+    }, [dungeon.rooms, visibleRoomIds]);
+
     useEffect(() => {
         savePersistedTrackerState({
             version: 1,
             dungeonId: dungeon.id,
+            visibleRoomIds,
             connections,
             nodePositions: getNodePositions(nodes),
         });
-    }, [connections, dungeon.id, nodes]);
+    }, [connections, dungeon.id, nodes, visibleRoomIds]);
 
     const handleDoorClick = useCallback(
         (door: DungeonDoor) => {
@@ -128,14 +147,52 @@ export function DungeonGraph({ dungeon }: DungeonGraphProps) {
     }
 
     function resetLayout() {
-        setNodes(createInitialRoomNodes(dungeon));
+        setNodes(createInitialRoomNodes(dungeon, visibleRoomIds));
         setSelectedDoor(undefined);
     }
 
     function resetRun() {
+        const startingRoomIds = ["ep-lobby"];
+
+        setVisibleRoomIds(startingRoomIds);
         setConnections([]);
-        setNodes(createInitialRoomNodes(dungeon));
+        setNodes(createInitialRoomNodes(dungeon, startingRoomIds));
         setSelectedDoor(undefined);
+    }
+
+    function addRoomToGraph(roomId: string) {
+        if (!roomId || visibleRoomIds.includes(roomId)) {
+            return;
+        }
+
+        const room = dungeon.rooms.find((candidate) => candidate.id === roomId);
+
+        if (!room) {
+            return;
+        }
+
+        setVisibleRoomIds((currentVisibleRoomIds) => [
+            ...currentVisibleRoomIds,
+            roomId,
+        ]);
+
+        setNodes((currentNodes) => [
+            ...currentNodes,
+            {
+                id: room.id,
+                type: "room",
+                position: {
+                    x: 180 + currentNodes.length * 40,
+                    y: 180 + currentNodes.length * 40,
+                },
+                data: {
+                    room,
+                    selectedDoorId: selectedDoor?.id,
+                    connectedDoorIds,
+                    onDoorClick: handleDoorClick,
+                },
+            },
+        ]);
     }
 
     const edges: Edge[] = useMemo(() => {
@@ -191,73 +248,21 @@ export function DungeonGraph({ dungeon }: DungeonGraphProps) {
                 <Controls />
             </ReactFlow>
 
-            <div className="connection-panel">
-                <div className="connection-panel__header">
-                    <strong>Connections</strong>
+            <ConnectionPanel
+                dungeon={dungeon}
+                connections={connections}
+                hiddenRooms={hiddenRooms}
+                onAddRoom={addRoomToGraph}
+                onDeleteConnection={deleteConnection}
+                onClearConnections={clearConnections}
+                onResetLayout={resetLayout}
+                onResetRun={resetRun}
+            />
 
-                    <div className="connection-panel__actions">
-                        <button
-                            type="button"
-                            className="connection-panel__button"
-                            onClick={resetLayout}
-                        >
-                            Reset Layout
-                        </button>
-
-                        {connections.length > 0 && (
-                            <button
-                                type="button"
-                                className="connection-panel__button"
-                                onClick={clearConnections}
-                            >
-                                Clear
-                            </button>
-                        )}
-
-                        <button
-                            type="button"
-                            className="connection-panel__button connection-panel__button--danger"
-                            onClick={resetRun}
-                        >
-                            Reset Run
-                        </button>
-                    </div>
-                </div>
-
-                {connections.length === 0 ? (
-                    <p className="connection-panel__empty">No connections yet.</p>
-                ) : (
-                    <ul className="connection-panel__list">
-                        {connections.map((connection) => (
-                            <li key={connection.id} className="connection-panel__item">
-                                <span>{getConnectionDisplayLabel(dungeon, connection)}</span>
-
-                                <button
-                                    type="button"
-                                    className="connection-panel__delete"
-                                    onClick={() => deleteConnection(connection.id)}
-                                    aria-label="Delete connection"
-                                >
-                                    ×
-                                </button>
-                            </li>
-                        ))}
-                    </ul>
-                )}
-            </div>
-
-            <div className="tracker-statusbar">
-        <span
-            className={[
-                "tracker-statusbar__indicator",
-                selectedDoor ? "tracker-statusbar__indicator--active" : "",
-            ]
-                .filter(Boolean)
-                .join(" ")}
-        />
-
-                <span>{statusText}</span>
-            </div>
+            <TrackerStatusBar
+                statusText={statusText}
+                isActive={selectedDoor !== undefined}
+            />
         </div>
     );
 }
@@ -287,16 +292,6 @@ function getDoorDisplayLabel(
     }
 
     return doorId;
-}
-
-function getConnectionDisplayLabel(
-    dungeon: DungeonDefinition,
-    connection: DoorConnection,
-): string {
-    const fromLabel = getDoorDisplayLabel(dungeon, connection.fromDoorId);
-    const toLabel = getDoorDisplayLabel(dungeon, connection.toDoorId);
-
-    return `${fromLabel} ↔ ${toLabel}`;
 }
 
 function getStorageKey(dungeonId: string): string {
@@ -333,26 +328,6 @@ function savePersistedTrackerState(state: PersistedTrackerState) {
     localStorage.setItem(getStorageKey(state.dungeonId), JSON.stringify(state));
 }
 
-function createInitialRoomNodes(
-    dungeon: DungeonDefinition,
-    nodePositions?: Record<string, GraphPosition>,
-): RoomFlowNode[] {
-    return dungeon.rooms.map((room, index) => ({
-        id: room.id,
-        type: "room",
-        position: nodePositions?.[room.id] ?? {
-            x: 100 + (index % 2) * 320,
-            y: 100 + Math.floor(index / 2) * 220,
-        },
-        data: {
-            room,
-            selectedDoorId: undefined,
-            connectedDoorIds: [],
-            onDoorClick: () => undefined,
-        },
-    }));
-}
-
 function getNodePositions(nodes: RoomFlowNode[]): Record<string, GraphPosition> {
     return nodes.reduce<Record<string, GraphPosition>>((positions, node) => {
         positions[node.id] = {
@@ -362,4 +337,27 @@ function getNodePositions(nodes: RoomFlowNode[]): Record<string, GraphPosition> 
 
         return positions;
     }, {});
+}
+
+function createInitialRoomNodes(
+    dungeon: DungeonDefinition,
+    visibleRoomIds: string[],
+    nodePositions?: Record<string, GraphPosition>,
+): RoomFlowNode[] {
+    return dungeon.rooms
+        .filter((room) => visibleRoomIds.includes(room.id))
+        .map((room, index) => ({
+            id: room.id,
+            type: "room",
+            position: nodePositions?.[room.id] ?? {
+                x: 100 + (index % 2) * 320,
+                y: 100 + Math.floor(index / 2) * 220,
+            },
+            data: {
+                room,
+                selectedDoorId: undefined,
+                connectedDoorIds: [],
+                onDoorClick: () => undefined,
+            },
+        }));
 }
