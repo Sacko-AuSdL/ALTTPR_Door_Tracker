@@ -5,16 +5,30 @@ type RoomTilePreviewProps = {
     allDungeons: DungeonDefinition[];
 };
 
+const MAX_VISIBLE_DOORS = 6;
+
 export function RoomTilePreview({ room, allDungeons }: RoomTilePreviewProps) {
     if (!room) {
         return (
             <div className="room-tile-preview room-tile-preview--empty">
-                Select a tile to preview it.
+                <div className="room-tile-preview__image">
+                    <span>No tile</span>
+                </div>
+
+                <div className="room-tile-preview__content">
+                    <div className="room-tile-preview__dungeon">Preview</div>
+                    <div className="room-tile-preview__name">Hover a tile</div>
+                    <div className="room-tile-preview__doors">
+                        <span>Select a tile to preview it.</span>
+                    </div>
+                </div>
             </div>
         );
     }
 
     const dungeonName = getDungeonName(room, allDungeons);
+    const visibleDoors = room.doors.slice(0, MAX_VISIBLE_DOORS);
+    const hiddenDoorCount = room.doors.length - visibleDoors.length;
 
     return (
         <div className="room-tile-preview">
@@ -28,12 +42,18 @@ export function RoomTilePreview({ room, allDungeons }: RoomTilePreviewProps) {
 
             <div className="room-tile-preview__content">
                 <div className="room-tile-preview__dungeon">{dungeonName}</div>
-                <div className="room-tile-preview__name">{room.name}</div>
+                <div className="room-tile-preview__name" title={room.name}>
+                    {room.name}
+                </div>
 
                 <div className="room-tile-preview__doors">
-                    {room.doors.map((door) => (
+                    {visibleDoors.map((door) => (
                         <span key={door.id}>{door.label}</span>
                     ))}
+
+                    {hiddenDoorCount > 0 && (
+                        <span>+{hiddenDoorCount} more</span>
+                    )}
                 </div>
             </div>
         </div>

@@ -14,6 +14,7 @@ export type DoorType =
     | "bigkey"
     | "shutter"
     | "stair"
+    | "drop"
     | "lobby"
     | "unknown";
 
