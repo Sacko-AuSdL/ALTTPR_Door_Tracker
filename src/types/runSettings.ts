@@ -1,19 +1,32 @@
-export type DoorShuffleMode = "basic" | "own-dungeon" | "cross-dungeon";
+export const DoorShuffleModes = {
+    Basic: "basic",
+    OwnDungeon: "own-dungeon",
+    CrossDungeon: "cross-dungeon",
+} as const;
 
-export type EntranceMode = "vanilla" | "shuffled";
+export type DoorShuffleMode =
+    (typeof DoorShuffleModes)[keyof typeof DoorShuffleModes];
+
+export const EntranceModes = {
+    Vanilla: "vanilla",
+    Shuffled: "shuffled",
+} as const;
+
+export type EntranceMode = (typeof EntranceModes)[keyof typeof EntranceModes];
 
 export type TrackerRunSettings = {
-    activeDungeonId: string;
     doorShuffleMode: DoorShuffleMode;
     entranceMode: EntranceMode;
 };
 
-export function createDefaultRunSettings(
-    activeDungeonId: string,
-): TrackerRunSettings {
+export type PersistedRunSettings = {
+    version: 1;
+    settings: TrackerRunSettings;
+};
+
+export function createDefaultRunSettings(): TrackerRunSettings {
     return {
-        activeDungeonId,
-        doorShuffleMode: "own-dungeon",
-        entranceMode: "vanilla",
+        doorShuffleMode: DoorShuffleModes.OwnDungeon,
+        entranceMode: EntranceModes.Vanilla,
     };
 }

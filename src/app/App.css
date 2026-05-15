@@ -19,6 +19,28 @@
     border-bottom: 1px solid #374151;
 }
 
+.app__dungeon-select {
+    display: grid;
+    gap: 0.35rem;
+    min-width: 220px;
+    text-align: left;
+}
+
+.app__dungeon-select span {
+    color: #9ca3af;
+    font-size: 0.75rem;
+}
+
+.app__dungeon-select select {
+    width: 100%;
+    cursor: pointer;
+    padding: 0.45rem 0.5rem;
+    border: 1px solid #4b5563;
+    border-radius: 0.45rem;
+    background: #1f2937;
+    color: #f9fafb;
+}
+
 .app__header h1 {
     margin: 0;
     font-size: 1.5rem;
@@ -246,30 +268,6 @@
     text-align: left;
 }
 
-.connection-panel__add-room {
-    display: grid;
-    gap: 0.35rem;
-    margin-bottom: 0.75rem;
-    padding-bottom: 0.75rem;
-    border-bottom: 1px solid #374151;
-}
-
-.connection-panel__add-room label {
-    color: #9ca3af;
-    font-size: 0.75rem;
-    text-align: left;
-}
-
-.connection-panel__add-room select {
-    width: 100%;
-    cursor: pointer;
-    padding: 0.45rem 0.5rem;
-    border: 1px solid #4b5563;
-    border-radius: 0.45rem;
-    background: #1f2937;
-    color: #f9fafb;
-}
-
 .run-settings-panel {
     display: grid;
     gap: 0.5rem;
@@ -296,5 +294,199 @@
     border: 1px solid #4b5563;
     border-radius: 0.45rem;
     background: #1f2937;
+    color: #f9fafb;
+}
+
+.dungeon-tabs {
+    flex: 0 0 auto;
+    display: flex;
+    gap: 0.35rem;
+    padding: 0.5rem 1rem;
+    overflow-x: auto;
+    border-bottom: 1px solid #374151;
+    background: #111827;
+}
+
+.dungeon-tabs__tab {
+    flex: 0 0 auto;
+    cursor: pointer;
+    padding: 0.45rem 0.75rem;
+    border: 1px solid #374151;
+    border-radius: 999px;
+    background: #1f2937;
+    color: #d1d5db;
+    font-size: 0.85rem;
+}
+
+.dungeon-tabs__tab:hover {
+    border-color: #60a5fa;
+    color: #f9fafb;
+}
+
+.dungeon-tabs__tab--active {
+    border-color: #facc15;
+    background: #854d0e;
+    color: #fef3c7;
+}
+
+.room-tile-preview {
+    display: grid;
+    grid-template-columns: 72px 1fr;
+    gap: 0.65rem;
+    align-items: center;
+
+    padding: 0.55rem;
+    border: 1px solid #374151;
+    border-radius: 0.5rem;
+    background: #111827;
+    text-align: left;
+}
+
+.room-tile-preview--empty {
+    display: block;
+    color: #9ca3af;
+    font-size: 0.8rem;
+}
+
+.room-tile-preview__image {
+    display: grid;
+    place-items: center;
+    width: 72px;
+    height: 56px;
+    border: 1px dashed #4b5563;
+    border-radius: 0.4rem;
+    overflow: hidden;
+    color: #6b7280;
+    font-size: 0.7rem;
+    text-align: center;
+}
+
+.room-tile-preview__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.room-tile-preview__dungeon {
+    color: #9ca3af;
+    font-size: 0.7rem;
+}
+
+.room-tile-preview__name {
+    color: #f9fafb;
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+.room-tile-preview__doors {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+    margin-top: 0.35rem;
+}
+
+.room-tile-preview__doors span {
+    padding: 0.1rem 0.35rem;
+    border: 1px solid #4b5563;
+    border-radius: 999px;
+    color: #d1d5db;
+    font-size: 0.7rem;
+}
+
+.connection-panel__button:disabled {
+    cursor: not-allowed;
+    opacity: 0.45;
+}
+
+.add-tile-picker {
+    display: grid;
+    gap: 0.6rem;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid #374151;
+}
+
+.add-tile-picker__toggle {
+    width: 100%;
+}
+
+.add-tile-picker__content {
+    display: grid;
+    gap: 0.6rem;
+}
+
+.add-tile-picker__groups {
+    display: grid;
+    gap: 0.65rem;
+}
+
+.add-tile-picker__group {
+    display: grid;
+    gap: 0.35rem;
+}
+
+.add-tile-picker__group h3 {
+    margin: 0;
+    color: #d1d5db;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-align: left;
+}
+
+.add-tile-picker__rooms {
+    display: grid;
+    gap: 0.3rem;
+}
+
+.add-tile-picker__room {
+    cursor: pointer;
+    width: 100%;
+    padding: 0.4rem 0.5rem;
+    border: 1px solid #374151;
+    border-radius: 0.45rem;
+    background: #1f2937;
+    color: #f9fafb;
+    font-size: 0.8rem;
+    text-align: left;
+}
+
+.add-tile-picker__room:hover,
+.add-tile-picker__room:focus {
+    border-color: #facc15;
+    background: #854d0e;
+    outline: none;
+}
+
+.room-node__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.room-node__title {
+    flex: 1;
+    margin-bottom: 0;
+    font-weight: 700;
+    text-align: center;
+}
+
+.room-node__remove {
+    flex: 0 0 auto;
+    cursor: pointer;
+    width: 1.4rem;
+    height: 1.4rem;
+    border: 1px solid #4b5563;
+    border-radius: 999px;
+    background: #111827;
+    color: #d1d5db;
+    font-size: 1rem;
+    line-height: 1;
+}
+
+.room-node__remove:hover {
+    border-color: #f87171;
+    background: #7f1d1d;
     color: #f9fafb;
 }

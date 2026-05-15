@@ -1,7 +1,9 @@
-import type {
-    DoorShuffleMode,
-    EntranceMode,
-    TrackerRunSettings,
+import {
+    DoorShuffleModes,
+    EntranceModes,
+    type DoorShuffleMode,
+    type EntranceMode,
+    type TrackerRunSettings,
 } from "../../types/runSettings";
 
 type RunSettingsPanelProps = {
@@ -38,9 +40,9 @@ export function RunSettingsPanel({
                         updateDoorShuffleMode(event.target.value as DoorShuffleMode)
                     }
                 >
-                    <option value="basic">Basic Doors</option>
-                    <option value="own-dungeon">Own Dungeon</option>
-                    <option value="cross-dungeon">Cross Dungeon</option>
+                    <option value={DoorShuffleModes.Basic}>Basic Doors</option>
+                    <option value={DoorShuffleModes.OwnDungeon}>Own Dungeon</option>
+                    <option value={DoorShuffleModes.CrossDungeon}>Cross Dungeon</option>
                 </select>
             </label>
 
@@ -53,8 +55,8 @@ export function RunSettingsPanel({
                         updateEntranceMode(event.target.value as EntranceMode)
                     }
                 >
-                    <option value="vanilla">Vanilla</option>
-                    <option value="shuffled">Shuffled</option>
+                    <option value={EntranceModes.Vanilla}>Vanilla</option>
+                    <option value={EntranceModes.Shuffled}>Shuffled</option>
                 </select>
             </label>
         </div>

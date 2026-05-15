@@ -10,6 +10,7 @@ export type RoomNodeData = {
     selectedDoorId?: string;
     connectedDoorIds: string[];
     onDoorClick: (door: DungeonDoor) => void;
+    onRemoveRoom: (roomId: string) => void;
 };
 
 export type RoomFlowNode = Node<RoomNodeData, "room">;
@@ -17,7 +18,22 @@ export type RoomFlowNode = Node<RoomNodeData, "room">;
 export function RoomNode({ data }: NodeProps<RoomFlowNode>) {
     return (
         <div className="room-node">
-            <div className="room-node__title">{data.room.name}</div>
+            <div className="room-node__header">
+                <div className="room-node__title">{data.room.name}</div>
+
+                <button
+                    type="button"
+                    className="nodrag room-node__remove"
+                    onClick={(event) => {
+                        event.stopPropagation();
+                        data.onRemoveRoom(data.room.id);
+                    }}
+                    aria-label={`Remove ${data.room.name}`}
+                    title="Remove tile"
+                >
+                    ×
+                </button>
+            </div>
 
             <div className="room-node__doors">
                 {data.room.doors.map((door) => {

@@ -1,31 +1,37 @@
 import type { DungeonDefinition } from "../../types/dungeon";
 import type { DoorConnection } from "../../types/tracker";
 import type {TrackerRunSettings} from "../../types/runSettings";
+import type { RoomGroup } from "../../domain/roomGroups";
+import { AddTilePicker } from "./AddTilePicker";
 import {RunSettingsPanel} from "./RunSettingsPanel";
 
 type ConnectionPanelProps = {
     dungeon: DungeonDefinition;
+    allDungeons: DungeonDefinition[];
     connections: DoorConnection[];
-    hiddenRooms: DungeonDefinition["rooms"];
+    roomGroups: RoomGroup[];
     runSettings: TrackerRunSettings;
     onRunSettingsChange: (settings: TrackerRunSettings) => void;
     onAddRoom: (roomId: string) => void;
     onDeleteConnection: (connectionId: string) => void;
     onClearConnections: () => void;
     onResetLayout: () => void;
+    onResetDungeon: () => void;
     onResetRun: () => void;
 };
 
 export function ConnectionPanel({
                                     dungeon,
+                                    allDungeons,
                                     connections,
-                                    hiddenRooms,
+                                    roomGroups,
                                     runSettings,
                                     onRunSettingsChange,
                                     onAddRoom,
                                     onDeleteConnection,
                                     onClearConnections,
                                     onResetLayout,
+                                    onResetDungeon,
                                     onResetRun,
                                 }: ConnectionPanelProps) {
     return (
@@ -54,6 +60,14 @@ export function ConnectionPanel({
 
                     <button
                         type="button"
+                        className="connection-panel__button"
+                        onClick={onResetDungeon}
+                    >
+                        Reset Dungeon
+                    </button>
+
+                    <button
+                        type="button"
                         className="connection-panel__button connection-panel__button--danger"
                         onClick={onResetRun}
                     >
@@ -70,24 +84,11 @@ export function ConnectionPanel({
             <div className="connection-panel__add-room">
                 <label htmlFor="add-room-select">Add Tile</label>
 
-                <select
-                    id="add-room-select"
-                    value=""
-                    onChange={(event) => {
-                        onAddRoom(event.target.value);
-                    }}
-                    disabled={hiddenRooms.length === 0}
-                >
-                    <option value="">
-                        {hiddenRooms.length === 0 ? "All tiles added" : "Select tile..."}
-                    </option>
-
-                    {hiddenRooms.map((room) => (
-                        <option key={room.id} value={room.id}>
-                            {room.name}
-                        </option>
-                    ))}
-                </select>
+                <AddTilePicker
+                    roomGroups={roomGroups}
+                    allDungeons={allDungeons}
+                    onAddRoom={onAddRoom}
+                />
             </div>
 
             {connections.length === 0 ? (

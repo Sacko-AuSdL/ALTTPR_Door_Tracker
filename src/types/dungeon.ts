@@ -30,6 +30,7 @@ export type DungeonRoom = {
     name: string;
     dungeonId: string;
     originalDungeonId: string;
+    previewImageUrl?: string;
     doors: DungeonDoor[];
 };
 

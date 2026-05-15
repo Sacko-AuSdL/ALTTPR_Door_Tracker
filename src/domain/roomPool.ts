@@ -1,5 +1,8 @@
 import type { DungeonDefinition, DungeonRoom } from "../types/dungeon";
-import type { TrackerRunSettings } from "../types/runSettings";
+import {
+    DoorShuffleModes,
+    type TrackerRunSettings,
+} from "../types/runSettings";
 
 type GetAvailableRoomsInput = {
     activeDungeon: DungeonDefinition;
@@ -17,13 +20,13 @@ export function getAvailableRoomsForSettings({
     const visibleRoomIdSet = new Set(visibleRoomIds);
 
     switch (settings.doorShuffleMode) {
-        case "basic":
-        case "own-dungeon":
+        case DoorShuffleModes.Basic:
+        case DoorShuffleModes.OwnDungeon:
             return activeDungeon.rooms.filter(
                 (room) => !visibleRoomIdSet.has(room.id),
             );
 
-        case "cross-dungeon":
+        case DoorShuffleModes.CrossDungeon:
             return allDungeons
                 .flatMap((dungeon) => dungeon.rooms)
                 .filter((room) => !visibleRoomIdSet.has(room.id));

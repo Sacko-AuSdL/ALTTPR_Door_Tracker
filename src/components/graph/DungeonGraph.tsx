@@ -20,43 +20,36 @@ import type { DoorConnection, GraphPosition, PersistedTrackerState } from "../..
 import { ConnectionPanel } from "./ConnectionPanel";
 import { TrackerStatusBar } from "./TrackerStatusBar";
 import { RoomNode, type RoomFlowNode } from "./RoomNode";
-import {createDefaultRunSettings} from "../../types/runSettings";
 import {getStartingRoomIds} from "../../domain/startingRooms";
+import { groupRoomsByOriginalDungeon } from "../../domain/roomGroups";
 import {getAvailableRoomsForSettings} from "../../domain/roomPool";
 import type { TrackerRunSettings } from "../../types/runSettings";
 
 type DungeonGraphProps = {
     dungeon: DungeonDefinition;
+    allDungeons: DungeonDefinition[];
+    runSettings: TrackerRunSettings;
+    onRunSettingsChange: (settings: TrackerRunSettings) => void;
 };
 
 const nodeTypes: NodeTypes = {
     room: RoomNode as ComponentType<NodeProps>,
 };
 
-export function DungeonGraph({ dungeon }: DungeonGraphProps) {
+export function DungeonGraph({ dungeon, allDungeons, runSettings,
+                                 onRunSettingsChange, }: DungeonGraphProps) {
     const persistedState = useMemo(
         () => loadPersistedTrackerState(dungeon.id),
         [dungeon.id],
     );
 
-    const defaultRunSettings = useMemo(
-        () => createDefaultRunSettings(dungeon.id),
-        [dungeon.id],
-    );
+    const [visibleRoomIds, setVisibleRoomIds] = useState<string[]>(() => {
+        if (persistedState?.visibleRoomIds?.length) {
+            return persistedState.visibleRoomIds;
+        }
 
-    const [runSettings, setRunSettings] = useState<TrackerRunSettings>(
-        () => persistedState?.settings ?? defaultRunSettings,
-    );
-
-    const initialVisibleRoomIds = useMemo(() => {
-        return persistedState?.visibleRoomIds?.length
-            ? persistedState.visibleRoomIds
-            : getStartingRoomIds(dungeon);
-    }, [dungeon, persistedState?.visibleRoomIds]);
-
-    const [visibleRoomIds, setVisibleRoomIds] = useState<string[]>(
-        () => initialVisibleRoomIds,
-    );
+        return getStartingRoomIds(dungeon, runSettings);
+    });
 
     const [selectedDoor, setSelectedDoor] = useState<DungeonDoor | undefined>();
 
@@ -66,11 +59,11 @@ export function DungeonGraph({ dungeon }: DungeonGraphProps) {
 
     const initialNodes = useMemo<RoomFlowNode[]>(() => {
         return createInitialRoomNodes(
-            dungeon,
+            allDungeons,
             visibleRoomIds,
             persistedState?.nodePositions,
         );
-    }, [dungeon, persistedState?.nodePositions, visibleRoomIds]);
+    }, [allDungeons, persistedState?.nodePositions, visibleRoomIds]);
 
     const [nodes, setNodes, onNodesChange] =
         useNodesState<RoomFlowNode>(initialNodes);
@@ -82,14 +75,22 @@ export function DungeonGraph({ dungeon }: DungeonGraphProps) {
         ]);
     }, [connections]);
 
+    const allRooms = useMemo(() => {
+        return allDungeons.flatMap((candidateDungeon) => candidateDungeon.rooms);
+    }, [allDungeons]);
+
     const hiddenRooms = useMemo(() => {
         return getAvailableRoomsForSettings({
             activeDungeon: dungeon,
-            allDungeons: [dungeon],
+            allDungeons,
             visibleRoomIds,
             settings: runSettings,
         });
-    }, [dungeon, visibleRoomIds, runSettings]);
+    }, [allDungeons, dungeon, visibleRoomIds, runSettings]);
+
+    const hiddenRoomGroups = useMemo(() => {
+        return groupRoomsByOriginalDungeon(hiddenRooms, allDungeons);
+    }, [hiddenRooms, allDungeons]);
 
     useEffect(() => {
         savePersistedTrackerState({
@@ -98,9 +99,8 @@ export function DungeonGraph({ dungeon }: DungeonGraphProps) {
             visibleRoomIds,
             connections,
             nodePositions: getNodePositions(nodes),
-            settings: runSettings,
         });
-    }, [connections, dungeon.id, nodes, visibleRoomIds, runSettings]);
+    }, [connections, dungeon.id, nodes, visibleRoomIds]);
 
     const handleDoorClick = useCallback(
         (door: DungeonDoor) => {
@@ -142,6 +142,27 @@ export function DungeonGraph({ dungeon }: DungeonGraphProps) {
         [connections, selectedDoor],
     );
 
+    const handleRemoveRoom = useCallback((roomId: string) => {
+        setSelectedDoor(undefined);
+
+        setVisibleRoomIds((currentVisibleRoomIds) =>
+            currentVisibleRoomIds.filter((visibleRoomId) => visibleRoomId !== roomId),
+        );
+
+        setNodes((currentNodes) =>
+            currentNodes.filter((node) => node.id !== roomId),
+        );
+
+        setConnections((currentConnections) =>
+            currentConnections.filter((connection) => {
+                const fromDoor = findDoorById(allDungeons, connection.fromDoorId);
+                const toDoor = findDoorById(allDungeons, connection.toDoorId);
+
+                return fromDoor.roomId !== roomId && toDoor.roomId !== roomId;
+            }),
+        );
+    }, [allDungeons, setNodes]);
+
     useEffect(() => {
         setNodes((currentNodes) =>
             currentNodes.map((node) => ({
@@ -151,10 +172,17 @@ export function DungeonGraph({ dungeon }: DungeonGraphProps) {
                     selectedDoorId: selectedDoor?.id,
                     connectedDoorIds,
                     onDoorClick: handleDoorClick,
+                    onRemoveRoom: handleRemoveRoom,
                 },
             })),
         );
-    }, [connectedDoorIds, handleDoorClick, selectedDoor?.id, setNodes]);
+    }, [
+        connectedDoorIds,
+        handleDoorClick,
+        handleRemoveRoom,
+        selectedDoor?.id,
+        setNodes,
+    ]);
 
     function deleteConnection(connectionId: string) {
         setConnections((currentConnections) =>
@@ -168,16 +196,27 @@ export function DungeonGraph({ dungeon }: DungeonGraphProps) {
     }
 
     function resetLayout() {
-        setNodes(createInitialRoomNodes(dungeon, visibleRoomIds));
+        setNodes(createInitialRoomNodes(allDungeons, visibleRoomIds));
+        setSelectedDoor(undefined);
+    }
+
+    function resetDungeon() {
+        const startingRoomIds = getStartingRoomIds(dungeon, runSettings);
+
+        clearPersistedTrackerState(dungeon.id);
+        setVisibleRoomIds(startingRoomIds);
+        setConnections([]);
+        setNodes(createInitialRoomNodes(allDungeons, startingRoomIds));
         setSelectedDoor(undefined);
     }
 
     function resetRun() {
-        const startingRoomIds = getStartingRoomIds(dungeon);
+        const startingRoomIds = getStartingRoomIds(dungeon, runSettings);
 
+        clearPersistedTrackerStates(allDungeons);
         setVisibleRoomIds(startingRoomIds);
         setConnections([]);
-        setNodes(createInitialRoomNodes(dungeon, startingRoomIds));
+        setNodes(createInitialRoomNodes(allDungeons, startingRoomIds));
         setSelectedDoor(undefined);
     }
 
@@ -186,7 +225,7 @@ export function DungeonGraph({ dungeon }: DungeonGraphProps) {
             return;
         }
 
-        const room = dungeon.rooms.find((candidate) => candidate.id === roomId);
+        const room = allRooms.find((candidate) => candidate.id === roomId);
 
         if (!room) {
             return;
@@ -211,6 +250,7 @@ export function DungeonGraph({ dungeon }: DungeonGraphProps) {
                     selectedDoorId: selectedDoor?.id,
                     connectedDoorIds,
                     onDoorClick: handleDoorClick,
+                    onRemoveRoom: handleRemoveRoom,
                 },
             },
         ]);
@@ -218,8 +258,8 @@ export function DungeonGraph({ dungeon }: DungeonGraphProps) {
 
     const edges: Edge[] = useMemo(() => {
         return connections.map((connection) => {
-            const fromDoor = findDoorById(dungeon, connection.fromDoorId);
-            const toDoor = findDoorById(dungeon, connection.toDoorId);
+            const fromDoor = findDoorById(allDungeons, connection.fromDoorId);
+            const toDoor = findDoorById(allDungeons, connection.toDoorId);
 
             return {
                 id: connection.id,
@@ -232,21 +272,23 @@ export function DungeonGraph({ dungeon }: DungeonGraphProps) {
                 className: "door-edge",
             };
         });
-    }, [connections, dungeon]);
+    }, [connections, allDungeons]);
 
     const selectedDoorLabel = useMemo(() => {
         if (!selectedDoor) {
             return undefined;
         }
 
-        return getDoorDisplayLabel(dungeon, selectedDoor.id);
-    }, [dungeon, selectedDoor]);
+        return getDoorDisplayLabel(allDungeons, selectedDoor.id);
+    }, [allDungeons, selectedDoor]);
 
     const statusText = selectedDoorLabel
         ? `Selected: ${selectedDoorLabel} — click another door to connect`
-        : connections.length === 0
-            ? "Click a door to start a connection"
-            : `${connections.length} connection${connections.length === 1 ? "" : "s"} tracked`;
+        : nodes.length === 0
+            ? "Add a tile to start tracking"
+            : connections.length === 0
+                ? "Click a door to start a connection"
+                : `${connections.length} connection${connections.length === 1 ? "" : "s"} tracked`;
 
     return (
         <div className="dungeon-graph">
@@ -271,14 +313,16 @@ export function DungeonGraph({ dungeon }: DungeonGraphProps) {
 
             <ConnectionPanel
                 dungeon={dungeon}
+                allDungeons={allDungeons}
                 connections={connections}
-                hiddenRooms={hiddenRooms}
+                roomGroups={hiddenRoomGroups}
                 runSettings={runSettings}
-                onRunSettingsChange={setRunSettings}
+                onRunSettingsChange={onRunSettingsChange}
                 onAddRoom={addRoomToGraph}
                 onDeleteConnection={deleteConnection}
                 onClearConnections={clearConnections}
                 onResetLayout={resetLayout}
+                onResetDungeon={resetDungeon}
                 onResetRun={resetRun}
             />
 
@@ -290,12 +334,17 @@ export function DungeonGraph({ dungeon }: DungeonGraphProps) {
     );
 }
 
-function findDoorById(dungeon: DungeonDefinition, doorId: string): DungeonDoor {
-    for (const room of dungeon.rooms) {
-        const door = room.doors.find((candidate) => candidate.id === doorId);
+function findDoorById(
+    dungeons: DungeonDefinition[],
+    doorId: string,
+): DungeonDoor {
+    for (const dungeon of dungeons) {
+        for (const room of dungeon.rooms) {
+            const door = room.doors.find((candidate) => candidate.id === doorId);
 
-        if (door) {
-            return door;
+            if (door) {
+                return door;
+            }
         }
     }
 
@@ -303,14 +352,16 @@ function findDoorById(dungeon: DungeonDefinition, doorId: string): DungeonDoor {
 }
 
 function getDoorDisplayLabel(
-    dungeon: DungeonDefinition,
+    dungeons: DungeonDefinition[],
     doorId: string,
 ): string {
-    for (const room of dungeon.rooms) {
-        const door = room.doors.find((candidate) => candidate.id === doorId);
+    for (const dungeon of dungeons) {
+        for (const room of dungeon.rooms) {
+            const door = room.doors.find((candidate) => candidate.id === doorId);
 
-        if (door) {
-            return `${room.name} / ${door.label}`;
+            if (door) {
+                return `${dungeon.name.replace(" - Sample", "")} / ${room.name} / ${door.label}`;
+            }
         }
     }
 
@@ -319,6 +370,16 @@ function getDoorDisplayLabel(
 
 function getStorageKey(dungeonId: string): string {
     return `alttpr-door-tracker:${dungeonId}`;
+}
+
+function clearPersistedTrackerState(dungeonId: string) {
+    localStorage.removeItem(getStorageKey(dungeonId));
+}
+
+function clearPersistedTrackerStates(dungeons: DungeonDefinition[]) {
+    for (const dungeon of dungeons) {
+        clearPersistedTrackerState(dungeon.id);
+    }
 }
 
 function loadPersistedTrackerState(
@@ -363,11 +424,12 @@ function getNodePositions(nodes: RoomFlowNode[]): Record<string, GraphPosition> 
 }
 
 function createInitialRoomNodes(
-    dungeon: DungeonDefinition,
+    dungeons: DungeonDefinition[],
     visibleRoomIds: string[],
     nodePositions?: Record<string, GraphPosition>,
 ): RoomFlowNode[] {
-    return dungeon.rooms
+    return dungeons
+        .flatMap((candidateDungeon) => candidateDungeon.rooms)
         .filter((room) => visibleRoomIds.includes(room.id))
         .map((room, index) => ({
             id: room.id,
@@ -381,6 +443,7 @@ function createInitialRoomNodes(
                 selectedDoorId: undefined,
                 connectedDoorIds: [],
                 onDoorClick: () => undefined,
+                onRemoveRoom: () => undefined,
             },
         }));
 }
