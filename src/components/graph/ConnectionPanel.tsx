@@ -1,10 +1,14 @@
 import type { DungeonDefinition } from "../../types/dungeon";
 import type { DoorConnection } from "../../types/tracker";
+import type {TrackerRunSettings} from "../../types/runSettings";
+import {RunSettingsPanel} from "./RunSettingsPanel";
 
 type ConnectionPanelProps = {
     dungeon: DungeonDefinition;
     connections: DoorConnection[];
     hiddenRooms: DungeonDefinition["rooms"];
+    runSettings: TrackerRunSettings;
+    onRunSettingsChange: (settings: TrackerRunSettings) => void;
     onAddRoom: (roomId: string) => void;
     onDeleteConnection: (connectionId: string) => void;
     onClearConnections: () => void;
@@ -16,6 +20,8 @@ export function ConnectionPanel({
                                     dungeon,
                                     connections,
                                     hiddenRooms,
+                                    runSettings,
+                                    onRunSettingsChange,
                                     onAddRoom,
                                     onDeleteConnection,
                                     onClearConnections,
@@ -55,6 +61,11 @@ export function ConnectionPanel({
                     </button>
                 </div>
             </div>
+
+            <RunSettingsPanel
+                settings={runSettings}
+                onChange={onRunSettingsChange}
+            />
 
             <div className="connection-panel__add-room">
                 <label htmlFor="add-room-select">Add Tile</label>

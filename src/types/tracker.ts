@@ -1,4 +1,5 @@
 // src/types/tracker.ts
+import type { TrackerRunSettings } from "./runSettings";
 
 export type DoorConnection = {
     id: string;
@@ -30,4 +31,5 @@ export type PersistedTrackerState = {
     visibleRoomIds: string[];
     connections: DoorConnection[];
     nodePositions: Record<string, GraphPosition>;
+    settings?: TrackerRunSettings;
 };

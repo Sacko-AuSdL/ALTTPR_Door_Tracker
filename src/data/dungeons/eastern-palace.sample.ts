@@ -8,6 +8,7 @@ export const easternPalaceSample: DungeonDefinition = {
             id: "ep-lobby",
             name: "Lobby",
             dungeonId: "eastern-palace",
+            originalDungeonId: "eastern-palace",
             doors: [
                 {
                     id: "ep-lobby-north",
@@ -29,6 +30,7 @@ export const easternPalaceSample: DungeonDefinition = {
             id: "ep-cannonball",
             name: "Cannonball Room",
             dungeonId: "eastern-palace",
+            originalDungeonId: "eastern-palace",
             doors: [
                 {
                     id: "ep-cannonball-south",
@@ -50,6 +52,7 @@ export const easternPalaceSample: DungeonDefinition = {
             id: "ep-big-key",
             name: "Big Key Room",
             dungeonId: "eastern-palace",
+            originalDungeonId: "eastern-palace",
             doors: [
                 {
                     id: "ep-big-key-south",
@@ -64,6 +67,7 @@ export const easternPalaceSample: DungeonDefinition = {
             id: "ep-map-chest",
             name: "Map Chest Room",
             dungeonId: "eastern-palace",
+            originalDungeonId: "eastern-palace",
             doors: [
                 {
                     id: "ep-map-chest-west",

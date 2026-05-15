@@ -29,6 +29,7 @@ export type DungeonRoom = {
     id: string;
     name: string;
     dungeonId: string;
+    originalDungeonId: string;
     doors: DungeonDoor[];
 };
 

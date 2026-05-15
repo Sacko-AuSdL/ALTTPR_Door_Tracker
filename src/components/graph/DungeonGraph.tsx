@@ -20,6 +20,10 @@ import type { DoorConnection, GraphPosition, PersistedTrackerState } from "../..
 import { ConnectionPanel } from "./ConnectionPanel";
 import { TrackerStatusBar } from "./TrackerStatusBar";
 import { RoomNode, type RoomFlowNode } from "./RoomNode";
+import {createDefaultRunSettings} from "../../types/runSettings";
+import {getStartingRoomIds} from "../../domain/startingRooms";
+import {getAvailableRoomsForSettings} from "../../domain/roomPool";
+import type { TrackerRunSettings } from "../../types/runSettings";
 
 type DungeonGraphProps = {
     dungeon: DungeonDefinition;
@@ -35,9 +39,20 @@ export function DungeonGraph({ dungeon }: DungeonGraphProps) {
         [dungeon.id],
     );
 
+    const defaultRunSettings = useMemo(
+        () => createDefaultRunSettings(dungeon.id),
+        [dungeon.id],
+    );
+
+    const [runSettings, setRunSettings] = useState<TrackerRunSettings>(
+        () => persistedState?.settings ?? defaultRunSettings,
+    );
+
     const initialVisibleRoomIds = useMemo(() => {
-        return persistedState?.visibleRoomIds ?? ["ep-lobby"];
-    }, [persistedState?.visibleRoomIds]);
+        return persistedState?.visibleRoomIds?.length
+            ? persistedState.visibleRoomIds
+            : getStartingRoomIds(dungeon);
+    }, [dungeon, persistedState?.visibleRoomIds]);
 
     const [visibleRoomIds, setVisibleRoomIds] = useState<string[]>(
         () => initialVisibleRoomIds,
@@ -68,8 +83,13 @@ export function DungeonGraph({ dungeon }: DungeonGraphProps) {
     }, [connections]);
 
     const hiddenRooms = useMemo(() => {
-        return dungeon.rooms.filter((room) => !visibleRoomIds.includes(room.id));
-    }, [dungeon.rooms, visibleRoomIds]);
+        return getAvailableRoomsForSettings({
+            activeDungeon: dungeon,
+            allDungeons: [dungeon],
+            visibleRoomIds,
+            settings: runSettings,
+        });
+    }, [dungeon, visibleRoomIds, runSettings]);
 
     useEffect(() => {
         savePersistedTrackerState({
@@ -78,8 +98,9 @@ export function DungeonGraph({ dungeon }: DungeonGraphProps) {
             visibleRoomIds,
             connections,
             nodePositions: getNodePositions(nodes),
+            settings: runSettings,
         });
-    }, [connections, dungeon.id, nodes, visibleRoomIds]);
+    }, [connections, dungeon.id, nodes, visibleRoomIds, runSettings]);
 
     const handleDoorClick = useCallback(
         (door: DungeonDoor) => {
@@ -152,7 +173,7 @@ export function DungeonGraph({ dungeon }: DungeonGraphProps) {
     }
 
     function resetRun() {
-        const startingRoomIds = ["ep-lobby"];
+        const startingRoomIds = getStartingRoomIds(dungeon);
 
         setVisibleRoomIds(startingRoomIds);
         setConnections([]);
@@ -252,6 +273,8 @@ export function DungeonGraph({ dungeon }: DungeonGraphProps) {
                 dungeon={dungeon}
                 connections={connections}
                 hiddenRooms={hiddenRooms}
+                runSettings={runSettings}
+                onRunSettingsChange={setRunSettings}
                 onAddRoom={addRoomToGraph}
                 onDeleteConnection={deleteConnection}
                 onClearConnections={clearConnections}
