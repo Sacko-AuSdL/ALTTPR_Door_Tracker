@@ -1,4 +1,5 @@
 import type { DungeonDefinition, DungeonRoom } from "../../types/dungeon";
+import { getPublicAssetUrl } from "../utils/publicAssetUrl";
 
 type RoomTilePreviewProps = {
     room: DungeonRoom | undefined;
@@ -27,14 +28,15 @@ export function RoomTilePreview({ room, allDungeons }: RoomTilePreviewProps) {
     }
 
     const dungeonName = getDungeonName(room, allDungeons);
+    const previewImageUrl = getPublicAssetUrl(room.previewImageUrl);
     const visibleDoors = room.doors.slice(0, MAX_VISIBLE_DOORS);
     const hiddenDoorCount = room.doors.length - visibleDoors.length;
 
     return (
         <div className="room-tile-preview">
             <div className="room-tile-preview__image">
-                {room.previewImageUrl ? (
-                    <img src={room.previewImageUrl} alt={room.name} />
+                {previewImageUrl ? (
+                    <img src={previewImageUrl} alt={room.name} />
                 ) : (
                     <span>No image yet</span>
                 )}

@@ -1,6 +1,7 @@
 import { Handle, Position, type NodeProps } from "@xyflow/react";
 import type { CSSProperties } from "react";
 import type { DungeonDoor, DungeonRoom } from "../../types/dungeon";
+import { getPublicAssetUrl } from "../utils/publicAssetUrl";
 
 export type RoomNodeData = {
     room: DungeonRoom;
@@ -22,15 +23,15 @@ export type RoomFlowNode = {
 };
 
 export function RoomNode({ data }: NodeProps<RoomFlowNode>) {
-    const hasPreviewImage = Boolean(data.room.previewImageUrl);
+    const previewImageUrl = getPublicAssetUrl(data.room.previewImageUrl);
 
     return (
         <div className="room-node">
-            {hasPreviewImage && (
+            {previewImageUrl && (
                 <div
                     className="room-node__background"
                     style={{
-                        backgroundImage: `url(${data.room.previewImageUrl})`,
+                        backgroundImage: `url(${previewImageUrl})`,
                     }}
                 />
             )}
