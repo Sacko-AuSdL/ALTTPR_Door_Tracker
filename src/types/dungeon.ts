@@ -24,6 +24,8 @@ export type DungeonDoor = {
     label: string;
     direction?: DoorDirection;
     type: DoorType;
+    x?: number;
+    y?: number;
 };
 
 export type DungeonRoom = {

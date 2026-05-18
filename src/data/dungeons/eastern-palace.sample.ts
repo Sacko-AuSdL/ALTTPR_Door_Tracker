@@ -1,4 +1,4 @@
-import type { DungeonDefinition } from "../../types/dungeon.ts";
+import type { DungeonDefinition } from "../../types/dungeon";
 
 export const easternPalaceSample: DungeonDefinition = {
     id: "eastern-palace",

@@ -24,6 +24,7 @@ import {getStartingRoomIds} from "../../domain/startingRooms";
 import { groupRoomsByOriginalDungeon } from "../../domain/roomGroups";
 import {getAvailableRoomsForSettings} from "../../domain/roomPool";
 import type { TrackerRunSettings } from "../../types/runSettings";
+import {getConnectionColor} from "../../domain/connectionColors";
 
 type DungeonGraphProps = {
     dungeon: DungeonDefinition;
@@ -73,6 +74,35 @@ export function DungeonGraph({ dungeon, allDungeons, runSettings,
             connection.fromDoorId,
             connection.toDoorId,
         ]);
+    }, [connections]);
+
+    const doorConnectionMap = useMemo(() => {
+        const map: Record<
+            string,
+            {
+                connectionId: string;
+                color: string;
+                index: number;
+            }
+        > = {};
+
+        connections.forEach((connection, index) => {
+            const color = getConnectionColor(index);
+
+            map[connection.fromDoorId] = {
+                connectionId: connection.id,
+                color,
+                index: index + 1,
+            };
+
+            map[connection.toDoorId] = {
+                connectionId: connection.id,
+                color,
+                index: index + 1,
+            };
+        });
+
+        return map;
     }, [connections]);
 
     const allRooms = useMemo(() => {
@@ -171,6 +201,7 @@ export function DungeonGraph({ dungeon, allDungeons, runSettings,
                     ...node.data,
                     selectedDoorId: selectedDoor?.id,
                     connectedDoorIds,
+                    doorConnectionMap,
                     onDoorClick: handleDoorClick,
                     onRemoveRoom: handleRemoveRoom,
                 },
@@ -178,6 +209,7 @@ export function DungeonGraph({ dungeon, allDungeons, runSettings,
         );
     }, [
         connectedDoorIds,
+        doorConnectionMap,
         handleDoorClick,
         handleRemoveRoom,
         selectedDoor?.id,
@@ -249,6 +281,7 @@ export function DungeonGraph({ dungeon, allDungeons, runSettings,
                     room,
                     selectedDoorId: selectedDoor?.id,
                     connectedDoorIds,
+                    doorConnectionMap,
                     onDoorClick: handleDoorClick,
                     onRemoveRoom: handleRemoveRoom,
                 },
@@ -257,9 +290,10 @@ export function DungeonGraph({ dungeon, allDungeons, runSettings,
     }
 
     const edges: Edge[] = useMemo(() => {
-        return connections.map((connection) => {
+        return connections.map((connection, index) => {
             const fromDoor = findDoorById(allDungeons, connection.fromDoorId);
             const toDoor = findDoorById(allDungeons, connection.toDoorId);
+            const color = getConnectionColor(index);
 
             return {
                 id: connection.id,
@@ -269,6 +303,10 @@ export function DungeonGraph({ dungeon, allDungeons, runSettings,
                 targetHandle: toDoor.id,
                 type: "smoothstep",
                 animated: false,
+                style: {
+                    stroke: color,
+                    strokeWidth: 3,
+                },
                 className: "door-edge",
             };
         });
@@ -442,6 +480,7 @@ function createInitialRoomNodes(
                 room,
                 selectedDoorId: undefined,
                 connectedDoorIds: [],
+                doorConnectionMap: {},
                 onDoorClick: () => undefined,
                 onRemoveRoom: () => undefined,
             },

@@ -59,6 +59,28 @@ def main() -> None:
         help="Output TypeScript file.",
     )
 
+    parser.add_argument(
+        "--crop-tiles",
+        action="store_true",
+        help="Crop room preview images from the KrisDavie underworld map.",
+    )
+    parser.add_argument(
+        "--tile-source-image",
+        default="data/maps/Underworld_Items_Trimmed_512.png",
+        help="Path to the source tile sheet, relative to the KrisDavie repository.",
+    )
+    parser.add_argument(
+        "--tile-output-dir",
+        default="public/assets/krisdavie/rooms",
+        help="Output directory for cropped room preview images.",
+    )
+    parser.add_argument(
+        "--tile-size",
+        type=int,
+        default=512,
+        help="Source tile size in pixels.",
+    )
+
     args = parser.parse_args()
 
     source_root = Path(args.source).resolve()
@@ -80,6 +102,15 @@ def main() -> None:
         vanilla_layout_optimized=vanilla_layout_optimized,
         door_coordinates=door_coordinates,
     )
+
+    if args.crop_tiles:
+        crop_room_tiles(
+            source_root=source_root,
+            dungeons=dungeons,
+            source_image_relative_path=args.tile_source_image,
+            output_dir=Path(args.tile_output_dir).resolve(),
+            tile_size=args.tile_size,
+        )
 
     write_typescript_file(output_path, dungeons)
 
@@ -143,6 +174,7 @@ def build_dungeons(
                     "name": room_name,
                     "dungeonId": dungeon_id,
                     "originalDungeonId": dungeon_id,
+                    "previewImageUrl": f"/assets/krisdavie/rooms/{dungeon_id}/{room_id}.png",
                     "doors": doors,
                 }
             )
@@ -173,6 +205,8 @@ def build_door(
         "label": derive_door_label(name),
         "direction": infer_door_direction(raw_door, door_type),
         "type": door_type,
+        "x": int(raw_door.get("x", 256)),
+        "y": int(raw_door.get("y", 256)),
     }
 
 
@@ -323,19 +357,99 @@ def make_unique_id(base_id: str, used_ids: set[str]) -> str:
 def write_typescript_file(output_path: Path, dungeons: list[dict[str, Any]]) -> None:
     output_path.parent.mkdir(parents=True, exist_ok=True)
 
-    serialized_dungeons = json.dumps(
-        dungeons,
-        ensure_ascii=False,
-        indent=2,
-    )
+    generated_dir = output_path.parent
+    exported_names: list[tuple[str, str]] = []
 
-    content = f"""import type {{ DungeonDefinition }} from "../../../types/dungeon";
+    for dungeon in dungeons:
+        dungeon_id = dungeon["id"]
+        export_name = to_pascal_case(dungeon_id) + "Generated"
+        file_name = f"{dungeon_id}.generated.ts"
+        file_path = generated_dir / file_name
 
-export const krisdavieDungeons = {serialized_dungeons} satisfies DungeonDefinition[];
+        serialized_dungeon = json.dumps(
+            dungeon,
+            ensure_ascii=False,
+            indent=2,
+        )
+
+        content = f"""import type {{ DungeonDefinition }} from "../../../types/dungeon";
+
+export const {export_name} = {serialized_dungeon} satisfies DungeonDefinition;
 """
 
-    output_path.write_text(content, encoding="utf-8")
+        file_path.write_text(content, encoding="utf-8")
+        exported_names.append((export_name, file_name))
 
+    imports = "\n".join(
+        f'import {{ {export_name} }} from "./{file_name.replace(".ts", "")}";'
+        for export_name, file_name in exported_names
+    )
+
+    catalog_entries = ",\n    ".join(export_name for export_name, _ in exported_names)
+
+    catalog_content = f"""import type {{ DungeonDefinition }} from "../../../types/dungeon";
+{imports}
+
+export const krisdavieDungeons = [
+    {catalog_entries},
+] satisfies DungeonDefinition[];
+"""
+
+    output_path.write_text(catalog_content, encoding="utf-8")
+
+def to_pascal_case(value: str) -> str:
+    return "".join(part.capitalize() for part in value.split("-"))
+
+def crop_room_tiles(
+        source_root: Path,
+        dungeons: list[dict[str, Any]],
+        source_image_relative_path: str,
+        output_dir: Path,
+        tile_size: int,
+) -> None:
+    try:
+        from PIL import Image
+    except ImportError as error:
+        raise SystemExit(
+            "Pillow is required for cropping tiles. Install it with: python -m pip install pillow"
+        ) from error
+
+    source_image_path = source_root / source_image_relative_path
+
+    if not source_image_path.exists():
+        raise SystemExit(f"Tile source image not found: {source_image_path}")
+
+    source_image = Image.open(source_image_path)
+
+    for dungeon in dungeons:
+        dungeon_output_dir = output_dir / dungeon["id"]
+        dungeon_output_dir.mkdir(parents=True, exist_ok=True)
+
+        for room in dungeon["rooms"]:
+            match = re.search(r"-tile-(\d+)-(\d+)$", room["id"])
+
+            if not match:
+                continue
+
+            tile_x = int(match.group(1))
+            tile_y = int(match.group(2))
+
+            left = tile_x * tile_size
+            top = tile_y * tile_size
+            right = left + tile_size
+            bottom = top + tile_size
+
+            if right > source_image.width or bottom > source_image.height:
+                print(
+                    f"Skipping {room['id']}: crop outside source image "
+                    f"({left}, {top}, {right}, {bottom})"
+                )
+                continue
+
+            cropped_tile = source_image.crop((left, top, right, bottom))
+            cropped_tile.save(dungeon_output_dir / f"{room['id']}.png")
+
+    print(f"Cropped room previews to {output_dir}")
 
 if __name__ == "__main__":
     main()

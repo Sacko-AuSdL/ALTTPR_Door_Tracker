@@ -59,53 +59,133 @@
 }
 
 .room-node {
-    min-width: 190px;
-    padding: 0.75rem;
-    border: 2px solid #4b5563;
+    position: relative;
+    width: 240px;
+    height: 240px;
+    border: 1px solid #4b5563;
     border-radius: 0.75rem;
-    background: #1f2937;
-    box-shadow: 0 10px 24px rgb(0 0 0 / 35%);
+    overflow: hidden;
+    background: #111827;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+    cursor: grab;
 }
 
 .room-node:active {
     cursor: grabbing;
 }
 
+.room-node__background {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    image-rendering: pixelated;
+    pointer-events: none;
+}
+
+.room-node__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(17, 24, 39, 0.08);
+    pointer-events: none;
+}
+
+.room-node__content {
+    position: relative;
+    z-index: 1;
+    height: 100%;
+    padding: 0.55rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.room-node__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.5rem;
+}
+
 .room-node__title {
-    margin-bottom: 0.75rem;
+    flex: 1;
+    padding: 0.25rem 0.4rem;
+    border-radius: 0.35rem;
+    background: rgba(17, 24, 39, 0.72);
+    color: #f9fafb;
+    font-size: 0.78rem;
     font-weight: 700;
-    text-align: center;
+    line-height: 1.2;
+    text-align: left;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.room-node__remove {
+    position: absolute;
+    top: 0.35rem;
+    right: 0.35rem;
+    z-index: 5;
+
+    cursor: pointer;
+    width: 1.45rem;
+    height: 1.45rem;
+    border: 1px solid #6b7280;
+    border-radius: 999px;
+    background: rgba(17, 24, 39, 0.85);
+    color: #e5e7eb;
+    font-size: 1rem;
+    line-height: 1;
+}
+
+.room-node__remove:hover {
+    border-color: #f87171;
+    background: #7f1d1d;
+    color: #fff;
 }
 
 .room-node__doors {
-    display: grid;
-    gap: 0.4rem;
+    position: absolute;
+    inset: 0;
+    z-index: 4;
 }
 
 .room-node__door {
+    position: absolute;
+    transform: translate(-50%, -50%);
+
     cursor: pointer;
-    padding: 0.4rem 0.55rem;
-    border: 1px solid #6b7280;
-    border-radius: 0.4rem;
-    background: #374151;
-    color: #f9fafb;
+    max-width: 5.5rem;
+    padding: 0.12rem 0.32rem;
+    border: 1px solid #4b5563;
+    border-radius: 999px;
+    background: rgba(17, 24, 39, 0.88);
+    color: #f3f4f6;
+    font-size: 0.58rem;
+    line-height: 1.1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .room-node__door:hover {
-    background: #4b5563;
+    z-index: 10;
+    max-width: none;
+    border-color: #facc15;
+    background: rgba(133, 77, 14, 0.95);
 }
 
 .room-node__door--selected {
-    border-color: #facc15;
-    background: #854d0e;
+    border-color: #60a5fa;
+    background: rgba(30, 64, 175, 0.95);
 }
 
 .room-node__door--connected {
     border-color: #34d399;
-}
-
-.room-node__door-row {
-    position: relative;
 }
 
 .room-node__handle {
@@ -113,15 +193,6 @@
     height: 1px;
     opacity: 0;
     pointer-events: none;
-}
-
-.room-node__door--connected + .room-node__handle,
-.room-node__door-row:has(.room-node__door--connected) .room-node__handle {
-    background: #34d399;
-}
-
-.room-node__door-row:has(.room-node__door--selected) .room-node__handle {
-    background: #facc15;
 }
 
 .react-flow__edge.door-edge {
@@ -504,38 +575,4 @@
     padding-bottom: 0.4rem;
     background: rgb(17 24 39 / 96%);
     backdrop-filter: blur(8px);
-}
-
-.room-node__header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.5rem;
-    margin-bottom: 0.75rem;
-}
-
-.room-node__title {
-    flex: 1;
-    margin-bottom: 0;
-    font-weight: 700;
-    text-align: center;
-}
-
-.room-node__remove {
-    flex: 0 0 auto;
-    cursor: pointer;
-    width: 1.4rem;
-    height: 1.4rem;
-    border: 1px solid #4b5563;
-    border-radius: 999px;
-    background: #111827;
-    color: #d1d5db;
-    font-size: 1rem;
-    line-height: 1;
-}
-
-.room-node__remove:hover {
-    border-color: #f87171;
-    background: #7f1d1d;
-    color: #f9fafb;
 }

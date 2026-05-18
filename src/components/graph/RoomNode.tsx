@@ -1,26 +1,43 @@
-import { Handle, Position, type Node, type NodeProps } from "@xyflow/react";
-import type {
-    DoorDirection,
-    DungeonDoor,
-    DungeonRoom,
-} from "../../types/dungeon";
+import { Handle, Position, type NodeProps } from "@xyflow/react";
+import type { CSSProperties } from "react";
+import type { DungeonDoor, DungeonRoom } from "../../types/dungeon";
 
 export type RoomNodeData = {
     room: DungeonRoom;
     selectedDoorId?: string;
     connectedDoorIds: string[];
+    doorConnectionMap: Record<
+        string,
+        { connectionId: string; color: string; index: number }
+    >;
     onDoorClick: (door: DungeonDoor) => void;
     onRemoveRoom: (roomId: string) => void;
 };
 
-export type RoomFlowNode = Node<RoomNodeData, "room">;
+export type RoomFlowNode = {
+    id: string;
+    type: "room";
+    position: { x: number; y: number };
+    data: RoomNodeData;
+};
 
 export function RoomNode({ data }: NodeProps<RoomFlowNode>) {
+    const hasPreviewImage = Boolean(data.room.previewImageUrl);
+
     return (
         <div className="room-node">
-            <div className="room-node__header">
-                <div className="room-node__title">{data.room.name}</div>
+            {hasPreviewImage && (
+                <div
+                    className="room-node__background"
+                    style={{
+                        backgroundImage: `url(${data.room.previewImageUrl})`,
+                    }}
+                />
+            )}
 
+            <div className="room-node__overlay" />
+
+            <div className="room-node__content">
                 <button
                     type="button"
                     className="nodrag room-node__remove"
@@ -29,28 +46,22 @@ export function RoomNode({ data }: NodeProps<RoomFlowNode>) {
                         data.onRemoveRoom(data.room.id);
                     }}
                     aria-label={`Remove ${data.room.name}`}
-                    title="Remove tile"
+                    title={`Remove ${data.room.name}`}
                 >
                     ×
                 </button>
-            </div>
 
-            <div className="room-node__doors">
-                {data.room.doors.map((door) => {
-                    const isSelected = data.selectedDoorId === door.id;
-                    const isConnected = data.connectedDoorIds.includes(door.id);
-                    const handlePosition = getHandlePosition(door.direction);
+                <div className="room-node__doors">
+                    {data.room.doors.map((door) => {
+                        const isSelected = data.selectedDoorId === door.id;
+                        const isConnected = data.connectedDoorIds.includes(door.id);
+                        const connectionInfo = data.doorConnectionMap[door.id];
 
-                    return (
-                        <div key={door.id} className="room-node__door-row">
-                            <Handle
-                                id={door.id}
-                                type="target"
-                                position={handlePosition}
-                                className="room-node__handle"
-                            />
-
+                        return (
                             <button
+                                key={door.id}
+                                type="button"
+                                style={getDoorVisualStyle(door, isSelected, data.doorConnectionMap)}
                                 className={[
                                     "nodrag",
                                     "room-node__door",
@@ -59,19 +70,41 @@ export function RoomNode({ data }: NodeProps<RoomFlowNode>) {
                                 ]
                                     .filter(Boolean)
                                     .join(" ")}
-                                type="button"
-                                onClick={() => data.onDoorClick(door)}
+                                onClick={(event) => {
+                                    event.stopPropagation();
+                                    data.onDoorClick(door);
+                                }}
+                                title={door.label}
                             >
-                                {door.label}
+                                {connectionInfo ? `${connectionInfo.index} ${door.label}` : door.label}
                             </button>
+                        );
+                    })}
+                </div>
 
-                            <Handle
-                                id={door.id}
-                                type="source"
-                                position={handlePosition}
-                                className="room-node__handle"
-                            />
-                        </div>
+                {data.room.doors.map((door) => {
+                    return (
+                        <Handle
+                            key={door.id}
+                            id={door.id}
+                            type="source"
+                            position={Position.Top}
+                            style={getDoorHotspotStyle(door)}
+                            className="room-node__handle"
+                        />
+                    );
+                })}
+
+                {data.room.doors.map((door) => {
+                    return (
+                        <Handle
+                            key={`${door.id}-target`}
+                            id={door.id}
+                            type="target"
+                            position={Position.Top}
+                            style={getDoorHotspotStyle(door)}
+                            className="room-node__handle"
+                        />
                     );
                 })}
             </div>
@@ -79,19 +112,31 @@ export function RoomNode({ data }: NodeProps<RoomFlowNode>) {
     );
 }
 
-function getHandlePosition(direction?: DoorDirection): Position {
-    switch (direction) {
-        case "north":
-            return Position.Top;
-        case "south":
-            return Position.Bottom;
-        case "west":
-            return Position.Left;
-        case "east":
-            return Position.Right;
-        case "stairs":
-        case "drop":
-        default:
-            return Position.Right;
+function getDoorHotspotStyle(door: DungeonDoor): CSSProperties {
+    return {
+        left: `${((door.x ?? 256) / 512) * 100}%`,
+        top: `${((door.y ?? 256) / 512) * 100}%`,
+    };
+}
+
+function getDoorVisualStyle(
+    door: DungeonDoor,
+    isSelected: boolean,
+    doorConnectionMap: RoomNodeData["doorConnectionMap"],
+): CSSProperties {
+    const hotspotStyle = getDoorHotspotStyle(door);
+    const connectionInfo = doorConnectionMap[door.id];
+
+    if (!connectionInfo) {
+        return hotspotStyle;
     }
+
+    return {
+        ...hotspotStyle,
+        borderColor: connectionInfo.color,
+        boxShadow: isSelected
+            ? `0 0 0 2px white, 0 0 0 4px ${connectionInfo.color}`
+            : `0 0 0 2px ${connectionInfo.color}`,
+        background: "rgba(17, 24, 39, 0.92)",
+    };
 }
