@@ -1,73 +1,106 @@
-# React + TypeScript + Vite
+# ALTTPR Door Tracker
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern browser-based prototype for tracking **A Link to the Past Randomizer Door Shuffle** routes.
 
-Currently, two official plugins are available:
+The goal is to make door tracking more visual and flexible than a fixed grid tracker:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- add dungeon tiles dynamically
+- connect doors by clicking two door hotspots
+- move tiles freely on the canvas
+- remove tiles again when needed
+- save the current run state in browser local storage
+- support dungeon-specific and cross-dungeon tracking modes
 
-## React Compiler
+## Current Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React + TypeScript + Vite
+- Interactive graph powered by React Flow
+- Generated dungeon/tile data based on KrisDavie DoorTracker data
+- Real tile preview images generated from the source map
+- Door hotspots positioned directly on the tile images
+- Color-coded door connections
+- Dungeon tabs
+- Global run settings:
+    - Basic Doors
+    - Own Dungeon
+    - Cross Dungeon
+    - Vanilla / Shuffled entrances
+- LocalStorage persistence
+- Reset layout, reset dungeon, reset run
+- Add Tile picker with grouped dungeon accordion and hover preview
 
-## Expanding the ESLint configuration
+## Development
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Install dependencies:
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Start the local dev server:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run dev
 ```
+
+Build the app:
+
+```bash
+npm run build
+```
+
+Preview the production build locally:
+
+```bash
+npm run preview
+```
+
+## Generated Data
+
+Dungeon data and tile assets are generated from a local copy of the KrisDavie DoorTracker repository.
+
+The generator script is located at:
+
+```text
+scripts/generate_krisdavie_dungeons.py
+```
+
+Example generator command:
+
+```bash
+python scripts/generate_krisdavie_dungeons.py --source ../KrisDavie-DoorTracker --crop-tiles --tile-source-image data/maps/egmap.png --tile-size 512
+```
+
+Generated TypeScript files are written to:
+
+```text
+src/data/dungeons/generated/
+```
+
+Generated tile images are written to:
+
+```text
+public/assets/krisdavie/rooms/
+```
+
+The generated files are committed so users and deployment builds do **not** need Python or the original KrisDavie repository.
+
+## Deployment
+
+This project can be deployed as a static site.
+
+For GitHub Pages, the Vite base path must match the repository name:
+
+```ts
+base: "/ALTTPR_Door_Tracker/"
+```
+
+Deployment is handled through GitHub Actions.
+
+## Attribution
+
+This project uses generated data and visual assets derived from:
+
+- KrisDavie/DoorTracker
+
+This project is an independent fan/tooling project for ALTTPR Door Shuffle tracking.

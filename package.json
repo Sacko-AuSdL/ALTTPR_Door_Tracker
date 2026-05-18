@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "generate:krisdavie": "python scripts/generate_krisdavie_dungeons.py --source ../KrisDavie-DoorTracker --crop-tiles --tile-source-image data/maps/egmap.png --tile-size 512"
   },
   "dependencies": {
     "@xyflow/react": "^12.10.2",
