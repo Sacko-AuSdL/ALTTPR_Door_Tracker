@@ -1,5 +1,7 @@
 # ALTTPR Door Tracker
 
+[Open the live tracker](https://mawisadi.github.io/ALTTPR_Door_Tracker/)
+
 A modern browser-based prototype for tracking **A Link to the Past Randomizer Door Shuffle** routes.
 
 The goal is to make door tracking more visual and flexible than a fixed grid tracker:
@@ -19,15 +21,32 @@ The goal is to make door tracking more visual and flexible than a fixed grid tra
 - Real tile preview images generated from the source map
 - Door hotspots positioned directly on the tile images
 - Color-coded door connections
+- Configurable tile size:
+  - Small
+  - Medium
+  - Large
 - Dungeon tabs
 - Global run settings:
-    - Basic Doors
-    - Own Dungeon
-    - Cross Dungeon
-    - Vanilla / Shuffled entrances
+  - Basic Doors
+  - Own Dungeon
+  - Cross Dungeon
+  - Vanilla / Shuffled entrances
 - LocalStorage persistence
 - Reset layout, reset dungeon, reset run
 - Add Tile picker with grouped dungeon accordion and hover preview
+
+## Usage
+
+- Select a dungeon tab.
+- Use the Add Tile panel to add rooms to the current graph.
+- Hover a tile in the picker to preview it.
+- Click a tile in the picker to add it.
+- Click one door hotspot, then another door hotspot, to create a connection.
+- Click an existing connection line to remove it.
+- Drag tiles around the canvas to organize the current route.
+- Use the Run Settings panel to change door shuffle mode, entrance mode, and tile size.
+
+The tracker state is saved in browser LocalStorage.
 
 ## Development
 
