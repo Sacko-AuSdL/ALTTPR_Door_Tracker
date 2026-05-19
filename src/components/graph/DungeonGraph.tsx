@@ -14,17 +14,19 @@ import {
     useMemo,
     useState,
     type ComponentType,
+    type CSSProperties,
 } from "react";
 import type { DungeonDefinition, DungeonDoor } from "../../types/dungeon";
 import type { DoorConnection, GraphPosition, PersistedTrackerState } from "../../types/tracker";
 import { ConnectionPanel } from "./ConnectionPanel";
 import { TrackerStatusBar } from "./TrackerStatusBar";
 import { RoomNode, type RoomFlowNode } from "./RoomNode";
-import {getStartingRoomIds} from "../../domain/startingRooms";
+import { getStartingRoomIds } from "../../domain/startingRooms";
 import { groupRoomsByOriginalDungeon } from "../../domain/roomGroups";
-import {getAvailableRoomsForSettings} from "../../domain/roomPool";
+import { getAvailableRoomsForSettings } from "../../domain/roomPool";
+import { getTileSizePx } from "../../types/runSettings";
 import type { TrackerRunSettings } from "../../types/runSettings";
-import {getConnectionColor} from "../../domain/connectionColors";
+import { getConnectionColor } from "../../domain/connectionColors";
 
 type DungeonGraphProps = {
     dungeon: DungeonDefinition;
@@ -75,6 +77,10 @@ export function DungeonGraph({ dungeon, allDungeons, runSettings,
             connection.toDoorId,
         ]);
     }, [connections]);
+
+    const graphStyle = {
+        "--room-node-size": `${getTileSizePx(runSettings.tileSize)}px`,
+    } as CSSProperties;
 
     const doorConnectionMap = useMemo(() => {
         const map: Record<
@@ -329,7 +335,7 @@ export function DungeonGraph({ dungeon, allDungeons, runSettings,
                 : `${connections.length} connection${connections.length === 1 ? "" : "s"} tracked`;
 
     return (
-        <div className="dungeon-graph">
+        <div className="dungeon-graph" style={graphStyle}>
             <ReactFlow
                 nodes={nodes}
                 edges={edges}

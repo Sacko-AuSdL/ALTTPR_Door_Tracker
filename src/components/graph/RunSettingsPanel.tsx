@@ -1,8 +1,10 @@
 import {
     DoorShuffleModes,
     EntranceModes,
+    TileSizes,
     type DoorShuffleMode,
     type EntranceMode,
+    type TileSize,
     type TrackerRunSettings,
 } from "../../types/runSettings";
 
@@ -26,6 +28,13 @@ export function RunSettingsPanel({
         onChange({
             ...settings,
             entranceMode,
+        });
+    }
+
+    function updateTileSize(tileSize: TileSize) {
+        onChange({
+            ...settings,
+            tileSize,
         });
     }
 
@@ -57,6 +66,21 @@ export function RunSettingsPanel({
                 >
                     <option value={EntranceModes.Vanilla}>Vanilla</option>
                     <option value={EntranceModes.Shuffled}>Shuffled</option>
+                </select>
+            </label>
+
+            <label>
+                <span>Tile Size</span>
+
+                <select
+                    value={settings.tileSize}
+                    onChange={(event) =>
+                        updateTileSize(event.target.value as TileSize)
+                    }
+                >
+                    <option value={TileSizes.Small}>Small</option>
+                    <option value={TileSizes.Medium}>Medium</option>
+                    <option value={TileSizes.Large}>Large</option>
                 </select>
             </label>
         </div>

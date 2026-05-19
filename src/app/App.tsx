@@ -83,7 +83,10 @@ function loadPersistedRunSettings(): TrackerRunSettings | undefined {
             return undefined;
         }
 
-        return parsedState.settings;
+        return {
+            ...createDefaultRunSettings(),
+            ...parsedState.settings,
+        };
     } catch {
         return undefined;
     }
