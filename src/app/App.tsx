@@ -29,10 +29,11 @@ export default function App() {
     return (
         <main className="app">
             <header className="app__header">
-                <div>
-                    <h1>ALTTPR Door Shuffle Tracker</h1>
-                    <p>Click one door, then another door, to create a connection.</p>
-                </div>
+                <h1>ALTTPR Door Tracker</h1>
+
+                <p>
+                    Add tiles, click two door hotspots to connect them.
+                </p>
             </header>
 
             <nav className="dungeon-tabs" aria-label="Dungeon selection">
