@@ -1,7 +1,7 @@
 import type { DungeonDefinition } from "../../types/dungeon";
 import type { DoorConnection } from "../../types/tracker";
 import type { TrackerRunSettings } from "../../types/runSettings";
-import { EntranceModes } from "../../types/runSettings";
+import { DoorShuffleModes } from "../../types/runSettings";
 import type { RoomGroup } from "../../domain/roomGroups";
 import { AddTilePicker } from "./AddTilePicker";
 import { RunSettingsPanel } from "./RunSettingsPanel";
@@ -79,7 +79,7 @@ export function ConnectionPanel({
             <AddTilePicker
                 roomGroups={roomGroups}
                 allDungeons={allDungeons}
-                collapseAfterAdd={runSettings.entranceMode !== EntranceModes.Vanilla}
+                collapseAfterAdd={runSettings.doorShuffleMode !== DoorShuffleModes.OwnDungeon}
                 onAddRoom={onAddRoom}
             />
 
