@@ -17,18 +17,19 @@ export function getAvailableRoomsForSettings({
                                                  visibleRoomIds,
                                                  settings,
                                              }: GetAvailableRoomsInput): DungeonRoom[] {
+    const rooms =
+        settings.doorShuffleMode === DoorShuffleModes.CrossDungeon
+            ? allDungeons.flatMap((dungeon) => dungeon.rooms)
+            : activeDungeon.rooms;
+
+    return removeVisibleRooms(rooms, visibleRoomIds);
+}
+
+function removeVisibleRooms(
+    rooms: DungeonRoom[],
+    visibleRoomIds: string[],
+): DungeonRoom[] {
     const visibleRoomIdSet = new Set(visibleRoomIds);
 
-    switch (settings.doorShuffleMode) {
-        case DoorShuffleModes.Basic:
-        case DoorShuffleModes.OwnDungeon:
-            return activeDungeon.rooms.filter(
-                (room) => !visibleRoomIdSet.has(room.id),
-            );
-
-        case DoorShuffleModes.CrossDungeon:
-            return allDungeons
-                .flatMap((dungeon) => dungeon.rooms)
-                .filter((room) => !visibleRoomIdSet.has(room.id));
-    }
+    return rooms.filter((room) => !visibleRoomIdSet.has(room.id));
 }
