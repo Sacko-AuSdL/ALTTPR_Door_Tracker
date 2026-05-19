@@ -1,9 +1,10 @@
 import type { DungeonDefinition } from "../../types/dungeon";
 import type { DoorConnection } from "../../types/tracker";
-import type {TrackerRunSettings} from "../../types/runSettings";
+import type { TrackerRunSettings } from "../../types/runSettings";
+import { EntranceModes } from "../../types/runSettings";
 import type { RoomGroup } from "../../domain/roomGroups";
 import { AddTilePicker } from "./AddTilePicker";
-import {RunSettingsPanel} from "./RunSettingsPanel";
+import { RunSettingsPanel } from "./RunSettingsPanel";
 
 type ConnectionPanelProps = {
     dungeon: DungeonDefinition;
@@ -37,7 +38,7 @@ export function ConnectionPanel({
     return (
         <div className="connection-panel">
             <div className="connection-panel__header">
-                <strong>Connections</strong>
+                <strong>Tracker</strong>
 
                 <div className="connection-panel__actions">
                     <button
@@ -47,16 +48,6 @@ export function ConnectionPanel({
                     >
                         Reset Layout
                     </button>
-
-                    {connections.length > 0 && (
-                        <button
-                            type="button"
-                            className="connection-panel__button"
-                            onClick={onClearConnections}
-                        >
-                            Clear
-                        </button>
-                    )}
 
                     <button
                         type="button"
@@ -76,41 +67,63 @@ export function ConnectionPanel({
                 </div>
             </div>
 
-            <RunSettingsPanel
-                settings={runSettings}
-                onChange={onRunSettingsChange}
+            <details className="connection-panel__section">
+                <summary>Run Settings</summary>
+
+                <RunSettingsPanel
+                    settings={runSettings}
+                    onChange={onRunSettingsChange}
+                />
+            </details>
+
+            <AddTilePicker
+                roomGroups={roomGroups}
+                allDungeons={allDungeons}
+                collapseAfterAdd={runSettings.entranceMode !== EntranceModes.Vanilla}
+                onAddRoom={onAddRoom}
             />
 
-            <div className="connection-panel__add-room">
-                <label htmlFor="add-room-select">Add Tile</label>
+            <details className="connection-panel__section">
+                <summary>
+                    Connections
+                    {connections.length > 0 && (
+                        <span className="connection-panel__summary-count">
+                    {connections.length}
+                </span>
+                    )}
+                </summary>
 
-                <AddTilePicker
-                    roomGroups={roomGroups}
-                    allDungeons={allDungeons}
-                    onAddRoom={onAddRoom}
-                />
-            </div>
+                {connections.length > 0 && (
+                    <button
+                        type="button"
+                        className="connection-panel__button"
+                        onClick={onClearConnections}
+                    >
+                        Clear Connections
+                    </button>
+                )}
 
-            {connections.length === 0 ? (
-                <p className="connection-panel__empty">No connections yet.</p>
-            ) : (
-                <ul className="connection-panel__list">
-                    {connections.map((connection) => (
-                        <li key={connection.id} className="connection-panel__item">
-                            <span>{getConnectionDisplayLabel(dungeon, connection)}</span>
+                {connections.length === 0 ? (
+                    <p className="connection-panel__empty">No connections yet.</p>
+                ) : (
+                    <ul className="connection-panel__list">
+                        {connections.map((connection) => (
+                            <li key={connection.id} className="connection-panel__item">
+                                <span>{getConnectionDisplayLabel(dungeon, connection)}</span>
 
-                            <button
-                                type="button"
-                                className="connection-panel__delete"
-                                onClick={() => onDeleteConnection(connection.id)}
-                                aria-label="Delete connection"
-                            >
-                                ×
-                            </button>
-                        </li>
-                    ))}
-                </ul>
-            )}
+                                <button
+                                    type="button"
+                                    className="connection-panel__delete"
+                                    onClick={() => onDeleteConnection(connection.id)}
+                                    aria-label="Delete connection"
+                                >
+                                    ×
+                                </button>
+                            </li>
+                        ))}
+                    </ul>
+                )}
+            </details>
         </div>
     );
 }
