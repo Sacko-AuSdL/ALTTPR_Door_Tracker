@@ -1,6 +1,6 @@
 # ALTTPR Door Tracker
 
-[Open the live tracker](https://mawisadi.github.io/ALTTPR_Door_Tracker/)
+[Open the live tracker](https://Sacko-AuSdL.github.io/ALTTPR_Door_Tracker/)
 
 A modern browser-based prototype for tracking **A Link to the Past Randomizer Door Shuffle** routes.
 
