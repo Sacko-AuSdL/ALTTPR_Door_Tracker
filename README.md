@@ -124,6 +124,13 @@ The generator also reads manually reviewed missing EG map tiles from:
 ```text
 scripts/manual_missing_tiles_review.json
 ```
+
+Manual door hotspot coordinate corrections are read from:
+```text
+scripts/manual_door_coordinate_overrides.json
+```
+These overrides are used to fine-tune individual door hotspot positions without editing generated files directly.
+
 The generated files are committed so users and deployment builds do **not** need Python or the original KrisDavie repository.
 
 ## Deployment
