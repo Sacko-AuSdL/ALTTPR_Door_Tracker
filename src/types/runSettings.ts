@@ -1,5 +1,5 @@
 export const DoorShuffleModes = {
-    Basic: "basic",
+    Beginner: "beginner",
     OwnDungeon: "own-dungeon",
     CrossDungeon: "cross-dungeon",
 } as const;

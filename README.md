@@ -27,7 +27,7 @@ The goal is to make door tracking more visual and flexible than a fixed grid tra
   - Large
 - Dungeon tabs
 - Global run settings:
-  - Basic Doors
+  - Beginner
   - Own Dungeon
   - Cross Dungeon
   - Vanilla / Shuffled entrances

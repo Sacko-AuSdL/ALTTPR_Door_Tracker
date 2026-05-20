@@ -49,7 +49,7 @@ export function RunSettingsPanel({
                         updateDoorShuffleMode(event.target.value as DoorShuffleMode)
                     }
                 >
-                    <option value={DoorShuffleModes.Basic}>Basic Doors</option>
+                    <option value={DoorShuffleModes.Beginner}>Beginner</option>
                     <option value={DoorShuffleModes.OwnDungeon}>Own Dungeon</option>
                     <option value={DoorShuffleModes.CrossDungeon}>Cross Dungeon</option>
                 </select>
