@@ -1,7 +1,9 @@
 import {
+    DoorLabelModes,
     DoorShuffleModes,
     EntranceModes,
     TileSizes,
+    type DoorLabelMode,
     type DoorShuffleMode,
     type EntranceMode,
     type TileSize,
@@ -17,6 +19,13 @@ export function RunSettingsPanel({
                                      settings,
                                      onChange,
                                  }: RunSettingsPanelProps) {
+    function updateDoorLabelMode(doorLabelMode: DoorLabelMode) {
+        onChange({
+            ...settings,
+            doorLabelMode,
+        });
+    }
+
     function updateDoorShuffleMode(doorShuffleMode: DoorShuffleMode) {
         onChange({
             ...settings,
@@ -66,6 +75,21 @@ export function RunSettingsPanel({
                 >
                     <option value={EntranceModes.Vanilla}>Vanilla</option>
                     <option value={EntranceModes.Shuffled}>Shuffled</option>
+                </select>
+            </label>
+
+            <label>
+                <span>Door Labels</span>
+
+                <select
+                    value={settings.doorLabelMode}
+                    onChange={(event) =>
+                        updateDoorLabelMode(event.target.value as DoorLabelMode)
+                    }
+                >
+                    <option value={DoorLabelModes.Full}>Full</option>
+                    <option value={DoorLabelModes.Compact}>Compact</option>
+                    <option value={DoorLabelModes.Dots}>Dots only</option>
                 </select>
             </label>
 

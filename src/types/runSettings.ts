@@ -32,7 +32,17 @@ export type TrackerRunSettings = {
     doorShuffleMode: DoorShuffleMode;
     entranceMode: EntranceMode;
     tileSize: TileSize;
+    doorLabelMode: DoorLabelMode;
 };
+
+export const DoorLabelModes = {
+    Full: "full",
+    Compact: "compact",
+    Dots: "dots",
+} as const;
+
+export type DoorLabelMode =
+    (typeof DoorLabelModes)[keyof typeof DoorLabelModes];
 
 export type PersistedRunSettings = {
     version: 1;
@@ -44,6 +54,7 @@ export function createDefaultRunSettings(): TrackerRunSettings {
         doorShuffleMode: DoorShuffleModes.OwnDungeon,
         entranceMode: EntranceModes.Vanilla,
         tileSize: TileSizes.Medium,
+        doorLabelMode: DoorLabelModes.Compact,
     };
 }
 

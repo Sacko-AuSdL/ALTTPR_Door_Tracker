@@ -1,6 +1,10 @@
 import { Handle, Position, type NodeProps } from "@xyflow/react";
 import type { CSSProperties } from "react";
 import type { DungeonDoor, DungeonRoom } from "../../types/dungeon";
+import {
+    DoorLabelModes,
+    type DoorLabelMode,
+} from "../../types/runSettings";
 import { getPublicAssetUrl } from "../utils/publicAssetUrl";
 
 export type RoomNodeData = {
@@ -11,6 +15,7 @@ export type RoomNodeData = {
         string,
         { connectionId: string; color: string; index: number }
     >;
+    doorLabelMode: DoorLabelMode;
     onDoorClick: (door: DungeonDoor) => void;
     onRemoveRoom: (roomId: string) => void;
 };
@@ -66,6 +71,7 @@ export function RoomNode({ data }: NodeProps<RoomFlowNode>) {
                                 className={[
                                     "nodrag",
                                     "room-node__door",
+                                    data.doorLabelMode === DoorLabelModes.Dots ? "room-node__door--dots" : "",
                                     isSelected ? "room-node__door--selected" : "",
                                     isConnected ? "room-node__door--connected" : "",
                                 ]
@@ -77,7 +83,11 @@ export function RoomNode({ data }: NodeProps<RoomFlowNode>) {
                                 }}
                                 title={door.label}
                             >
-                                {connectionInfo ? `${connectionInfo.index} ${door.label}` : door.label}
+                                {getDoorButtonLabel({
+                                    label: door.label,
+                                    connectionIndex: connectionInfo?.index,
+                                    mode: data.doorLabelMode,
+                                })}
                             </button>
                         );
                     })}
@@ -140,4 +150,60 @@ function getDoorVisualStyle(
             : `0 0 0 2px ${connectionInfo.color}`,
         background: "rgba(17, 24, 39, 0.92)",
     };
+}
+
+function getDoorButtonLabel({
+                                label,
+                                connectionIndex,
+                                mode,
+                            }: {
+    label: string;
+    connectionIndex?: number;
+    mode: DoorLabelMode;
+}): string {
+    if (mode === DoorLabelModes.Dots) {
+        return connectionIndex ? String(connectionIndex) : "";
+    }
+
+    const displayLabel =
+        mode === DoorLabelModes.Compact ? compactDoorLabel(label) : label;
+
+    return connectionIndex ? `${connectionIndex} ${displayLabel}` : displayLabel;
+}
+
+function compactDoorLabel(label: string): string {
+    const normalizedLabel = label.trim();
+
+    const replacements: Record<string, string> = {
+        "Up Stairs": "UP",
+        "Down Stairs": "DN",
+        "North Stairs": "N↑",
+        "South Stairs": "S↓",
+        "Up Ladder": "UP",
+        "Down Ladder": "DN",
+        "Drop Entrance": "DR",
+        Drop: "DR",
+        Hole: "HL",
+    };
+
+    if (replacements[normalizedLabel]) {
+        return replacements[normalizedLabel];
+    }
+
+    const bigKeyMatch = normalizedLabel.match(/^Big Key Door ([A-Z]{1,2})$/);
+    if (bigKeyMatch) {
+        return `BK-${bigKeyMatch[1]}`;
+    }
+
+    const keyMatch = normalizedLabel.match(/^Key Door ([A-Z]{1,2})$/);
+    if (keyMatch) {
+        return `K-${keyMatch[1]}`;
+    }
+
+    const edgeMatch = normalizedLabel.match(/([A-Z]{1,2}) Edge$/);
+    if (edgeMatch) {
+        return edgeMatch[1];
+    }
+
+    return normalizedLabel;
 }

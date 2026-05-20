@@ -24,7 +24,7 @@ import { RoomNode, type RoomFlowNode } from "./RoomNode";
 import { getStartingRoomIds } from "../../domain/startingRooms";
 import { groupRoomsByOriginalDungeon } from "../../domain/roomGroups";
 import { getAvailableRoomsForSettings } from "../../domain/roomPool";
-import { getTileSizePx } from "../../types/runSettings";
+import { DoorLabelModes, getTileSizePx } from "../../types/runSettings";
 import type { TrackerRunSettings } from "../../types/runSettings";
 import { getConnectionColor } from "../../domain/connectionColors";
 
@@ -208,6 +208,7 @@ export function DungeonGraph({ dungeon, allDungeons, runSettings,
                     selectedDoorId: selectedDoor?.id,
                     connectedDoorIds,
                     doorConnectionMap,
+                    doorLabelMode: runSettings.doorLabelMode,
                     onDoorClick: handleDoorClick,
                     onRemoveRoom: handleRemoveRoom,
                 },
@@ -218,6 +219,7 @@ export function DungeonGraph({ dungeon, allDungeons, runSettings,
         doorConnectionMap,
         handleDoorClick,
         handleRemoveRoom,
+        runSettings.doorLabelMode,
         selectedDoor?.id,
         setNodes,
     ]);
@@ -288,6 +290,7 @@ export function DungeonGraph({ dungeon, allDungeons, runSettings,
                     selectedDoorId: selectedDoor?.id,
                     connectedDoorIds,
                     doorConnectionMap,
+                    doorLabelMode: runSettings.doorLabelMode,
                     onDoorClick: handleDoorClick,
                     onRemoveRoom: handleRemoveRoom,
                 },
@@ -487,6 +490,7 @@ function createInitialRoomNodes(
                 selectedDoorId: undefined,
                 connectedDoorIds: [],
                 doorConnectionMap: {},
+                doorLabelMode: DoorLabelModes.Compact,
                 onDoorClick: () => undefined,
                 onRemoveRoom: () => undefined,
             },
