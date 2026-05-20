@@ -1,22 +1,10 @@
 // src/types/tracker.ts
+import type { DoorMarkerMap } from "./doorMarker";
 
 export type DoorConnection = {
     id: string;
     fromDoorId: string;
     toDoorId: string;
-};
-
-export type SelectedDoor = {
-    roomId: string;
-    doorId: string;
-};
-
-export type TrackerState = {
-    dungeonId: string;
-    visibleRoomIds: string[];
-    discoveredRoomIds: string[];
-    connections: DoorConnection[];
-    selectedDoorId?: string;
 };
 
 export type GraphPosition = {
@@ -30,4 +18,5 @@ export type PersistedTrackerState = {
     visibleRoomIds: string[];
     connections: DoorConnection[];
     nodePositions: Record<string, GraphPosition>;
+    doorMarkers?: DoorMarkerMap;
 };

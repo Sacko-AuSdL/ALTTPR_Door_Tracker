@@ -1,6 +1,8 @@
 import { Handle, Position, type NodeProps } from "@xyflow/react";
 import type { CSSProperties } from "react";
 import type { DungeonDoor, DungeonRoom } from "../../types/dungeon";
+import { DOOR_MARKER_DEFINITIONS, getDoorMarkerDefinition } from "../../data/doorMarkerDefinitions";
+import type { DoorMarkerMap, DoorMarkerType } from "../../types/doorMarker";
 import {
     DoorLabelModes,
     type DoorLabelMode,
@@ -13,10 +15,20 @@ export type RoomNodeData = {
     connectedDoorIds: string[];
     doorConnectionMap: Record<
         string,
-        { connectionId: string; color: string; index: number }
+        {
+            connectionId: string;
+            color: string;
+            index: number;
+        }
     >;
     doorLabelMode: DoorLabelMode;
+    doorMarkers: DoorMarkerMap;
     onDoorClick: (door: DungeonDoor) => void;
+    onDoorMarkerChange: (
+        doorId: string,
+        markerType: DoorMarkerType | undefined,
+    ) => void;
+    onDoorSelectionClear: () => void;
     onRemoveRoom: (roomId: string) => void;
 };
 
@@ -29,6 +41,18 @@ export type RoomFlowNode = {
 
 export function RoomNode({ data }: NodeProps<RoomFlowNode>) {
     const previewImageUrl = getPublicAssetUrl(data.room.previewImageUrl);
+    const selectedDoor = data.room.doors.find(
+        (door) => door.id === data.selectedDoorId,
+    );
+
+    function setSelectedDoorMarker(markerType: DoorMarkerType | undefined) {
+        if (!selectedDoor) {
+            return;
+        }
+
+        data.onDoorMarkerChange(selectedDoor.id, markerType);
+        data.onDoorSelectionClear();
+    }
 
     return (
         <div className="room-node">
@@ -92,6 +116,87 @@ export function RoomNode({ data }: NodeProps<RoomFlowNode>) {
                         );
                     })}
                 </div>
+
+                {data.room.doors.map((door) => {
+                    const markerDefinition = getDoorMarkerDefinition(data.doorMarkers[door.id]);
+
+                    if (!markerDefinition) {
+                        return null;
+                    }
+
+                    const markerIconUrl = getPublicAssetUrl(markerDefinition.iconUrl);
+
+                    return (
+                        <button
+                            key={`${door.id}-marker`}
+                            type="button"
+                            className="nodrag room-node__door-marker"
+                            style={getDoorMarkerStyle(door)}
+                            title={`Remove ${markerDefinition.label} marker`}
+                            aria-label={`Remove ${markerDefinition.label} marker from ${door.label}`}
+                            onClick={(event) => {
+                                event.stopPropagation();
+                                data.onDoorMarkerChange(door.id, undefined);
+                                data.onDoorSelectionClear();
+                            }}
+                        >
+                            {markerIconUrl ? (
+                                <img src={markerIconUrl} alt="" aria-hidden="true" />
+                            ) : (
+                                <span>{markerDefinition.shortLabel}</span>
+                            )}
+                        </button>
+                    );
+                })}
+
+                {selectedDoor && (
+                    <div
+                        className={[
+                            "nodrag",
+                            "room-node__marker-menu",
+                            getDoorMarkerMenuPlacementClass(selectedDoor),
+                        ].join(" ")}
+                        style={getDoorMarkerMenuStyle(selectedDoor)}
+                        onClick={(event) => {
+                            event.stopPropagation();
+                        }}
+                    >
+                        {DOOR_MARKER_DEFINITIONS.map((definition) => {
+                            const iconUrl = getPublicAssetUrl(definition.iconUrl);
+
+                            return (
+                                <button
+                                    key={definition.type}
+                                    type="button"
+                                    className="room-node__marker-menu-button"
+                                    onClick={(event) => {
+                                        event.stopPropagation();
+                                        setSelectedDoorMarker(definition.type);
+                                    }}
+                                    title={definition.label}
+                                >
+                                    {iconUrl ? (
+                                        <img src={iconUrl} alt={definition.label} />
+                                    ) : (
+                                        definition.shortLabel
+                                    )}
+                                </button>
+                            );
+                        })}
+
+                        <button
+                            type="button"
+                            className="room-node__marker-menu-button room-node__marker-menu-button--clear"
+                            onClick={(event) => {
+                                event.stopPropagation();
+                                setSelectedDoorMarker(undefined);
+                            }}
+                            title="Clear marker"
+                        >
+                            ×
+                        </button>
+                    </div>
+                )}
 
                 {data.room.doors.map((door) => {
                     return (
@@ -206,4 +311,53 @@ function compactDoorLabel(label: string): string {
     }
 
     return normalizedLabel;
+}
+
+function getDoorMarkerStyle(door: DungeonDoor): CSSProperties {
+    const xPercent = ((door.x ?? 256) / 512) * 100;
+    const yPercent = ((door.y ?? 256) / 512) * 100;
+
+    let markerX = xPercent;
+    let markerY = yPercent;
+
+    if (yPercent < 18) {
+        markerY += 9;
+    } else if (yPercent > 82) {
+        markerY -= 9;
+    } else if (xPercent < 18) {
+        markerX += 9;
+    } else if (xPercent > 82) {
+        markerX -= 9;
+    } else {
+        markerY -= 8;
+    }
+
+    return {
+        left: `${clamp(markerX, 8, 92)}%`,
+        top: `${clamp(markerY, 8, 92)}%`,
+    };
+}
+
+function getDoorMarkerMenuStyle(door: DungeonDoor): CSSProperties {
+    const xPercent = ((door.x ?? 256) / 512) * 100;
+    const yPercent = ((door.y ?? 256) / 512) * 100;
+
+    return {
+        left: `${clamp(xPercent, 20, 80)}%`,
+        top: `${clamp(yPercent, 12, 88)}%`,
+    };
+}
+
+function getDoorMarkerMenuPlacementClass(door: DungeonDoor): string {
+    const yPercent = ((door.y ?? 256) / 512) * 100;
+
+    if (yPercent < 30) {
+        return "room-node__marker-menu--below";
+    }
+
+    return "room-node__marker-menu--above";
+}
+
+function clamp(value: number, min: number, max: number): number {
+    return Math.min(Math.max(value, min), max);
 }

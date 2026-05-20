@@ -18,6 +18,7 @@ import {
 } from "react";
 import type { DungeonDefinition, DungeonDoor } from "../../types/dungeon";
 import type { DoorConnection, GraphPosition, PersistedTrackerState } from "../../types/tracker";
+import type { DoorMarkerMap, DoorMarkerType } from "../../types/doorMarker";
 import { ConnectionPanel } from "./ConnectionPanel";
 import { TrackerStatusBar } from "./TrackerStatusBar";
 import { RoomNode, type RoomFlowNode } from "./RoomNode";
@@ -82,6 +83,14 @@ export function DungeonGraph({ dungeon, allDungeons, runSettings,
         "--room-node-size": `${getTileSizePx(runSettings.tileSize)}px`,
     } as CSSProperties;
 
+    const [doorMarkers, setDoorMarkers] = useState<DoorMarkerMap>(
+        () => persistedState?.doorMarkers ?? {},
+    );
+
+    const clearSelectedDoor = useCallback(() => {
+        setSelectedDoor(undefined);
+    }, []);
+
     const doorConnectionMap = useMemo(() => {
         const map: Record<
             string,
@@ -135,8 +144,9 @@ export function DungeonGraph({ dungeon, allDungeons, runSettings,
             visibleRoomIds,
             connections,
             nodePositions: getNodePositions(nodes),
+            doorMarkers,
         });
-    }, [connections, dungeon.id, nodes, visibleRoomIds]);
+    }, [connections, doorMarkers, dungeon.id, nodes, visibleRoomIds]);
 
     const handleDoorClick = useCallback(
         (door: DungeonDoor) => {
@@ -178,6 +188,23 @@ export function DungeonGraph({ dungeon, allDungeons, runSettings,
         [connections, selectedDoor],
     );
 
+    const handleDoorMarkerChange = useCallback(
+        (doorId: string, markerType: DoorMarkerType | undefined) => {
+            setDoorMarkers((currentDoorMarkers) => {
+                const nextDoorMarkers = { ...currentDoorMarkers };
+
+                if (markerType) {
+                    nextDoorMarkers[doorId] = markerType;
+                } else {
+                    delete nextDoorMarkers[doorId];
+                }
+
+                return nextDoorMarkers;
+            });
+        },
+        [],
+    );
+
     const handleRemoveRoom = useCallback((roomId: string) => {
         setSelectedDoor(undefined);
 
@@ -197,6 +224,17 @@ export function DungeonGraph({ dungeon, allDungeons, runSettings,
                 return fromDoor.roomId !== roomId && toDoor.roomId !== roomId;
             }),
         );
+
+        setDoorMarkers((currentDoorMarkers) => {
+            const nextDoorMarkers = { ...currentDoorMarkers };
+            const room = allRooms.find((candidate) => candidate.id === roomId);
+
+            room?.doors.forEach((door) => {
+                delete nextDoorMarkers[door.id];
+            });
+
+            return nextDoorMarkers;
+        });
     }, [allDungeons, setNodes]);
 
     useEffect(() => {
@@ -209,7 +247,10 @@ export function DungeonGraph({ dungeon, allDungeons, runSettings,
                     connectedDoorIds,
                     doorConnectionMap,
                     doorLabelMode: runSettings.doorLabelMode,
+                    doorMarkers,
                     onDoorClick: handleDoorClick,
+                    onDoorMarkerChange: handleDoorMarkerChange,
+                    onDoorSelectionClear: clearSelectedDoor,
                     onRemoveRoom: handleRemoveRoom,
                 },
             })),
@@ -217,7 +258,9 @@ export function DungeonGraph({ dungeon, allDungeons, runSettings,
     }, [
         connectedDoorIds,
         doorConnectionMap,
+        doorMarkers,
         handleDoorClick,
+        handleDoorMarkerChange,
         handleRemoveRoom,
         runSettings.doorLabelMode,
         selectedDoor?.id,
@@ -295,7 +338,10 @@ export function DungeonGraph({ dungeon, allDungeons, runSettings,
                         connectedDoorIds,
                         doorConnectionMap,
                         doorLabelMode: runSettings.doorLabelMode,
+                        doorMarkers,
                         onDoorClick: handleDoorClick,
+                        onDoorMarkerChange: handleDoorMarkerChange,
+                        onDoorSelectionClear: clearSelectedDoor,
                         onRemoveRoom: handleRemoveRoom,
                     },
                 },
@@ -496,7 +542,10 @@ function createInitialRoomNodes(
                 connectedDoorIds: [],
                 doorConnectionMap: {},
                 doorLabelMode: DoorLabelModes.Compact,
+                doorMarkers: {},
                 onDoorClick: () => undefined,
+                onDoorMarkerChange: () => undefined,
+                onDoorSelectionClear: () => undefined,
                 onRemoveRoom: () => undefined,
             },
         }));
