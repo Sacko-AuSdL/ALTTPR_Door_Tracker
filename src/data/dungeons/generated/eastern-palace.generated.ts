@@ -5,47 +5,164 @@ export const EasternPalaceGenerated = {
   "name": "Eastern Palace",
   "rooms": [
     {
-      "id": "eastern-palace-tile-9-9",
-      "name": "Eastern Darkness (9,9)",
+      "id": "eastern-palace-tile-10-10",
+      "name": "Eastern East Wing (10,10)",
       "dungeonId": "eastern-palace",
       "originalDungeonId": "eastern-palace",
-      "previewImageUrl": "/assets/krisdavie/rooms/eastern-palace/eastern-palace-tile-9-9.png",
+      "previewImageUrl": "/assets/krisdavie/rooms/eastern-palace/eastern-palace-tile-10-10.png",
       "doors": [
         {
-          "id": "eastern-darkness-s",
-          "roomId": "eastern-palace-tile-9-9",
-          "label": "S",
+          "id": "eastern-east-wing-w",
+          "roomId": "eastern-palace-tile-10-10",
+          "label": "W",
+          "direction": "west",
+          "type": "normal",
+          "x": 33,
+          "y": 266
+        },
+        {
+          "id": "eastern-east-wing-en",
+          "roomId": "eastern-palace-tile-10-10",
+          "label": "EN",
+          "direction": "north",
+          "type": "normal",
+          "x": 221,
+          "y": 137
+        },
+        {
+          "id": "eastern-pot-switch-wn",
+          "roomId": "eastern-palace-tile-10-10",
+          "label": "WN",
+          "direction": "north",
+          "type": "normal",
+          "x": 290,
+          "y": 136
+        },
+        {
+          "id": "eastern-east-wing-es",
+          "roomId": "eastern-palace-tile-10-10",
+          "label": "ES",
           "direction": "south",
           "type": "normal",
-          "x": 255,
-          "y": 479
+          "x": 222,
+          "y": 392
         },
         {
-          "id": "eastern-darkness-ne",
-          "roomId": "eastern-palace-tile-9-9",
-          "label": "NE",
-          "direction": "east",
+          "id": "eastern-map-balcony-ws",
+          "roomId": "eastern-palace-tile-10-10",
+          "label": "WS",
+          "direction": "south",
           "type": "normal",
-          "x": 385,
-          "y": 306
+          "x": 289,
+          "y": 393
         },
         {
-          "id": "eastern-rupees-se",
-          "roomId": "eastern-palace-tile-9-9",
+          "id": "eastern-pot-switch-se",
+          "roomId": "eastern-palace-tile-10-10",
           "label": "SE",
           "direction": "east",
           "type": "normal",
-          "x": 384,
+          "x": 383,
           "y": 223
         },
         {
-          "id": "eastern-darkness-up-stairs",
-          "roomId": "eastern-palace-tile-9-9",
-          "label": "Up Stairs",
+          "id": "eastern-map-room-ne",
+          "roomId": "eastern-palace-tile-10-10",
+          "label": "NE",
+          "direction": "east",
+          "type": "normal",
+          "x": 384,
+          "y": 304
+        },
+        {
+          "id": "eastern-map-valley-wn",
+          "roomId": "eastern-palace-tile-10-10",
+          "label": "WN",
+          "direction": "west",
+          "type": "normal",
+          "x": 57,
+          "y": 137
+        },
+        {
+          "id": "eastern-map-valley-sw",
+          "roomId": "eastern-palace-tile-10-10",
+          "label": "SW",
+          "direction": "south",
+          "type": "normal",
+          "x": 127,
+          "y": 479
+        }
+      ]
+    },
+    {
+      "id": "eastern-palace-tile-10-11",
+      "name": "Eastern Dark Square (10,11)",
+      "dungeonId": "eastern-palace",
+      "originalDungeonId": "eastern-palace",
+      "previewImageUrl": "/assets/krisdavie/rooms/eastern-palace/eastern-palace-tile-10-11.png",
+      "doors": [
+        {
+          "id": "eastern-dark-square-nw",
+          "roomId": "eastern-palace-tile-10-11",
+          "label": "NW",
+          "direction": "north",
+          "type": "normal",
+          "x": 127,
+          "y": 50
+        },
+        {
+          "id": "eastern-dark-square-key-door-wn",
+          "roomId": "eastern-palace-tile-10-11",
+          "label": "Key Door WN",
+          "direction": "west",
+          "type": "key",
+          "x": 35,
+          "y": 136
+        },
+        {
+          "id": "eastern-dark-square-en",
+          "roomId": "eastern-palace-tile-10-11",
+          "label": "EN",
+          "direction": "north",
+          "type": "normal",
+          "x": 220,
+          "y": 137
+        },
+        {
+          "id": "eastern-dark-pots-wn",
+          "roomId": "eastern-palace-tile-10-11",
+          "label": "WN",
+          "direction": "north",
+          "type": "normal",
+          "x": 291,
+          "y": 136
+        }
+      ]
+    },
+    {
+      "id": "eastern-palace-tile-10-13",
+      "name": "Eastern Attic Start",
+      "dungeonId": "eastern-palace",
+      "originalDungeonId": "eastern-palace",
+      "previewImageUrl": "/assets/krisdavie/rooms/eastern-palace/eastern-palace-tile-10-13.png",
+      "doors": [
+        {
+          "id": "eastern-attic-start-down-stairs",
+          "roomId": "eastern-palace-tile-10-13",
+          "label": "Down Stairs",
           "direction": "stairs",
           "type": "stair",
-          "x": 128,
-          "y": 304
+          "x": 127,
+          "y": 305
+        },
+        {
+          "id": "eastern-attic-start-ws",
+          "roomId": "eastern-palace-tile-10-13",
+          "label": "WS",
+          "direction": "west",
+          "type": "normal",
+          "x": 32,
+          "y": 392
         }
       ]
     },
@@ -140,6 +257,96 @@ export const EasternPalaceGenerated = {
       ]
     },
     {
+      "id": "eastern-palace-tile-8-11",
+      "name": "Eastern Big Key (8,11)",
+      "dungeonId": "eastern-palace",
+      "originalDungeonId": "eastern-palace",
+      "previewImageUrl": "/assets/krisdavie/rooms/eastern-palace/eastern-palace-tile-8-11.png",
+      "doors": [
+        {
+          "id": "eastern-big-key-en",
+          "roomId": "eastern-palace-tile-8-11",
+          "label": "EN",
+          "direction": "east",
+          "type": "bigkey",
+          "x": 479,
+          "y": 135
+        },
+        {
+          "id": "eastern-big-key-ne",
+          "roomId": "eastern-palace-tile-8-11",
+          "label": "NE",
+          "direction": "north",
+          "type": "bigkey",
+          "x": 383,
+          "y": 51
+        }
+      ]
+    },
+    {
+      "id": "eastern-palace-tile-8-12",
+      "name": "Eastern Boss (8,12)",
+      "dungeonId": "eastern-palace",
+      "originalDungeonId": "eastern-palace",
+      "previewImageUrl": "/assets/krisdavie/rooms/eastern-palace/eastern-palace-tile-8-12.png",
+      "doors": [
+        {
+          "id": "eastern-boss-se",
+          "roomId": "eastern-palace-tile-8-12",
+          "label": "SE",
+          "direction": "south",
+          "type": "normal",
+          "x": 384,
+          "y": 479
+        }
+      ]
+    },
+    {
+      "id": "eastern-palace-tile-8-13",
+      "name": "Eastern Single Eyegore",
+      "dungeonId": "eastern-palace",
+      "originalDungeonId": "eastern-palace",
+      "previewImageUrl": "/assets/krisdavie/rooms/eastern-palace/eastern-palace-tile-8-13.png",
+      "doors": [
+        {
+          "id": "eastern-single-eyegore-es",
+          "roomId": "eastern-palace-tile-8-13",
+          "label": "ES",
+          "direction": "east",
+          "type": "normal",
+          "x": 479,
+          "y": 393
+        },
+        {
+          "id": "eastern-single-eyegore-ne",
+          "roomId": "eastern-palace-tile-8-13",
+          "label": "NE",
+          "direction": "east",
+          "type": "normal",
+          "x": 383,
+          "y": 305
+        },
+        {
+          "id": "eastern-duo-eyegores-se",
+          "roomId": "eastern-palace-tile-8-13",
+          "label": "SE",
+          "direction": "east",
+          "type": "normal",
+          "x": 383,
+          "y": 222
+        },
+        {
+          "id": "eastern-duo-eyegores-ne",
+          "roomId": "eastern-palace-tile-8-13",
+          "label": "NE",
+          "direction": "north",
+          "type": "normal",
+          "x": 383,
+          "y": 48
+        }
+      ]
+    },
+    {
       "id": "eastern-palace-tile-9-10",
       "name": "Eastern Courtyard Ledge (9,10)",
       "dungeonId": "eastern-palace",
@@ -203,123 +410,6 @@ export const EasternPalaceGenerated = {
       ]
     },
     {
-      "id": "eastern-palace-tile-10-10",
-      "name": "Eastern East Wing (10,10)",
-      "dungeonId": "eastern-palace",
-      "originalDungeonId": "eastern-palace",
-      "previewImageUrl": "/assets/krisdavie/rooms/eastern-palace/eastern-palace-tile-10-10.png",
-      "doors": [
-        {
-          "id": "eastern-east-wing-w",
-          "roomId": "eastern-palace-tile-10-10",
-          "label": "W",
-          "direction": "west",
-          "type": "normal",
-          "x": 33,
-          "y": 266
-        },
-        {
-          "id": "eastern-east-wing-en",
-          "roomId": "eastern-palace-tile-10-10",
-          "label": "EN",
-          "direction": "north",
-          "type": "normal",
-          "x": 221,
-          "y": 137
-        },
-        {
-          "id": "eastern-pot-switch-wn",
-          "roomId": "eastern-palace-tile-10-10",
-          "label": "WN",
-          "direction": "north",
-          "type": "normal",
-          "x": 290,
-          "y": 136
-        },
-        {
-          "id": "eastern-east-wing-es",
-          "roomId": "eastern-palace-tile-10-10",
-          "label": "ES",
-          "direction": "south",
-          "type": "normal",
-          "x": 222,
-          "y": 392
-        },
-        {
-          "id": "eastern-map-balcony-ws",
-          "roomId": "eastern-palace-tile-10-10",
-          "label": "WS",
-          "direction": "south",
-          "type": "normal",
-          "x": 289,
-          "y": 393
-        },
-        {
-          "id": "eastern-pot-switch-se",
-          "roomId": "eastern-palace-tile-10-10",
-          "label": "SE",
-          "direction": "east",
-          "type": "normal",
-          "x": 383,
-          "y": 223
-        },
-        {
-          "id": "eastern-map-room-ne",
-          "roomId": "eastern-palace-tile-10-10",
-          "label": "NE",
-          "direction": "east",
-          "type": "normal",
-          "x": 384,
-          "y": 304
-        },
-        {
-          "id": "eastern-map-valley-wn",
-          "roomId": "eastern-palace-tile-10-10",
-          "label": "WN",
-          "direction": "west",
-          "type": "normal",
-          "x": 57,
-          "y": 137
-        },
-        {
-          "id": "eastern-map-valley-sw",
-          "roomId": "eastern-palace-tile-10-10",
-          "label": "SW",
-          "direction": "south",
-          "type": "normal",
-          "x": 127,
-          "y": 479
-        }
-      ]
-    },
-    {
-      "id": "eastern-palace-tile-8-11",
-      "name": "Eastern Big Key (8,11)",
-      "dungeonId": "eastern-palace",
-      "originalDungeonId": "eastern-palace",
-      "previewImageUrl": "/assets/krisdavie/rooms/eastern-palace/eastern-palace-tile-8-11.png",
-      "doors": [
-        {
-          "id": "eastern-big-key-en",
-          "roomId": "eastern-palace-tile-8-11",
-          "label": "EN",
-          "direction": "east",
-          "type": "bigkey",
-          "x": 479,
-          "y": 135
-        },
-        {
-          "id": "eastern-big-key-ne",
-          "roomId": "eastern-palace-tile-8-11",
-          "label": "NE",
-          "direction": "north",
-          "type": "bigkey",
-          "x": 383,
-          "y": 51
-        }
-      ]
-    },
-    {
       "id": "eastern-palace-tile-9-11",
       "name": "Eastern Cannonball (9,11)",
       "dungeonId": "eastern-palace",
@@ -361,69 +451,6 @@ export const EasternPalaceGenerated = {
           "type": "key",
           "x": 477,
           "y": 135
-        }
-      ]
-    },
-    {
-      "id": "eastern-palace-tile-10-11",
-      "name": "Eastern Dark Square (10,11)",
-      "dungeonId": "eastern-palace",
-      "originalDungeonId": "eastern-palace",
-      "previewImageUrl": "/assets/krisdavie/rooms/eastern-palace/eastern-palace-tile-10-11.png",
-      "doors": [
-        {
-          "id": "eastern-dark-square-nw",
-          "roomId": "eastern-palace-tile-10-11",
-          "label": "NW",
-          "direction": "north",
-          "type": "normal",
-          "x": 127,
-          "y": 50
-        },
-        {
-          "id": "eastern-dark-square-key-door-wn",
-          "roomId": "eastern-palace-tile-10-11",
-          "label": "Key Door WN",
-          "direction": "west",
-          "type": "key",
-          "x": 35,
-          "y": 136
-        },
-        {
-          "id": "eastern-dark-square-en",
-          "roomId": "eastern-palace-tile-10-11",
-          "label": "EN",
-          "direction": "north",
-          "type": "normal",
-          "x": 220,
-          "y": 137
-        },
-        {
-          "id": "eastern-dark-pots-wn",
-          "roomId": "eastern-palace-tile-10-11",
-          "label": "WN",
-          "direction": "north",
-          "type": "normal",
-          "x": 291,
-          "y": 136
-        }
-      ]
-    },
-    {
-      "id": "eastern-palace-tile-8-12",
-      "name": "Eastern Boss (8,12)",
-      "dungeonId": "eastern-palace",
-      "originalDungeonId": "eastern-palace",
-      "previewImageUrl": "/assets/krisdavie/rooms/eastern-palace/eastern-palace-tile-8-12.png",
-      "doors": [
-        {
-          "id": "eastern-boss-se",
-          "roomId": "eastern-palace-tile-8-12",
-          "label": "SE",
-          "direction": "south",
-          "type": "normal",
-          "x": 384,
-          "y": 479
         }
       ]
     },
@@ -505,6 +532,96 @@ export const EasternPalaceGenerated = {
           "type": "normal",
           "x": 256,
           "y": 50
+        }
+      ]
+    },
+    {
+      "id": "eastern-palace-tile-9-13",
+      "name": "Eastern False Switches",
+      "dungeonId": "eastern-palace",
+      "originalDungeonId": "eastern-palace",
+      "previewImageUrl": "/assets/krisdavie/rooms/eastern-palace/eastern-palace-tile-9-13.png",
+      "doors": [
+        {
+          "id": "eastern-false-switches-es",
+          "roomId": "eastern-palace-tile-9-13",
+          "label": "ES",
+          "direction": "east",
+          "type": "normal",
+          "x": 478,
+          "y": 392
+        },
+        {
+          "id": "eastern-false-switches-ws",
+          "roomId": "eastern-palace-tile-9-13",
+          "label": "WS",
+          "direction": "south",
+          "type": "normal",
+          "x": 288,
+          "y": 392
+        },
+        {
+          "id": "eastern-cannonball-hell-es",
+          "roomId": "eastern-palace-tile-9-13",
+          "label": "ES",
+          "direction": "south",
+          "type": "normal",
+          "x": 221,
+          "y": 394
+        },
+        {
+          "id": "eastern-cannonball-hell-ws",
+          "roomId": "eastern-palace-tile-9-13",
+          "label": "WS",
+          "direction": "west",
+          "type": "normal",
+          "x": 33,
+          "y": 392
+        }
+      ]
+    },
+    {
+      "id": "eastern-palace-tile-9-9",
+      "name": "Eastern Darkness (9,9)",
+      "dungeonId": "eastern-palace",
+      "originalDungeonId": "eastern-palace",
+      "previewImageUrl": "/assets/krisdavie/rooms/eastern-palace/eastern-palace-tile-9-9.png",
+      "doors": [
+        {
+          "id": "eastern-darkness-s",
+          "roomId": "eastern-palace-tile-9-9",
+          "label": "S",
+          "direction": "south",
+          "type": "normal",
+          "x": 255,
+          "y": 479
+        },
+        {
+          "id": "eastern-darkness-ne",
+          "roomId": "eastern-palace-tile-9-9",
+          "label": "NE",
+          "direction": "east",
+          "type": "normal",
+          "x": 385,
+          "y": 306
+        },
+        {
+          "id": "eastern-rupees-se",
+          "roomId": "eastern-palace-tile-9-9",
+          "label": "SE",
+          "direction": "east",
+          "type": "normal",
+          "x": 384,
+          "y": 223
+        },
+        {
+          "id": "eastern-darkness-up-stairs",
+          "roomId": "eastern-palace-tile-9-9",
+          "label": "Up Stairs",
+          "direction": "stairs",
+          "type": "stair",
+          "x": 128,
+          "y": 304
         }
       ]
     }

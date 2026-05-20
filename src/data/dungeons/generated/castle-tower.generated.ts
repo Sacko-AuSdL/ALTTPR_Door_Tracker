@@ -5,24 +5,6 @@ export const CastleTowerGenerated = {
   "name": "Castle Tower",
   "rooms": [
     {
-      "id": "castle-tower-tile-0-2",
-      "name": "Tower Agahnim 1 (0,2)",
-      "dungeonId": "castle-tower",
-      "originalDungeonId": "castle-tower",
-      "previewImageUrl": "/assets/krisdavie/rooms/castle-tower/castle-tower-tile-0-2.png",
-      "doors": [
-        {
-          "id": "tower-agahnim-1-sw",
-          "roomId": "castle-tower-tile-0-2",
-          "label": "SW",
-          "direction": "south",
-          "type": "normal",
-          "x": 128,
-          "y": 480
-        }
-      ]
-    },
-    {
       "id": "castle-tower-tile-0-11",
       "name": "Tower Red Spears (0,11)",
       "dungeonId": "castle-tower",
@@ -289,6 +271,114 @@ export const CastleTowerGenerated = {
           "type": "stair",
           "x": 383,
           "y": 50
+        }
+      ]
+    },
+    {
+      "id": "castle-tower-tile-0-2",
+      "name": "Tower Agahnim 1 (0,2)",
+      "dungeonId": "castle-tower",
+      "originalDungeonId": "castle-tower",
+      "previewImageUrl": "/assets/krisdavie/rooms/castle-tower/castle-tower-tile-0-2.png",
+      "doors": [
+        {
+          "id": "tower-agahnim-1-sw",
+          "roomId": "castle-tower-tile-0-2",
+          "label": "SW",
+          "direction": "south",
+          "type": "normal",
+          "x": 128,
+          "y": 480
+        }
+      ]
+    },
+    {
+      "id": "castle-tower-tile-0-3",
+      "name": "Tower Antechamber",
+      "dungeonId": "castle-tower",
+      "originalDungeonId": "castle-tower",
+      "previewImageUrl": "/assets/krisdavie/rooms/castle-tower/castle-tower-tile-0-3.png",
+      "doors": [
+        {
+          "id": "tower-antechamber-south-stairs",
+          "roomId": "castle-tower-tile-0-3",
+          "label": "South Stairs",
+          "direction": "stairs",
+          "type": "stair",
+          "x": 127,
+          "y": 480
+        },
+        {
+          "id": "tower-antechamber-nw",
+          "roomId": "castle-tower-tile-0-3",
+          "label": "NW",
+          "direction": "west",
+          "type": "normal",
+          "x": 129,
+          "y": 306
+        },
+        {
+          "id": "tower-altar-sw",
+          "roomId": "castle-tower-tile-0-3",
+          "label": "SW",
+          "direction": "west",
+          "type": "normal",
+          "x": 127,
+          "y": 222
+        },
+        {
+          "id": "tower-altar-nw",
+          "roomId": "castle-tower-tile-0-3",
+          "label": "NW",
+          "direction": "north",
+          "type": "normal",
+          "x": 127,
+          "y": 50
+        }
+      ]
+    },
+    {
+      "id": "castle-tower-tile-0-4",
+      "name": "Tower Push Statue",
+      "dungeonId": "castle-tower",
+      "originalDungeonId": "castle-tower",
+      "previewImageUrl": "/assets/krisdavie/rooms/castle-tower/castle-tower-tile-0-4.png",
+      "doors": [
+        {
+          "id": "tower-push-statue-down-stairs",
+          "roomId": "castle-tower-tile-0-4",
+          "label": "Down Stairs",
+          "direction": "stairs",
+          "type": "stair",
+          "x": 415,
+          "y": 329
+        },
+        {
+          "id": "tower-push-statue-ws",
+          "roomId": "castle-tower-tile-0-4",
+          "label": "WS",
+          "direction": "south",
+          "type": "normal",
+          "x": 313,
+          "y": 392
+        },
+        {
+          "id": "tower-catwalk-es",
+          "roomId": "castle-tower-tile-0-4",
+          "label": "ES",
+          "direction": "south",
+          "type": "normal",
+          "x": 193,
+          "y": 394
+        },
+        {
+          "id": "tower-catwalk-north-stairs",
+          "roomId": "castle-tower-tile-0-4",
+          "label": "North Stairs",
+          "direction": "stairs",
+          "type": "stair",
+          "x": 128,
+          "y": 48
         }
       ]
     }

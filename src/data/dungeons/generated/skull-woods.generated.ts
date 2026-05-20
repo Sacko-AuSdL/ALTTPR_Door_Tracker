@@ -5,69 +5,6 @@ export const SkullWoodsGenerated = {
   "name": "Skull Woods",
   "rooms": [
     {
-      "id": "skull-woods-tile-9-2",
-      "name": "Skull Boss (9,2)",
-      "dungeonId": "skull-woods",
-      "originalDungeonId": "skull-woods",
-      "previewImageUrl": "/assets/krisdavie/rooms/skull-woods/skull-woods-tile-9-2.png",
-      "doors": [
-        {
-          "id": "skull-boss-drop-entrance",
-          "roomId": "skull-woods-tile-9-2",
-          "label": "Drop Entrance",
-          "direction": "drop",
-          "type": "drop",
-          "x": 390,
-          "y": 384
-        }
-      ]
-    },
-    {
-      "id": "skull-woods-tile-9-3",
-      "name": "Skull Spike Corner (9,3)",
-      "dungeonId": "skull-woods",
-      "originalDungeonId": "skull-woods",
-      "previewImageUrl": "/assets/krisdavie/rooms/skull-woods/skull-woods-tile-9-3.png",
-      "doors": [
-        {
-          "id": "skull-spike-corner-sw",
-          "roomId": "skull-woods-tile-9-3",
-          "label": "SW",
-          "direction": "south",
-          "type": "normal",
-          "x": 127,
-          "y": 479
-        },
-        {
-          "id": "skull-spike-corner-es",
-          "roomId": "skull-woods-tile-9-3",
-          "label": "ES",
-          "direction": "south",
-          "type": "normal",
-          "x": 221,
-          "y": 391
-        },
-        {
-          "id": "skull-final-drop-ws",
-          "roomId": "skull-woods-tile-9-3",
-          "label": "WS",
-          "direction": "drop",
-          "type": "drop",
-          "x": 289,
-          "y": 391
-        },
-        {
-          "id": "skull-final-drop-hole",
-          "roomId": "skull-woods-tile-9-3",
-          "label": "Hole",
-          "direction": "drop",
-          "type": "drop",
-          "x": 390,
-          "y": 384
-        }
-      ]
-    },
-    {
       "id": "skull-woods-tile-6-5",
       "name": "Skull Small Hall (6,5)",
       "dungeonId": "skull-woods",
@@ -221,6 +158,60 @@ export const SkullWoodsGenerated = {
       ]
     },
     {
+      "id": "skull-woods-tile-7-6",
+      "name": "Skull Compass Room (7,6)",
+      "dungeonId": "skull-woods",
+      "originalDungeonId": "skull-woods",
+      "previewImageUrl": "/assets/krisdavie/rooms/skull-woods/skull-woods-tile-7-6.png",
+      "doors": [
+        {
+          "id": "skull-compass-room-ne",
+          "roomId": "skull-woods-tile-7-6",
+          "label": "NE",
+          "direction": "north",
+          "type": "normal",
+          "x": 383,
+          "y": 49
+        },
+        {
+          "id": "skull-compass-room-es",
+          "roomId": "skull-woods-tile-7-6",
+          "label": "ES",
+          "direction": "east",
+          "type": "normal",
+          "x": 477,
+          "y": 392
+        },
+        {
+          "id": "skull-left-drop-es",
+          "roomId": "skull-woods-tile-7-6",
+          "label": "ES",
+          "direction": "drop",
+          "type": "drop",
+          "x": 221,
+          "y": 391
+        },
+        {
+          "id": "skull-drop-entrance-left",
+          "roomId": "skull-woods-tile-7-6",
+          "label": "Skull Drop Entrance Left",
+          "direction": "drop",
+          "type": "drop",
+          "x": 127,
+          "y": 124
+        },
+        {
+          "id": "skull-compass-room-ws",
+          "roomId": "skull-woods-tile-7-6",
+          "label": "WS",
+          "direction": "south",
+          "type": "normal",
+          "x": 289,
+          "y": 392
+        }
+      ]
+    },
+    {
       "id": "skull-woods-tile-8-5",
       "name": "Skull 1 Lobby (8,5)",
       "dungeonId": "skull-woods",
@@ -320,6 +311,168 @@ export const SkullWoodsGenerated = {
       ]
     },
     {
+      "id": "skull-woods-tile-8-6",
+      "name": "Skull Pinball (8,6)",
+      "dungeonId": "skull-woods",
+      "originalDungeonId": "skull-woods",
+      "previewImageUrl": "/assets/krisdavie/rooms/skull-woods/skull-woods-tile-8-6.png",
+      "doors": [
+        {
+          "id": "skull-pinball-ne",
+          "roomId": "skull-woods-tile-8-6",
+          "label": "NE",
+          "direction": "north",
+          "type": "normal",
+          "x": 383,
+          "y": 50
+        },
+        {
+          "id": "skull-pinball-ws",
+          "roomId": "skull-woods-tile-8-6",
+          "label": "WS",
+          "direction": "west",
+          "type": "normal",
+          "x": 31,
+          "y": 392
+        },
+        {
+          "id": "skull-drop-entrance-right",
+          "roomId": "skull-woods-tile-8-6",
+          "label": "Skull Drop Entrance Right",
+          "direction": "drop",
+          "type": "drop",
+          "x": 218,
+          "y": 286
+        }
+      ]
+    },
+    {
+      "id": "skull-woods-tile-9-2",
+      "name": "Skull Boss (9,2)",
+      "dungeonId": "skull-woods",
+      "originalDungeonId": "skull-woods",
+      "previewImageUrl": "/assets/krisdavie/rooms/skull-woods/skull-woods-tile-9-2.png",
+      "doors": [
+        {
+          "id": "skull-boss-drop-entrance",
+          "roomId": "skull-woods-tile-9-2",
+          "label": "Drop Entrance",
+          "direction": "drop",
+          "type": "drop",
+          "x": 390,
+          "y": 384
+        }
+      ]
+    },
+    {
+      "id": "skull-woods-tile-9-3",
+      "name": "Skull Spike Corner (9,3)",
+      "dungeonId": "skull-woods",
+      "originalDungeonId": "skull-woods",
+      "previewImageUrl": "/assets/krisdavie/rooms/skull-woods/skull-woods-tile-9-3.png",
+      "doors": [
+        {
+          "id": "skull-spike-corner-sw",
+          "roomId": "skull-woods-tile-9-3",
+          "label": "SW",
+          "direction": "south",
+          "type": "normal",
+          "x": 127,
+          "y": 479
+        },
+        {
+          "id": "skull-spike-corner-es",
+          "roomId": "skull-woods-tile-9-3",
+          "label": "ES",
+          "direction": "south",
+          "type": "normal",
+          "x": 221,
+          "y": 391
+        },
+        {
+          "id": "skull-final-drop-ws",
+          "roomId": "skull-woods-tile-9-3",
+          "label": "WS",
+          "direction": "drop",
+          "type": "drop",
+          "x": 289,
+          "y": 391
+        },
+        {
+          "id": "skull-final-drop-hole",
+          "roomId": "skull-woods-tile-9-3",
+          "label": "Hole",
+          "direction": "drop",
+          "type": "drop",
+          "x": 390,
+          "y": 384
+        }
+      ]
+    },
+    {
+      "id": "skull-woods-tile-9-4",
+      "name": "Skull Star Pits",
+      "dungeonId": "skull-woods",
+      "originalDungeonId": "skull-woods",
+      "previewImageUrl": "/assets/krisdavie/rooms/skull-woods/skull-woods-tile-9-4.png",
+      "doors": [
+        {
+          "id": "skull-star-pits-sw",
+          "roomId": "skull-woods-tile-9-4",
+          "label": "SW",
+          "direction": "drop",
+          "type": "drop",
+          "x": 127,
+          "y": 478
+        },
+        {
+          "id": "skull-star-pits-es",
+          "roomId": "skull-woods-tile-9-4",
+          "label": "ES",
+          "direction": "drop",
+          "type": "drop",
+          "x": 221,
+          "y": 392
+        },
+        {
+          "id": "skull-torch-room-ws",
+          "roomId": "skull-woods-tile-9-4",
+          "label": "WS",
+          "direction": "south",
+          "type": "normal",
+          "x": 289,
+          "y": 393
+        },
+        {
+          "id": "skull-torch-room-wn",
+          "roomId": "skull-woods-tile-9-4",
+          "label": "WN",
+          "direction": "north",
+          "type": "normal",
+          "x": 287,
+          "y": 135
+        },
+        {
+          "id": "skull-vines-en",
+          "roomId": "skull-woods-tile-9-4",
+          "label": "EN",
+          "direction": "north",
+          "type": "normal",
+          "x": 221,
+          "y": 136
+        },
+        {
+          "id": "skull-vines-nw",
+          "roomId": "skull-woods-tile-9-4",
+          "label": "NW",
+          "direction": "north",
+          "type": "normal",
+          "x": 127,
+          "y": 53
+        }
+      ]
+    },
+    {
       "id": "skull-woods-tile-9-5",
       "name": "Skull 3 Lobby (9,5)",
       "dungeonId": "skull-woods",
@@ -379,96 +532,6 @@ export const SkullWoodsGenerated = {
           "type": "normal",
           "x": 194,
           "y": 392
-        }
-      ]
-    },
-    {
-      "id": "skull-woods-tile-7-6",
-      "name": "Skull Compass Room (7,6)",
-      "dungeonId": "skull-woods",
-      "originalDungeonId": "skull-woods",
-      "previewImageUrl": "/assets/krisdavie/rooms/skull-woods/skull-woods-tile-7-6.png",
-      "doors": [
-        {
-          "id": "skull-compass-room-ne",
-          "roomId": "skull-woods-tile-7-6",
-          "label": "NE",
-          "direction": "north",
-          "type": "normal",
-          "x": 383,
-          "y": 49
-        },
-        {
-          "id": "skull-compass-room-es",
-          "roomId": "skull-woods-tile-7-6",
-          "label": "ES",
-          "direction": "east",
-          "type": "normal",
-          "x": 477,
-          "y": 392
-        },
-        {
-          "id": "skull-left-drop-es",
-          "roomId": "skull-woods-tile-7-6",
-          "label": "ES",
-          "direction": "drop",
-          "type": "drop",
-          "x": 221,
-          "y": 391
-        },
-        {
-          "id": "skull-drop-entrance-left",
-          "roomId": "skull-woods-tile-7-6",
-          "label": "Skull Drop Entrance Left",
-          "direction": "drop",
-          "type": "drop",
-          "x": 127,
-          "y": 124
-        },
-        {
-          "id": "skull-compass-room-ws",
-          "roomId": "skull-woods-tile-7-6",
-          "label": "WS",
-          "direction": "south",
-          "type": "normal",
-          "x": 289,
-          "y": 392
-        }
-      ]
-    },
-    {
-      "id": "skull-woods-tile-8-6",
-      "name": "Skull Pinball (8,6)",
-      "dungeonId": "skull-woods",
-      "originalDungeonId": "skull-woods",
-      "previewImageUrl": "/assets/krisdavie/rooms/skull-woods/skull-woods-tile-8-6.png",
-      "doors": [
-        {
-          "id": "skull-pinball-ne",
-          "roomId": "skull-woods-tile-8-6",
-          "label": "NE",
-          "direction": "north",
-          "type": "normal",
-          "x": 383,
-          "y": 50
-        },
-        {
-          "id": "skull-pinball-ws",
-          "roomId": "skull-woods-tile-8-6",
-          "label": "WS",
-          "direction": "west",
-          "type": "normal",
-          "x": 31,
-          "y": 392
-        },
-        {
-          "id": "skull-drop-entrance-right",
-          "roomId": "skull-woods-tile-8-6",
-          "label": "Skull Drop Entrance Right",
-          "direction": "drop",
-          "type": "drop",
-          "x": 218,
-          "y": 286
         }
       ]
     }

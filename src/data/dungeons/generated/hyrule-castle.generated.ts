@@ -5,6 +5,123 @@ export const HyruleCastleGenerated = {
   "name": "Hyrule Castle",
   "rooms": [
     {
+      "id": "hyrule-castle-tile-0-5",
+      "name": "Hyrule Castle West Hall",
+      "dungeonId": "hyrule-castle",
+      "originalDungeonId": "hyrule-castle",
+      "previewImageUrl": "/assets/krisdavie/rooms/hyrule-castle/hyrule-castle-tile-0-5.png",
+      "doors": [
+        {
+          "id": "hyrule-castle-west-hall-e",
+          "roomId": "hyrule-castle-tile-0-5",
+          "label": "E",
+          "direction": "east",
+          "type": "normal",
+          "x": 454,
+          "y": 136
+        },
+        {
+          "id": "hyrule-castle-west-hall-s",
+          "roomId": "hyrule-castle-tile-0-5",
+          "label": "S",
+          "direction": "south",
+          "type": "normal",
+          "x": 383,
+          "y": 454
+        }
+      ]
+    },
+    {
+      "id": "hyrule-castle-tile-0-6",
+      "name": "Hyrule Castle West Lobby (0,6)",
+      "dungeonId": "hyrule-castle",
+      "originalDungeonId": "hyrule-castle",
+      "previewImageUrl": "/assets/krisdavie/rooms/hyrule-castle/hyrule-castle-tile-0-6.png",
+      "doors": [
+        {
+          "id": "hyrule-castle-west-lobby-e",
+          "roomId": "hyrule-castle-tile-0-6",
+          "label": "E",
+          "direction": "east",
+          "type": "normal",
+          "x": 454,
+          "y": 264
+        },
+        {
+          "id": "hyrule-castle-west-lobby-n",
+          "roomId": "hyrule-castle-tile-0-6",
+          "label": "N",
+          "direction": "north",
+          "type": "normal",
+          "x": 383,
+          "y": 73
+        },
+        {
+          "id": "hyrule-castle-west-lobby-en",
+          "roomId": "hyrule-castle-tile-0-6",
+          "label": "EN",
+          "direction": "east",
+          "type": "normal",
+          "x": 477,
+          "y": 136
+        },
+        {
+          "id": "hyrule-castle-west-lobby-s",
+          "roomId": "hyrule-castle-tile-0-6",
+          "label": "S",
+          "direction": "south",
+          "type": "normal",
+          "x": 383,
+          "y": 478
+        }
+      ]
+    },
+    {
+      "id": "hyrule-castle-tile-0-7",
+      "name": "Hyrule Dungeon Staircase",
+      "dungeonId": "hyrule-castle",
+      "originalDungeonId": "hyrule-castle",
+      "previewImageUrl": "/assets/krisdavie/rooms/hyrule-castle/hyrule-castle-tile-0-7.png",
+      "doors": [
+        {
+          "id": "hyrule-dungeon-staircase-up-stairs",
+          "roomId": "hyrule-castle-tile-0-7",
+          "label": "Up Stairs",
+          "direction": "stairs",
+          "type": "stair",
+          "x": 168,
+          "y": 49
+        },
+        {
+          "id": "hyrule-dungeon-staircase-down-stairs",
+          "roomId": "hyrule-castle-tile-0-7",
+          "label": "Down Stairs",
+          "direction": "stairs",
+          "type": "stair",
+          "x": 88,
+          "y": 49
+        }
+      ]
+    },
+    {
+      "id": "hyrule-castle-tile-0-8",
+      "name": "Hyrule Dungeon Cellblock (0,8)",
+      "dungeonId": "hyrule-castle",
+      "originalDungeonId": "hyrule-castle",
+      "previewImageUrl": "/assets/krisdavie/rooms/hyrule-castle/hyrule-castle-tile-0-8.png",
+      "doors": [
+        {
+          "id": "hyrule-dungeon-cellblock-up-stairs",
+          "roomId": "hyrule-castle-tile-0-8",
+          "label": "Up Stairs",
+          "direction": "stairs",
+          "type": "stair",
+          "x": 89,
+          "y": 48
+        }
+      ]
+    },
+    {
       "id": "hyrule-castle-tile-1-0",
       "name": "Hyrule Castle Back Hall (1,0)",
       "dungeonId": "hyrule-castle",
@@ -113,42 +230,6 @@ export const HyruleCastleGenerated = {
       ]
     },
     {
-      "id": "hyrule-castle-tile-2-1",
-      "name": "Sanctuary (2,1)",
-      "dungeonId": "hyrule-castle",
-      "originalDungeonId": "hyrule-castle",
-      "previewImageUrl": "/assets/krisdavie/rooms/hyrule-castle/hyrule-castle-tile-2-1.png",
-      "doors": [
-        {
-          "id": "sanctuary-n",
-          "roomId": "hyrule-castle-tile-2-1",
-          "label": "N",
-          "direction": "north",
-          "type": "normal",
-          "x": 255,
-          "y": 74
-        },
-        {
-          "id": "sanctuary-mirror-route",
-          "roomId": "hyrule-castle-tile-2-1",
-          "label": "Sanctuary Mirror Route",
-          "direction": "north",
-          "type": "normal",
-          "x": 256,
-          "y": 204
-        },
-        {
-          "id": "sanctuary-s",
-          "roomId": "hyrule-castle-tile-2-1",
-          "label": "S",
-          "direction": "south",
-          "type": "normal",
-          "x": 256,
-          "y": 454
-        }
-      ]
-    },
-    {
       "id": "hyrule-castle-tile-1-2",
       "name": "Sewers Key Rat (1,2)",
       "dungeonId": "hyrule-castle",
@@ -194,29 +275,29 @@ export const HyruleCastleGenerated = {
       ]
     },
     {
-      "id": "hyrule-castle-tile-2-3",
-      "name": "Sewers Dark Cross (2,3)",
+      "id": "hyrule-castle-tile-1-4",
+      "name": "Sewers Behind Tapestry",
       "dungeonId": "hyrule-castle",
       "originalDungeonId": "hyrule-castle",
-      "previewImageUrl": "/assets/krisdavie/rooms/hyrule-castle/hyrule-castle-tile-2-3.png",
+      "previewImageUrl": "/assets/krisdavie/rooms/hyrule-castle/hyrule-castle-tile-1-4.png",
       "doors": [
         {
-          "id": "sewers-dark-cross-south-stairs",
-          "roomId": "hyrule-castle-tile-2-3",
-          "label": "South Stairs",
-          "direction": "stairs",
-          "type": "stair",
+          "id": "sewers-behind-tapestry-s",
+          "roomId": "hyrule-castle-tile-1-4",
+          "label": "S",
+          "direction": "south",
+          "type": "normal",
           "x": 256,
-          "y": 480
+          "y": 479
         },
         {
-          "id": "sewers-dark-cross-key-door-n",
-          "roomId": "hyrule-castle-tile-2-3",
-          "label": "Key Door N",
-          "direction": "north",
-          "type": "key",
-          "x": 255,
-          "y": 49
+          "id": "sewers-behind-tapestry-down-stairs",
+          "roomId": "hyrule-castle-tile-1-4",
+          "label": "Down Stairs",
+          "direction": "stairs",
+          "type": "stair",
+          "x": 432,
+          "y": 50
         }
       ]
     },
@@ -244,87 +325,6 @@ export const HyruleCastleGenerated = {
           "type": "stair",
           "x": 255,
           "y": 455
-        }
-      ]
-    },
-    {
-      "id": "hyrule-castle-tile-2-5",
-      "name": "Hyrule Castle East Hall (2,5)",
-      "dungeonId": "hyrule-castle",
-      "originalDungeonId": "hyrule-castle",
-      "previewImageUrl": "/assets/krisdavie/rooms/hyrule-castle/hyrule-castle-tile-2-5.png",
-      "doors": [
-        {
-          "id": "hyrule-castle-east-hall-w",
-          "roomId": "hyrule-castle-tile-2-5",
-          "label": "W",
-          "direction": "west",
-          "type": "normal",
-          "x": 57,
-          "y": 136
-        },
-        {
-          "id": "hyrule-castle-east-hall-s",
-          "roomId": "hyrule-castle-tile-2-5",
-          "label": "S",
-          "direction": "south",
-          "type": "normal",
-          "x": 257,
-          "y": 478
-        },
-        {
-          "id": "hyrule-castle-east-hall-sw",
-          "roomId": "hyrule-castle-tile-2-5",
-          "label": "SW",
-          "direction": "south",
-          "type": "normal",
-          "x": 127,
-          "y": 454
-        }
-      ]
-    },
-    {
-      "id": "hyrule-castle-tile-0-6",
-      "name": "Hyrule Castle West Lobby (0,6)",
-      "dungeonId": "hyrule-castle",
-      "originalDungeonId": "hyrule-castle",
-      "previewImageUrl": "/assets/krisdavie/rooms/hyrule-castle/hyrule-castle-tile-0-6.png",
-      "doors": [
-        {
-          "id": "hyrule-castle-west-lobby-e",
-          "roomId": "hyrule-castle-tile-0-6",
-          "label": "E",
-          "direction": "east",
-          "type": "normal",
-          "x": 454,
-          "y": 264
-        },
-        {
-          "id": "hyrule-castle-west-lobby-n",
-          "roomId": "hyrule-castle-tile-0-6",
-          "label": "N",
-          "direction": "north",
-          "type": "normal",
-          "x": 383,
-          "y": 73
-        },
-        {
-          "id": "hyrule-castle-west-lobby-en",
-          "roomId": "hyrule-castle-tile-0-6",
-          "label": "EN",
-          "direction": "east",
-          "type": "normal",
-          "x": 477,
-          "y": 136
-        },
-        {
-          "id": "hyrule-castle-west-lobby-s",
-          "roomId": "hyrule-castle-tile-0-6",
-          "label": "S",
-          "direction": "south",
-          "type": "normal",
-          "x": 383,
-          "y": 478
         }
       ]
     },
@@ -379,51 +379,6 @@ export const HyruleCastleGenerated = {
           "type": "stair",
           "x": 256,
           "y": 50
-        }
-      ]
-    },
-    {
-      "id": "hyrule-castle-tile-2-6",
-      "name": "Hyrule Castle East Lobby (2,6)",
-      "dungeonId": "hyrule-castle",
-      "originalDungeonId": "hyrule-castle",
-      "previewImageUrl": "/assets/krisdavie/rooms/hyrule-castle/hyrule-castle-tile-2-6.png",
-      "doors": [
-        {
-          "id": "hyrule-castle-east-lobby-w",
-          "roomId": "hyrule-castle-tile-2-6",
-          "label": "W",
-          "direction": "west",
-          "type": "normal",
-          "x": 58,
-          "y": 264
-        },
-        {
-          "id": "hyrule-castle-east-lobby-n",
-          "roomId": "hyrule-castle-tile-2-6",
-          "label": "N",
-          "direction": "north",
-          "type": "normal",
-          "x": 256,
-          "y": 50
-        },
-        {
-          "id": "hyrule-castle-east-lobby-nw",
-          "roomId": "hyrule-castle-tile-2-6",
-          "label": "NW",
-          "direction": "north",
-          "type": "normal",
-          "x": 127,
-          "y": 74
-        },
-        {
-          "id": "hyrule-castle-east-lobby-s",
-          "roomId": "hyrule-castle-tile-2-6",
-          "label": "S",
-          "direction": "south",
-          "type": "normal",
-          "x": 127,
-          "y": 478
         }
       ]
     },
@@ -491,6 +446,285 @@ export const HyruleCastleGenerated = {
       ]
     },
     {
+      "id": "hyrule-castle-tile-1-8",
+      "name": "Hyrule Dungeon Guardroom Catwalk Edge (1,8)",
+      "dungeonId": "hyrule-castle",
+      "originalDungeonId": "hyrule-castle",
+      "previewImageUrl": "/assets/krisdavie/rooms/hyrule-castle/hyrule-castle-tile-1-8.png",
+      "doors": [
+        {
+          "id": "hyrule-dungeon-guardroom-catwalk-edge",
+          "roomId": "hyrule-castle-tile-1-8",
+          "label": "Hyrule Dungeon Guardroom Catwalk Edge",
+          "direction": "east",
+          "type": "normal",
+          "x": 510,
+          "y": 118
+        },
+        {
+          "id": "hyrule-dungeon-guardroom-abyss-edge",
+          "roomId": "hyrule-castle-tile-1-8",
+          "label": "Hyrule Dungeon Guardroom Abyss Edge",
+          "direction": "east",
+          "type": "normal",
+          "x": 510,
+          "y": 404
+        },
+        {
+          "id": "hyrule-dungeon-guardroom-n",
+          "roomId": "hyrule-castle-tile-1-8",
+          "label": "N",
+          "direction": "north",
+          "type": "normal",
+          "x": 128,
+          "y": 74
+        }
+      ]
+    },
+    {
+      "id": "hyrule-castle-tile-2-0",
+      "name": "Sewers Pull Switch",
+      "dungeonId": "hyrule-castle",
+      "originalDungeonId": "hyrule-castle",
+      "previewImageUrl": "/assets/krisdavie/rooms/hyrule-castle/hyrule-castle-tile-2-0.png",
+      "doors": [
+        {
+          "id": "sewers-pull-switch-down-stairs",
+          "roomId": "hyrule-castle-tile-2-0",
+          "label": "Down Stairs",
+          "direction": "stairs",
+          "type": "stair",
+          "x": 383,
+          "y": 75
+        },
+        {
+          "id": "sewers-yet-more-rats-s",
+          "roomId": "hyrule-castle-tile-2-0",
+          "label": "S",
+          "direction": "north",
+          "type": "normal",
+          "x": 253,
+          "y": 195
+        },
+        {
+          "id": "sewers-pull-switch-n",
+          "roomId": "hyrule-castle-tile-2-0",
+          "label": "N",
+          "direction": "south",
+          "type": "normal",
+          "x": 256,
+          "y": 327
+        },
+        {
+          "id": "sewers-pull-switch-s",
+          "roomId": "hyrule-castle-tile-2-0",
+          "label": "S",
+          "direction": "south",
+          "type": "normal",
+          "x": 256,
+          "y": 455
+        }
+      ]
+    },
+    {
+      "id": "hyrule-castle-tile-2-1",
+      "name": "Sanctuary (2,1)",
+      "dungeonId": "hyrule-castle",
+      "originalDungeonId": "hyrule-castle",
+      "previewImageUrl": "/assets/krisdavie/rooms/hyrule-castle/hyrule-castle-tile-2-1.png",
+      "doors": [
+        {
+          "id": "sanctuary-n",
+          "roomId": "hyrule-castle-tile-2-1",
+          "label": "N",
+          "direction": "north",
+          "type": "normal",
+          "x": 255,
+          "y": 74
+        },
+        {
+          "id": "sanctuary-mirror-route",
+          "roomId": "hyrule-castle-tile-2-1",
+          "label": "Sanctuary Mirror Route",
+          "direction": "north",
+          "type": "normal",
+          "x": 256,
+          "y": 204
+        },
+        {
+          "id": "sanctuary-s",
+          "roomId": "hyrule-castle-tile-2-1",
+          "label": "S",
+          "direction": "south",
+          "type": "normal",
+          "x": 256,
+          "y": 454
+        }
+      ]
+    },
+    {
+      "id": "hyrule-castle-tile-2-2",
+      "name": "Sewers Water",
+      "dungeonId": "hyrule-castle",
+      "originalDungeonId": "hyrule-castle",
+      "previewImageUrl": "/assets/krisdavie/rooms/hyrule-castle/hyrule-castle-tile-2-2.png",
+      "doors": [
+        {
+          "id": "sewers-water-s",
+          "roomId": "hyrule-castle-tile-2-2",
+          "label": "S",
+          "direction": "south",
+          "type": "normal",
+          "x": 255,
+          "y": 479
+        },
+        {
+          "id": "sewers-water-w",
+          "roomId": "hyrule-castle-tile-2-2",
+          "label": "W",
+          "direction": "west",
+          "type": "normal",
+          "x": 33,
+          "y": 392
+        }
+      ]
+    },
+    {
+      "id": "hyrule-castle-tile-2-3",
+      "name": "Sewers Dark Cross (2,3)",
+      "dungeonId": "hyrule-castle",
+      "originalDungeonId": "hyrule-castle",
+      "previewImageUrl": "/assets/krisdavie/rooms/hyrule-castle/hyrule-castle-tile-2-3.png",
+      "doors": [
+        {
+          "id": "sewers-dark-cross-south-stairs",
+          "roomId": "hyrule-castle-tile-2-3",
+          "label": "South Stairs",
+          "direction": "stairs",
+          "type": "stair",
+          "x": 256,
+          "y": 480
+        },
+        {
+          "id": "sewers-dark-cross-key-door-n",
+          "roomId": "hyrule-castle-tile-2-3",
+          "label": "Key Door N",
+          "direction": "north",
+          "type": "key",
+          "x": 255,
+          "y": 49
+        }
+      ]
+    },
+    {
+      "id": "hyrule-castle-tile-2-4",
+      "name": "Sewers Rope Room",
+      "dungeonId": "hyrule-castle",
+      "originalDungeonId": "hyrule-castle",
+      "previewImageUrl": "/assets/krisdavie/rooms/hyrule-castle/hyrule-castle-tile-2-4.png",
+      "doors": [
+        {
+          "id": "sewers-rope-room-up-stairs",
+          "roomId": "hyrule-castle-tile-2-4",
+          "label": "Up Stairs",
+          "direction": "stairs",
+          "type": "stair",
+          "x": 432,
+          "y": 48
+        },
+        {
+          "id": "sewers-rope-room-north-stairs",
+          "roomId": "hyrule-castle-tile-2-4",
+          "label": "North Stairs",
+          "direction": "stairs",
+          "type": "stair",
+          "x": 255,
+          "y": 49
+        }
+      ]
+    },
+    {
+      "id": "hyrule-castle-tile-2-5",
+      "name": "Hyrule Castle East Hall (2,5)",
+      "dungeonId": "hyrule-castle",
+      "originalDungeonId": "hyrule-castle",
+      "previewImageUrl": "/assets/krisdavie/rooms/hyrule-castle/hyrule-castle-tile-2-5.png",
+      "doors": [
+        {
+          "id": "hyrule-castle-east-hall-w",
+          "roomId": "hyrule-castle-tile-2-5",
+          "label": "W",
+          "direction": "west",
+          "type": "normal",
+          "x": 57,
+          "y": 136
+        },
+        {
+          "id": "hyrule-castle-east-hall-s",
+          "roomId": "hyrule-castle-tile-2-5",
+          "label": "S",
+          "direction": "south",
+          "type": "normal",
+          "x": 257,
+          "y": 478
+        },
+        {
+          "id": "hyrule-castle-east-hall-sw",
+          "roomId": "hyrule-castle-tile-2-5",
+          "label": "SW",
+          "direction": "south",
+          "type": "normal",
+          "x": 127,
+          "y": 454
+        }
+      ]
+    },
+    {
+      "id": "hyrule-castle-tile-2-6",
+      "name": "Hyrule Castle East Lobby (2,6)",
+      "dungeonId": "hyrule-castle",
+      "originalDungeonId": "hyrule-castle",
+      "previewImageUrl": "/assets/krisdavie/rooms/hyrule-castle/hyrule-castle-tile-2-6.png",
+      "doors": [
+        {
+          "id": "hyrule-castle-east-lobby-w",
+          "roomId": "hyrule-castle-tile-2-6",
+          "label": "W",
+          "direction": "west",
+          "type": "normal",
+          "x": 58,
+          "y": 264
+        },
+        {
+          "id": "hyrule-castle-east-lobby-n",
+          "roomId": "hyrule-castle-tile-2-6",
+          "label": "N",
+          "direction": "north",
+          "type": "normal",
+          "x": 256,
+          "y": 50
+        },
+        {
+          "id": "hyrule-castle-east-lobby-nw",
+          "roomId": "hyrule-castle-tile-2-6",
+          "label": "NW",
+          "direction": "north",
+          "type": "normal",
+          "x": 127,
+          "y": 74
+        },
+        {
+          "id": "hyrule-castle-east-lobby-s",
+          "roomId": "hyrule-castle-tile-2-6",
+          "label": "S",
+          "direction": "south",
+          "type": "normal",
+          "x": 127,
+          "y": 478
+        }
+      ]
+    },
+    {
       "id": "hyrule-castle-tile-2-7",
       "name": "Hyrule Dungeon Map Room (2,7)",
       "dungeonId": "hyrule-castle",
@@ -541,60 +775,6 @@ export const HyruleCastleGenerated = {
           "type": "normal",
           "x": 54,
           "y": 510
-        }
-      ]
-    },
-    {
-      "id": "hyrule-castle-tile-0-8",
-      "name": "Hyrule Dungeon Cellblock (0,8)",
-      "dungeonId": "hyrule-castle",
-      "originalDungeonId": "hyrule-castle",
-      "previewImageUrl": "/assets/krisdavie/rooms/hyrule-castle/hyrule-castle-tile-0-8.png",
-      "doors": [
-        {
-          "id": "hyrule-dungeon-cellblock-up-stairs",
-          "roomId": "hyrule-castle-tile-0-8",
-          "label": "Up Stairs",
-          "direction": "stairs",
-          "type": "stair",
-          "x": 89,
-          "y": 48
-        }
-      ]
-    },
-    {
-      "id": "hyrule-castle-tile-1-8",
-      "name": "Hyrule Dungeon Guardroom Catwalk Edge (1,8)",
-      "dungeonId": "hyrule-castle",
-      "originalDungeonId": "hyrule-castle",
-      "previewImageUrl": "/assets/krisdavie/rooms/hyrule-castle/hyrule-castle-tile-1-8.png",
-      "doors": [
-        {
-          "id": "hyrule-dungeon-guardroom-catwalk-edge",
-          "roomId": "hyrule-castle-tile-1-8",
-          "label": "Hyrule Dungeon Guardroom Catwalk Edge",
-          "direction": "east",
-          "type": "normal",
-          "x": 510,
-          "y": 118
-        },
-        {
-          "id": "hyrule-dungeon-guardroom-abyss-edge",
-          "roomId": "hyrule-castle-tile-1-8",
-          "label": "Hyrule Dungeon Guardroom Abyss Edge",
-          "direction": "east",
-          "type": "normal",
-          "x": 510,
-          "y": 404
-        },
-        {
-          "id": "hyrule-dungeon-guardroom-n",
-          "roomId": "hyrule-castle-tile-1-8",
-          "label": "N",
-          "direction": "north",
-          "type": "normal",
-          "x": 128,
-          "y": 74
         }
       ]
     },

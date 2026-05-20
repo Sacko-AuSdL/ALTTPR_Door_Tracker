@@ -5,6 +5,177 @@ export const SwampPalaceGenerated = {
   "name": "Swamp Palace",
   "rooms": [
     {
+      "id": "swamp-palace-tile-4-3",
+      "name": "Swamp West Shallows (4,3)",
+      "dungeonId": "swamp-palace",
+      "originalDungeonId": "swamp-palace",
+      "previewImageUrl": "/assets/krisdavie/rooms/swamp-palace/swamp-palace-tile-4-3.png",
+      "doors": [
+        {
+          "id": "swamp-west-shallows-es",
+          "roomId": "swamp-palace-tile-4-3",
+          "label": "ES",
+          "direction": "east",
+          "type": "normal",
+          "x": 477,
+          "y": 392
+        },
+        {
+          "id": "swamp-west-block-path-up-stairs",
+          "roomId": "swamp-palace-tile-4-3",
+          "label": "Up Stairs",
+          "direction": "stairs",
+          "type": "stair",
+          "x": 128,
+          "y": 304
+        },
+        {
+          "id": "swamp-barrier-en",
+          "roomId": "swamp-palace-tile-4-3",
+          "label": "EN",
+          "direction": "east",
+          "type": "normal",
+          "x": 478,
+          "y": 136
+        },
+        {
+          "id": "swamp-west-ledge-drop-entrance",
+          "roomId": "swamp-palace-tile-4-3",
+          "label": "Drop Entrance",
+          "direction": "drop",
+          "type": "drop",
+          "x": 136,
+          "y": 136
+        },
+        {
+          "id": "swamp-barrier-ledge-drop-entrance",
+          "roomId": "swamp-palace-tile-4-3",
+          "label": "Drop Entrance",
+          "direction": "drop",
+          "type": "drop",
+          "x": 348,
+          "y": 136
+        }
+      ]
+    },
+    {
+      "id": "swamp-palace-tile-4-5",
+      "name": "Swamp Attic (4,5)",
+      "dungeonId": "swamp-palace",
+      "originalDungeonId": "swamp-palace",
+      "previewImageUrl": "/assets/krisdavie/rooms/swamp-palace/swamp-palace-tile-4-5.png",
+      "doors": [
+        {
+          "id": "swamp-attic-down-stairs",
+          "roomId": "swamp-palace-tile-4-5",
+          "label": "Down Stairs",
+          "direction": "stairs",
+          "type": "stair",
+          "x": 126,
+          "y": 305
+        },
+        {
+          "id": "swamp-attic-left-pit",
+          "roomId": "swamp-palace-tile-4-5",
+          "label": "Swamp Attic Left Pit",
+          "direction": "drop",
+          "type": "drop",
+          "x": 136,
+          "y": 136
+        },
+        {
+          "id": "swamp-attic-right-pit",
+          "roomId": "swamp-palace-tile-4-5",
+          "label": "Swamp Attic Right Pit",
+          "direction": "drop",
+          "type": "drop",
+          "x": 348,
+          "y": 136
+        }
+      ]
+    },
+    {
+      "id": "swamp-palace-tile-5-3",
+      "name": "Swamp Crystal Switch (5,3)",
+      "dungeonId": "swamp-palace",
+      "originalDungeonId": "swamp-palace",
+      "previewImageUrl": "/assets/krisdavie/rooms/swamp-palace/swamp-palace-tile-5-3.png",
+      "doors": [
+        {
+          "id": "swamp-crystal-switch-en",
+          "roomId": "swamp-palace-tile-5-3",
+          "label": "EN",
+          "direction": "east",
+          "type": "normal",
+          "x": 477,
+          "y": 136
+        },
+        {
+          "id": "swamp-crystal-switch-se",
+          "roomId": "swamp-palace-tile-5-3",
+          "label": "SE",
+          "direction": "east",
+          "type": "normal",
+          "x": 383,
+          "y": 221
+        },
+        {
+          "id": "swamp-shortcut-ne",
+          "roomId": "swamp-palace-tile-5-3",
+          "label": "NE",
+          "direction": "east",
+          "type": "normal",
+          "x": 382,
+          "y": 303
+        },
+        {
+          "id": "swamp-trench-2-pots-es",
+          "roomId": "swamp-palace-tile-5-3",
+          "label": "ES",
+          "direction": "east",
+          "type": "normal",
+          "x": 480,
+          "y": 392
+        },
+        {
+          "id": "swamp-trench-2-blocks-n",
+          "roomId": "swamp-palace-tile-5-3",
+          "label": "N",
+          "direction": "south",
+          "type": "normal",
+          "x": 256,
+          "y": 327
+        },
+        {
+          "id": "swamp-trench-2-alcove-s",
+          "roomId": "swamp-palace-tile-5-3",
+          "label": "S",
+          "direction": "north",
+          "type": "normal",
+          "x": 256,
+          "y": 200
+        },
+        {
+          "id": "swamp-trench-2-departure-ws",
+          "roomId": "swamp-palace-tile-5-3",
+          "label": "WS",
+          "direction": "west",
+          "type": "normal",
+          "x": 32,
+          "y": 391
+        },
+        {
+          "id": "swamp-big-key-ledge-wn",
+          "roomId": "swamp-palace-tile-5-3",
+          "label": "WN",
+          "direction": "west",
+          "type": "bigkey",
+          "x": 34,
+          "y": 135
+        }
+      ]
+    },
+    {
       "id": "swamp-palace-tile-6-0",
       "name": "Swamp Boss (6,0)",
       "dungeonId": "swamp-palace",
@@ -203,168 +374,6 @@ export const SwampPalaceGenerated = {
       ]
     },
     {
-      "id": "swamp-palace-tile-8-2",
-      "name": "Swamp Lobby (8,2)",
-      "dungeonId": "swamp-palace",
-      "originalDungeonId": "swamp-palace",
-      "previewImageUrl": "/assets/krisdavie/rooms/swamp-palace/swamp-palace-tile-8-2.png",
-      "doors": [
-        {
-          "id": "swamp-lobby-s",
-          "roomId": "swamp-palace-tile-8-2",
-          "label": "S",
-          "direction": "south",
-          "type": "normal",
-          "x": 256,
-          "y": 479
-        },
-        {
-          "id": "swamp-entrance-down-stairs",
-          "roomId": "swamp-palace-tile-8-2",
-          "label": "Down Stairs",
-          "direction": "stairs",
-          "type": "stair",
-          "x": 127,
-          "y": 50
-        }
-      ]
-    },
-    {
-      "id": "swamp-palace-tile-4-3",
-      "name": "Swamp West Shallows (4,3)",
-      "dungeonId": "swamp-palace",
-      "originalDungeonId": "swamp-palace",
-      "previewImageUrl": "/assets/krisdavie/rooms/swamp-palace/swamp-palace-tile-4-3.png",
-      "doors": [
-        {
-          "id": "swamp-west-shallows-es",
-          "roomId": "swamp-palace-tile-4-3",
-          "label": "ES",
-          "direction": "east",
-          "type": "normal",
-          "x": 477,
-          "y": 392
-        },
-        {
-          "id": "swamp-west-block-path-up-stairs",
-          "roomId": "swamp-palace-tile-4-3",
-          "label": "Up Stairs",
-          "direction": "stairs",
-          "type": "stair",
-          "x": 128,
-          "y": 304
-        },
-        {
-          "id": "swamp-barrier-en",
-          "roomId": "swamp-palace-tile-4-3",
-          "label": "EN",
-          "direction": "east",
-          "type": "normal",
-          "x": 478,
-          "y": 136
-        },
-        {
-          "id": "swamp-west-ledge-drop-entrance",
-          "roomId": "swamp-palace-tile-4-3",
-          "label": "Drop Entrance",
-          "direction": "drop",
-          "type": "drop",
-          "x": 136,
-          "y": 136
-        },
-        {
-          "id": "swamp-barrier-ledge-drop-entrance",
-          "roomId": "swamp-palace-tile-4-3",
-          "label": "Drop Entrance",
-          "direction": "drop",
-          "type": "drop",
-          "x": 348,
-          "y": 136
-        }
-      ]
-    },
-    {
-      "id": "swamp-palace-tile-5-3",
-      "name": "Swamp Crystal Switch (5,3)",
-      "dungeonId": "swamp-palace",
-      "originalDungeonId": "swamp-palace",
-      "previewImageUrl": "/assets/krisdavie/rooms/swamp-palace/swamp-palace-tile-5-3.png",
-      "doors": [
-        {
-          "id": "swamp-crystal-switch-en",
-          "roomId": "swamp-palace-tile-5-3",
-          "label": "EN",
-          "direction": "east",
-          "type": "normal",
-          "x": 477,
-          "y": 136
-        },
-        {
-          "id": "swamp-crystal-switch-se",
-          "roomId": "swamp-palace-tile-5-3",
-          "label": "SE",
-          "direction": "east",
-          "type": "normal",
-          "x": 383,
-          "y": 221
-        },
-        {
-          "id": "swamp-shortcut-ne",
-          "roomId": "swamp-palace-tile-5-3",
-          "label": "NE",
-          "direction": "east",
-          "type": "normal",
-          "x": 382,
-          "y": 303
-        },
-        {
-          "id": "swamp-trench-2-pots-es",
-          "roomId": "swamp-palace-tile-5-3",
-          "label": "ES",
-          "direction": "east",
-          "type": "normal",
-          "x": 480,
-          "y": 392
-        },
-        {
-          "id": "swamp-trench-2-blocks-n",
-          "roomId": "swamp-palace-tile-5-3",
-          "label": "N",
-          "direction": "south",
-          "type": "normal",
-          "x": 256,
-          "y": 327
-        },
-        {
-          "id": "swamp-trench-2-alcove-s",
-          "roomId": "swamp-palace-tile-5-3",
-          "label": "S",
-          "direction": "north",
-          "type": "normal",
-          "x": 256,
-          "y": 200
-        },
-        {
-          "id": "swamp-trench-2-departure-ws",
-          "roomId": "swamp-palace-tile-5-3",
-          "label": "WS",
-          "direction": "west",
-          "type": "normal",
-          "x": 32,
-          "y": 391
-        },
-        {
-          "id": "swamp-big-key-ledge-wn",
-          "roomId": "swamp-palace-tile-5-3",
-          "label": "WN",
-          "direction": "west",
-          "type": "bigkey",
-          "x": 34,
-          "y": 135
-        }
-      ]
-    },
-    {
       "id": "swamp-palace-tile-6-3",
       "name": "Swamp Hub (6,3)",
       "dungeonId": "swamp-palace",
@@ -428,123 +437,6 @@ export const SwampPalaceGenerated = {
       ]
     },
     {
-      "id": "swamp-palace-tile-7-3",
-      "name": "Swamp Map Ledge (7,3)",
-      "dungeonId": "swamp-palace",
-      "originalDungeonId": "swamp-palace",
-      "previewImageUrl": "/assets/krisdavie/rooms/swamp-palace/swamp-palace-tile-7-3.png",
-      "doors": [
-        {
-          "id": "swamp-map-ledge-en",
-          "roomId": "swamp-palace-tile-7-3",
-          "label": "EN",
-          "direction": "east",
-          "type": "normal",
-          "x": 476,
-          "y": 137
-        },
-        {
-          "id": "swamp-trench-1-approach-es",
-          "roomId": "swamp-palace-tile-7-3",
-          "label": "ES",
-          "direction": "east",
-          "type": "normal",
-          "x": 477,
-          "y": 392
-        },
-        {
-          "id": "swamp-trench-1-nexus-n",
-          "roomId": "swamp-palace-tile-7-3",
-          "label": "N",
-          "direction": "south",
-          "type": "normal",
-          "x": 254,
-          "y": 325
-        },
-        {
-          "id": "swamp-trench-1-alcove-s",
-          "roomId": "swamp-palace-tile-7-3",
-          "label": "S",
-          "direction": "north",
-          "type": "normal",
-          "x": 255,
-          "y": 198
-        },
-        {
-          "id": "swamp-trench-1-key-ledge-nw",
-          "roomId": "swamp-palace-tile-7-3",
-          "label": "NW",
-          "direction": "west",
-          "type": "normal",
-          "x": 128,
-          "y": 306
-        },
-        {
-          "id": "swamp-trench-1-departure-ws",
-          "roomId": "swamp-palace-tile-7-3",
-          "label": "WS",
-          "direction": "west",
-          "type": "normal",
-          "x": 33,
-          "y": 392
-        },
-        {
-          "id": "swamp-hammer-switch-sw",
-          "roomId": "swamp-palace-tile-7-3",
-          "label": "SW",
-          "direction": "west",
-          "type": "normal",
-          "x": 127,
-          "y": 221
-        },
-        {
-          "id": "swamp-hammer-switch-wn",
-          "roomId": "swamp-palace-tile-7-3",
-          "label": "WN",
-          "direction": "west",
-          "type": "normal",
-          "x": 36,
-          "y": 135
-        }
-      ]
-    },
-    {
-      "id": "swamp-palace-tile-8-3",
-      "name": "Swamp Pot Row (8,3)",
-      "dungeonId": "swamp-palace",
-      "originalDungeonId": "swamp-palace",
-      "previewImageUrl": "/assets/krisdavie/rooms/swamp-palace/swamp-palace-tile-8-3.png",
-      "doors": [
-        {
-          "id": "swamp-pot-row-up-stairs",
-          "roomId": "swamp-palace-tile-8-3",
-          "label": "Up Stairs",
-          "direction": "stairs",
-          "type": "stair",
-          "x": 127,
-          "y": 49
-        },
-        {
-          "id": "swamp-pot-row-wn",
-          "roomId": "swamp-palace-tile-8-3",
-          "label": "WN",
-          "direction": "west",
-          "type": "normal",
-          "x": 36,
-          "y": 136
-        },
-        {
-          "id": "swamp-pot-row-ws",
-          "roomId": "swamp-palace-tile-8-3",
-          "label": "WS",
-          "direction": "west",
-          "type": "normal",
-          "x": 35,
-          "y": 391
-        }
-      ]
-    },
-    {
       "id": "swamp-palace-tile-6-4",
       "name": "Swamp Donut Top (6,4)",
       "dungeonId": "swamp-palace",
@@ -595,42 +487,6 @@ export const SwampPalaceGenerated = {
           "type": "normal",
           "x": 127,
           "y": 198
-        }
-      ]
-    },
-    {
-      "id": "swamp-palace-tile-4-5",
-      "name": "Swamp Attic (4,5)",
-      "dungeonId": "swamp-palace",
-      "originalDungeonId": "swamp-palace",
-      "previewImageUrl": "/assets/krisdavie/rooms/swamp-palace/swamp-palace-tile-4-5.png",
-      "doors": [
-        {
-          "id": "swamp-attic-down-stairs",
-          "roomId": "swamp-palace-tile-4-5",
-          "label": "Down Stairs",
-          "direction": "stairs",
-          "type": "stair",
-          "x": 126,
-          "y": 305
-        },
-        {
-          "id": "swamp-attic-left-pit",
-          "roomId": "swamp-palace-tile-4-5",
-          "label": "Swamp Attic Left Pit",
-          "direction": "drop",
-          "type": "drop",
-          "x": 136,
-          "y": 136
-        },
-        {
-          "id": "swamp-attic-right-pit",
-          "roomId": "swamp-palace-tile-4-5",
-          "label": "Swamp Attic Right Pit",
-          "direction": "drop",
-          "type": "drop",
-          "x": 348,
-          "y": 136
         }
       ]
     },
@@ -774,6 +630,150 @@ export const SwampPalaceGenerated = {
           "direction": "south",
           "type": "normal",
           "x": 198,
+          "y": 391
+        }
+      ]
+    },
+    {
+      "id": "swamp-palace-tile-7-3",
+      "name": "Swamp Map Ledge (7,3)",
+      "dungeonId": "swamp-palace",
+      "originalDungeonId": "swamp-palace",
+      "previewImageUrl": "/assets/krisdavie/rooms/swamp-palace/swamp-palace-tile-7-3.png",
+      "doors": [
+        {
+          "id": "swamp-map-ledge-en",
+          "roomId": "swamp-palace-tile-7-3",
+          "label": "EN",
+          "direction": "east",
+          "type": "normal",
+          "x": 476,
+          "y": 137
+        },
+        {
+          "id": "swamp-trench-1-approach-es",
+          "roomId": "swamp-palace-tile-7-3",
+          "label": "ES",
+          "direction": "east",
+          "type": "normal",
+          "x": 477,
+          "y": 392
+        },
+        {
+          "id": "swamp-trench-1-nexus-n",
+          "roomId": "swamp-palace-tile-7-3",
+          "label": "N",
+          "direction": "south",
+          "type": "normal",
+          "x": 254,
+          "y": 325
+        },
+        {
+          "id": "swamp-trench-1-alcove-s",
+          "roomId": "swamp-palace-tile-7-3",
+          "label": "S",
+          "direction": "north",
+          "type": "normal",
+          "x": 255,
+          "y": 198
+        },
+        {
+          "id": "swamp-trench-1-key-ledge-nw",
+          "roomId": "swamp-palace-tile-7-3",
+          "label": "NW",
+          "direction": "west",
+          "type": "normal",
+          "x": 128,
+          "y": 306
+        },
+        {
+          "id": "swamp-trench-1-departure-ws",
+          "roomId": "swamp-palace-tile-7-3",
+          "label": "WS",
+          "direction": "west",
+          "type": "normal",
+          "x": 33,
+          "y": 392
+        },
+        {
+          "id": "swamp-hammer-switch-sw",
+          "roomId": "swamp-palace-tile-7-3",
+          "label": "SW",
+          "direction": "west",
+          "type": "normal",
+          "x": 127,
+          "y": 221
+        },
+        {
+          "id": "swamp-hammer-switch-wn",
+          "roomId": "swamp-palace-tile-7-3",
+          "label": "WN",
+          "direction": "west",
+          "type": "normal",
+          "x": 36,
+          "y": 135
+        }
+      ]
+    },
+    {
+      "id": "swamp-palace-tile-8-2",
+      "name": "Swamp Lobby (8,2)",
+      "dungeonId": "swamp-palace",
+      "originalDungeonId": "swamp-palace",
+      "previewImageUrl": "/assets/krisdavie/rooms/swamp-palace/swamp-palace-tile-8-2.png",
+      "doors": [
+        {
+          "id": "swamp-lobby-s",
+          "roomId": "swamp-palace-tile-8-2",
+          "label": "S",
+          "direction": "south",
+          "type": "normal",
+          "x": 256,
+          "y": 479
+        },
+        {
+          "id": "swamp-entrance-down-stairs",
+          "roomId": "swamp-palace-tile-8-2",
+          "label": "Down Stairs",
+          "direction": "stairs",
+          "type": "stair",
+          "x": 127,
+          "y": 50
+        }
+      ]
+    },
+    {
+      "id": "swamp-palace-tile-8-3",
+      "name": "Swamp Pot Row (8,3)",
+      "dungeonId": "swamp-palace",
+      "originalDungeonId": "swamp-palace",
+      "previewImageUrl": "/assets/krisdavie/rooms/swamp-palace/swamp-palace-tile-8-3.png",
+      "doors": [
+        {
+          "id": "swamp-pot-row-up-stairs",
+          "roomId": "swamp-palace-tile-8-3",
+          "label": "Up Stairs",
+          "direction": "stairs",
+          "type": "stair",
+          "x": 127,
+          "y": 49
+        },
+        {
+          "id": "swamp-pot-row-wn",
+          "roomId": "swamp-palace-tile-8-3",
+          "label": "WN",
+          "direction": "west",
+          "type": "normal",
+          "x": 36,
+          "y": 136
+        },
+        {
+          "id": "swamp-pot-row-ws",
+          "roomId": "swamp-palace-tile-8-3",
+          "label": "WS",
+          "direction": "west",
+          "type": "normal",
+          "x": 35,
           "y": 391
         }
       ]

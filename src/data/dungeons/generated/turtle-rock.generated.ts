@@ -5,6 +5,60 @@ export const TurtleRockGenerated = {
   "name": "Turtle Rock",
   "rooms": [
     {
+      "id": "turtle-rock-tile-3-1",
+      "name": "TR Pokey 2 (3,1)",
+      "dungeonId": "turtle-rock",
+      "originalDungeonId": "turtle-rock",
+      "previewImageUrl": "/assets/krisdavie/rooms/turtle-rock/turtle-rock-tile-3-1.png",
+      "doors": [
+        {
+          "id": "tr-pokey-2-en",
+          "roomId": "turtle-rock-tile-3-1",
+          "label": "EN",
+          "direction": "east",
+          "type": "normal",
+          "x": 476,
+          "y": 138
+        },
+        {
+          "id": "tr-pokey-2-es",
+          "roomId": "turtle-rock-tile-3-1",
+          "label": "ES",
+          "direction": "east",
+          "type": "normal",
+          "x": 476,
+          "y": 393
+        }
+      ]
+    },
+    {
+      "id": "turtle-rock-tile-3-2",
+      "name": "TR Lazy Eyes (3,2)",
+      "dungeonId": "turtle-rock",
+      "originalDungeonId": "turtle-rock",
+      "previewImageUrl": "/assets/krisdavie/rooms/turtle-rock/turtle-rock-tile-3-2.png",
+      "doors": [
+        {
+          "id": "tr-lazy-eyes-se",
+          "roomId": "turtle-rock-tile-3-2",
+          "label": "SE",
+          "direction": "south",
+          "type": "normal",
+          "x": 383,
+          "y": 479
+        },
+        {
+          "id": "tr-lazy-eyes-es",
+          "roomId": "turtle-rock-tile-3-2",
+          "label": "ES",
+          "direction": "east",
+          "type": "normal",
+          "x": 478,
+          "y": 391
+        }
+      ]
+    },
+    {
       "id": "turtle-rock-tile-4-0",
       "name": "TR Dash Room (4,0)",
       "dungeonId": "turtle-rock",
@@ -86,33 +140,6 @@ export const TurtleRockGenerated = {
       ]
     },
     {
-      "id": "turtle-rock-tile-3-1",
-      "name": "TR Pokey 2 (3,1)",
-      "dungeonId": "turtle-rock",
-      "originalDungeonId": "turtle-rock",
-      "previewImageUrl": "/assets/krisdavie/rooms/turtle-rock/turtle-rock-tile-3-1.png",
-      "doors": [
-        {
-          "id": "tr-pokey-2-en",
-          "roomId": "turtle-rock-tile-3-1",
-          "label": "EN",
-          "direction": "east",
-          "type": "normal",
-          "x": 476,
-          "y": 138
-        },
-        {
-          "id": "tr-pokey-2-es",
-          "roomId": "turtle-rock-tile-3-1",
-          "label": "ES",
-          "direction": "east",
-          "type": "normal",
-          "x": 476,
-          "y": 393
-        }
-      ]
-    },
-    {
       "id": "turtle-rock-tile-4-1",
       "name": "TR Lava Dual Pipes (4,1)",
       "dungeonId": "turtle-rock",
@@ -185,65 +212,74 @@ export const TurtleRockGenerated = {
       ]
     },
     {
-      "id": "turtle-rock-tile-5-1",
-      "name": "TR Pipe Pit (5,1)",
+      "id": "turtle-rock-tile-4-10",
+      "name": "TR Boss (4,10)",
       "dungeonId": "turtle-rock",
       "originalDungeonId": "turtle-rock",
-      "previewImageUrl": "/assets/krisdavie/rooms/turtle-rock/turtle-rock-tile-5-1.png",
+      "previewImageUrl": "/assets/krisdavie/rooms/turtle-rock/turtle-rock-tile-4-10.png",
       "doors": [
         {
-          "id": "tr-pipe-pit-up-stairs",
-          "roomId": "turtle-rock-tile-5-1",
-          "label": "Up Stairs",
-          "direction": "stairs",
-          "type": "stair",
-          "x": 126,
-          "y": 49
-        },
-        {
-          "id": "tr-pipe-pit-wn",
-          "roomId": "turtle-rock-tile-5-1",
-          "label": "WN",
-          "direction": "drop",
-          "type": "drop",
-          "x": 35,
-          "y": 137
-        },
-        {
-          "id": "tr-pipe-ledge-ws",
-          "roomId": "turtle-rock-tile-5-1",
-          "label": "WS",
-          "direction": "west",
+          "id": "tr-boss-sw",
+          "roomId": "turtle-rock-tile-4-10",
+          "label": "SW",
+          "direction": "south",
           "type": "normal",
-          "x": 34,
-          "y": 392
+          "x": 127,
+          "y": 479
         }
       ]
     },
     {
-      "id": "turtle-rock-tile-3-2",
-      "name": "TR Lazy Eyes (3,2)",
+      "id": "turtle-rock-tile-4-11",
+      "name": "TR Final Abyss",
       "dungeonId": "turtle-rock",
       "originalDungeonId": "turtle-rock",
-      "previewImageUrl": "/assets/krisdavie/rooms/turtle-rock/turtle-rock-tile-3-2.png",
+      "previewImageUrl": "/assets/krisdavie/rooms/turtle-rock/turtle-rock-tile-4-11.png",
       "doors": [
         {
-          "id": "tr-lazy-eyes-se",
-          "roomId": "turtle-rock-tile-3-2",
-          "label": "SE",
-          "direction": "south",
-          "type": "normal",
-          "x": 383,
-          "y": 479
+          "id": "tr-final-abyss-south-stairs",
+          "roomId": "turtle-rock-tile-4-11",
+          "label": "South Stairs",
+          "direction": "stairs",
+          "type": "stair",
+          "x": 255,
+          "y": 480
         },
         {
-          "id": "tr-lazy-eyes-es",
-          "roomId": "turtle-rock-tile-3-2",
+          "id": "tr-final-abyss-nw",
+          "roomId": "turtle-rock-tile-4-11",
+          "label": "NW",
+          "direction": "north",
+          "type": "normal",
+          "x": 128,
+          "y": 50
+        }
+      ]
+    },
+    {
+      "id": "turtle-rock-tile-4-12",
+      "name": "TR Crystal Maze",
+      "dungeonId": "turtle-rock",
+      "originalDungeonId": "turtle-rock",
+      "previewImageUrl": "/assets/krisdavie/rooms/turtle-rock/turtle-rock-tile-4-12.png",
+      "doors": [
+        {
+          "id": "tr-crystal-maze-es",
+          "roomId": "turtle-rock-tile-4-12",
           "label": "ES",
           "direction": "east",
           "type": "normal",
           "x": 478,
-          "y": 391
+          "y": 393
+        },
+        {
+          "id": "tr-crystal-maze-north-stairs",
+          "roomId": "turtle-rock-tile-4-12",
+          "label": "North Stairs",
+          "direction": "stairs",
+          "type": "stair",
+          "x": 256,
+          "y": 49
         }
       ]
     },
@@ -365,20 +401,128 @@ export const TurtleRockGenerated = {
       ]
     },
     {
-      "id": "turtle-rock-tile-4-10",
-      "name": "TR Boss (4,10)",
+      "id": "turtle-rock-tile-5-1",
+      "name": "TR Pipe Pit (5,1)",
       "dungeonId": "turtle-rock",
       "originalDungeonId": "turtle-rock",
-      "previewImageUrl": "/assets/krisdavie/rooms/turtle-rock/turtle-rock-tile-4-10.png",
+      "previewImageUrl": "/assets/krisdavie/rooms/turtle-rock/turtle-rock-tile-5-1.png",
       "doors": [
         {
-          "id": "tr-boss-sw",
-          "roomId": "turtle-rock-tile-4-10",
+          "id": "tr-pipe-pit-up-stairs",
+          "roomId": "turtle-rock-tile-5-1",
+          "label": "Up Stairs",
+          "direction": "stairs",
+          "type": "stair",
+          "x": 126,
+          "y": 49
+        },
+        {
+          "id": "tr-pipe-pit-wn",
+          "roomId": "turtle-rock-tile-5-1",
+          "label": "WN",
+          "direction": "drop",
+          "type": "drop",
+          "x": 35,
+          "y": 137
+        },
+        {
+          "id": "tr-pipe-ledge-ws",
+          "roomId": "turtle-rock-tile-5-1",
+          "label": "WS",
+          "direction": "west",
+          "type": "normal",
+          "x": 34,
+          "y": 392
+        }
+      ]
+    },
+    {
+      "id": "turtle-rock-tile-5-11",
+      "name": "TR Dark Ride",
+      "dungeonId": "turtle-rock",
+      "originalDungeonId": "turtle-rock",
+      "previewImageUrl": "/assets/krisdavie/rooms/turtle-rock/turtle-rock-tile-5-11.png",
+      "doors": [
+        {
+          "id": "tr-dark-ride-up-stairs",
+          "roomId": "turtle-rock-tile-5-11",
+          "label": "Up Stairs",
+          "direction": "stairs",
+          "type": "stair",
+          "x": 127,
+          "y": 49
+        },
+        {
+          "id": "tr-dark-ride-sw",
+          "roomId": "turtle-rock-tile-5-11",
           "label": "SW",
           "direction": "south",
           "type": "normal",
           "x": 127,
-          "y": 479
+          "y": 478
+        }
+      ]
+    },
+    {
+      "id": "turtle-rock-tile-5-12",
+      "name": "TR Dash Bridge (5,12)",
+      "dungeonId": "turtle-rock",
+      "originalDungeonId": "turtle-rock",
+      "previewImageUrl": "/assets/krisdavie/rooms/turtle-rock/turtle-rock-tile-5-12.png",
+      "doors": [
+        {
+          "id": "tr-dash-bridge-nw",
+          "roomId": "turtle-rock-tile-5-12",
+          "label": "NW",
+          "direction": "north",
+          "type": "normal",
+          "x": 127,
+          "y": 48
+        },
+        {
+          "id": "tr-dash-bridge-sw",
+          "roomId": "turtle-rock-tile-5-12",
+          "label": "SW",
+          "direction": "south",
+          "type": "normal",
+          "x": 128,
+          "y": 481
+        },
+        {
+          "id": "tr-dash-bridge-ws",
+          "roomId": "turtle-rock-tile-5-12",
+          "label": "WS",
+          "direction": "west",
+          "type": "normal",
+          "x": 33,
+          "y": 392
+        }
+      ]
+    },
+    {
+      "id": "turtle-rock-tile-5-13",
+      "name": "TR Eye Bridge (5,13)",
+      "dungeonId": "turtle-rock",
+      "originalDungeonId": "turtle-rock",
+      "previewImageUrl": "/assets/krisdavie/rooms/turtle-rock/turtle-rock-tile-5-13.png",
+      "doors": [
+        {
+          "id": "tr-eye-bridge-nw",
+          "roomId": "turtle-rock-tile-5-13",
+          "label": "NW",
+          "direction": "north",
+          "type": "normal",
+          "x": 127,
+          "y": 48
+        },
+        {
+          "id": "tr-eye-bridge-sw",
+          "roomId": "turtle-rock-tile-5-13",
+          "label": "SW",
+          "direction": "south",
+          "type": "normal",
+          "x": 127,
+          "y": 480
         }
       ]
     },
@@ -455,60 +599,6 @@ export const TurtleRockGenerated = {
       ]
     },
     {
-      "id": "turtle-rock-tile-7-11",
-      "name": "TR Roller Room (7,11)",
-      "dungeonId": "turtle-rock",
-      "originalDungeonId": "turtle-rock",
-      "previewImageUrl": "/assets/krisdavie/rooms/turtle-rock/turtle-rock-tile-7-11.png",
-      "doors": [
-        {
-          "id": "tr-roller-room-sw",
-          "roomId": "turtle-rock-tile-7-11",
-          "label": "SW",
-          "direction": "south",
-          "type": "normal",
-          "x": 127,
-          "y": 481
-        }
-      ]
-    },
-    {
-      "id": "turtle-rock-tile-5-12",
-      "name": "TR Dash Bridge (5,12)",
-      "dungeonId": "turtle-rock",
-      "originalDungeonId": "turtle-rock",
-      "previewImageUrl": "/assets/krisdavie/rooms/turtle-rock/turtle-rock-tile-5-12.png",
-      "doors": [
-        {
-          "id": "tr-dash-bridge-nw",
-          "roomId": "turtle-rock-tile-5-12",
-          "label": "NW",
-          "direction": "north",
-          "type": "normal",
-          "x": 127,
-          "y": 48
-        },
-        {
-          "id": "tr-dash-bridge-sw",
-          "roomId": "turtle-rock-tile-5-12",
-          "label": "SW",
-          "direction": "south",
-          "type": "normal",
-          "x": 128,
-          "y": 481
-        },
-        {
-          "id": "tr-dash-bridge-ws",
-          "roomId": "turtle-rock-tile-5-12",
-          "label": "WS",
-          "direction": "west",
-          "type": "normal",
-          "x": 33,
-          "y": 392
-        }
-      ]
-    },
-    {
       "id": "turtle-rock-tile-6-12",
       "name": "TR Hub (6,12)",
       "dungeonId": "turtle-rock",
@@ -572,33 +662,6 @@ export const TurtleRockGenerated = {
       ]
     },
     {
-      "id": "turtle-rock-tile-5-13",
-      "name": "TR Eye Bridge (5,13)",
-      "dungeonId": "turtle-rock",
-      "originalDungeonId": "turtle-rock",
-      "previewImageUrl": "/assets/krisdavie/rooms/turtle-rock/turtle-rock-tile-5-13.png",
-      "doors": [
-        {
-          "id": "tr-eye-bridge-nw",
-          "roomId": "turtle-rock-tile-5-13",
-          "label": "NW",
-          "direction": "north",
-          "type": "normal",
-          "x": 127,
-          "y": 48
-        },
-        {
-          "id": "tr-eye-bridge-sw",
-          "roomId": "turtle-rock-tile-5-13",
-          "label": "SW",
-          "direction": "south",
-          "type": "normal",
-          "x": 127,
-          "y": 480
-        }
-      ]
-    },
-    {
       "id": "turtle-rock-tile-6-13",
       "name": "TR Main Lobby (6,13)",
       "dungeonId": "turtle-rock",
@@ -631,6 +694,60 @@ export const TurtleRockGenerated = {
           "type": "normal",
           "x": 126,
           "y": 54
+        }
+      ]
+    },
+    {
+      "id": "turtle-rock-tile-7-11",
+      "name": "TR Roller Room (7,11)",
+      "dungeonId": "turtle-rock",
+      "originalDungeonId": "turtle-rock",
+      "previewImageUrl": "/assets/krisdavie/rooms/turtle-rock/turtle-rock-tile-7-11.png",
+      "doors": [
+        {
+          "id": "tr-roller-room-sw",
+          "roomId": "turtle-rock-tile-7-11",
+          "label": "SW",
+          "direction": "south",
+          "type": "normal",
+          "x": 127,
+          "y": 481
+        }
+      ]
+    },
+    {
+      "id": "turtle-rock-tile-7-12",
+      "name": "TR Torches Ledge",
+      "dungeonId": "turtle-rock",
+      "originalDungeonId": "turtle-rock",
+      "previewImageUrl": "/assets/krisdavie/rooms/turtle-rock/turtle-rock-tile-7-12.png",
+      "doors": [
+        {
+          "id": "tr-torches-ledge-ws",
+          "roomId": "turtle-rock-tile-7-12",
+          "label": "WS",
+          "direction": "west",
+          "type": "normal",
+          "x": 36,
+          "y": 392
+        },
+        {
+          "id": "tr-torches-wn",
+          "roomId": "turtle-rock-tile-7-12",
+          "label": "WN",
+          "direction": "west",
+          "type": "normal",
+          "x": 35,
+          "y": 138
+        },
+        {
+          "id": "tr-torches-nw",
+          "roomId": "turtle-rock-tile-7-12",
+          "label": "NW",
+          "direction": "north",
+          "type": "normal",
+          "x": 127,
+          "y": 51
         }
       ]
     }

@@ -5,6 +5,69 @@ export const TowerOfHeraGenerated = {
   "name": "Tower of Hera",
   "rooms": [
     {
+      "id": "tower-of-hera-tile-1-3",
+      "name": "Hera Beetles (1,3)",
+      "dungeonId": "tower-of-hera",
+      "originalDungeonId": "tower-of-hera",
+      "previewImageUrl": "/assets/krisdavie/rooms/tower-of-hera/tower-of-hera-tile-1-3.png",
+      "doors": [
+        {
+          "id": "hera-beetles-down-stairs",
+          "roomId": "tower-of-hera-tile-1-3",
+          "label": "Down Stairs",
+          "direction": "stairs",
+          "type": "stair",
+          "x": 367,
+          "y": 321
+        },
+        {
+          "id": "hera-beetles-ws",
+          "roomId": "tower-of-hera-tile-1-3",
+          "label": "WS",
+          "direction": "south",
+          "type": "normal",
+          "x": 288,
+          "y": 392
+        },
+        {
+          "id": "hera-startile-corner-es",
+          "roomId": "tower-of-hera-tile-1-3",
+          "label": "ES",
+          "direction": "south",
+          "type": "normal",
+          "x": 221,
+          "y": 392
+        },
+        {
+          "id": "hera-startile-corner-nw",
+          "roomId": "tower-of-hera-tile-1-3",
+          "label": "NW",
+          "direction": "west",
+          "type": "normal",
+          "x": 127,
+          "y": 306
+        },
+        {
+          "id": "hera-startile-wide-sw",
+          "roomId": "tower-of-hera-tile-1-3",
+          "label": "SW",
+          "direction": "west",
+          "type": "normal",
+          "x": 127,
+          "y": 222
+        },
+        {
+          "id": "hera-startile-wide-up-stairs",
+          "roomId": "tower-of-hera-tile-1-3",
+          "label": "Up Stairs",
+          "direction": "stairs",
+          "type": "stair",
+          "x": 447,
+          "y": 129
+        }
+      ]
+    },
+    {
       "id": "tower-of-hera-tile-7-0",
       "name": "Hera Boss (7,0)",
       "dungeonId": "tower-of-hera",
@@ -72,69 +135,6 @@ export const TowerOfHeraGenerated = {
           "direction": "stairs",
           "type": "stair",
           "x": 63,
-          "y": 129
-        }
-      ]
-    },
-    {
-      "id": "tower-of-hera-tile-1-3",
-      "name": "Hera Beetles (1,3)",
-      "dungeonId": "tower-of-hera",
-      "originalDungeonId": "tower-of-hera",
-      "previewImageUrl": "/assets/krisdavie/rooms/tower-of-hera/tower-of-hera-tile-1-3.png",
-      "doors": [
-        {
-          "id": "hera-beetles-down-stairs",
-          "roomId": "tower-of-hera-tile-1-3",
-          "label": "Down Stairs",
-          "direction": "stairs",
-          "type": "stair",
-          "x": 367,
-          "y": 321
-        },
-        {
-          "id": "hera-beetles-ws",
-          "roomId": "tower-of-hera-tile-1-3",
-          "label": "WS",
-          "direction": "south",
-          "type": "normal",
-          "x": 288,
-          "y": 392
-        },
-        {
-          "id": "hera-startile-corner-es",
-          "roomId": "tower-of-hera-tile-1-3",
-          "label": "ES",
-          "direction": "south",
-          "type": "normal",
-          "x": 221,
-          "y": 392
-        },
-        {
-          "id": "hera-startile-corner-nw",
-          "roomId": "tower-of-hera-tile-1-3",
-          "label": "NW",
-          "direction": "west",
-          "type": "normal",
-          "x": 127,
-          "y": 306
-        },
-        {
-          "id": "hera-startile-wide-sw",
-          "roomId": "tower-of-hera-tile-1-3",
-          "label": "SW",
-          "direction": "west",
-          "type": "normal",
-          "x": 127,
-          "y": 222
-        },
-        {
-          "id": "hera-startile-wide-up-stairs",
-          "roomId": "tower-of-hera-tile-1-3",
-          "label": "Up Stairs",
-          "direction": "stairs",
-          "type": "stair",
-          "x": 447,
           "y": 129
         }
       ]

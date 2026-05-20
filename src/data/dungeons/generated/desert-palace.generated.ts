@@ -257,6 +257,69 @@ export const DesertPalaceGenerated = {
       ]
     },
     {
+      "id": "desert-palace-tile-3-8",
+      "name": "Desert West Wing (3,8)",
+      "dungeonId": "desert-palace",
+      "originalDungeonId": "desert-palace",
+      "previewImageUrl": "/assets/krisdavie/rooms/desert-palace/desert-palace-tile-3-8.png",
+      "doors": [
+        {
+          "id": "desert-west-wing-n-edge",
+          "roomId": "desert-palace-tile-3-8",
+          "label": "N Edge",
+          "direction": "north",
+          "type": "normal",
+          "x": 449,
+          "y": 3
+        },
+        {
+          "id": "desert-west-wing-ws",
+          "roomId": "desert-palace-tile-3-8",
+          "label": "WS",
+          "direction": "south",
+          "type": "normal",
+          "x": 289,
+          "y": 392
+        },
+        {
+          "id": "desert-west-s",
+          "roomId": "desert-palace-tile-3-8",
+          "label": "S",
+          "direction": "south",
+          "type": "normal",
+          "x": 127,
+          "y": 483
+        },
+        {
+          "id": "desert-west-lobby-es",
+          "roomId": "desert-palace-tile-3-8",
+          "label": "ES",
+          "direction": "south",
+          "type": "normal",
+          "x": 221,
+          "y": 392
+        },
+        {
+          "id": "desert-west-lobby-nw",
+          "roomId": "desert-palace-tile-3-8",
+          "label": "NW",
+          "direction": "west",
+          "type": "normal",
+          "x": 127,
+          "y": 304
+        },
+        {
+          "id": "desert-fairy-fountain-sw",
+          "roomId": "desert-palace-tile-3-8",
+          "label": "SW",
+          "direction": "west",
+          "type": "normal",
+          "x": 127,
+          "y": 222
+        }
+      ]
+    },
+    {
       "id": "desert-palace-tile-4-7",
       "name": "Desert Dead End Edge (4,7)",
       "dungeonId": "desert-palace",
@@ -347,123 +410,6 @@ export const DesertPalaceGenerated = {
       ]
     },
     {
-      "id": "desert-palace-tile-5-7",
-      "name": "Desert Cannonball (5,7)",
-      "dungeonId": "desert-palace",
-      "originalDungeonId": "desert-palace",
-      "previewImageUrl": "/assets/krisdavie/rooms/desert-palace/desert-palace-tile-5-7.png",
-      "doors": [
-        {
-          "id": "desert-cannonball-s",
-          "roomId": "desert-palace-tile-5-7",
-          "label": "S",
-          "direction": "south",
-          "type": "normal",
-          "x": 384,
-          "y": 479
-        },
-        {
-          "id": "desert-arrow-pot-corner-s-edge",
-          "roomId": "desert-palace-tile-5-7",
-          "label": "S Edge",
-          "direction": "south",
-          "type": "normal",
-          "x": 128,
-          "y": 510
-        },
-        {
-          "id": "desert-arrow-pot-corner-w-edge",
-          "roomId": "desert-palace-tile-5-7",
-          "label": "W Edge",
-          "direction": "west",
-          "type": "normal",
-          "x": 2,
-          "y": 337
-        },
-        {
-          "id": "desert-arrow-pot-corner-nw",
-          "roomId": "desert-palace-tile-5-7",
-          "label": "NW",
-          "direction": "west",
-          "type": "normal",
-          "x": 127,
-          "y": 306
-        },
-        {
-          "id": "desert-trap-room-sw",
-          "roomId": "desert-palace-tile-5-7",
-          "label": "SW",
-          "direction": "west",
-          "type": "normal",
-          "x": 127,
-          "y": 223
-        }
-      ]
-    },
-    {
-      "id": "desert-palace-tile-3-8",
-      "name": "Desert West Wing (3,8)",
-      "dungeonId": "desert-palace",
-      "originalDungeonId": "desert-palace",
-      "previewImageUrl": "/assets/krisdavie/rooms/desert-palace/desert-palace-tile-3-8.png",
-      "doors": [
-        {
-          "id": "desert-west-wing-n-edge",
-          "roomId": "desert-palace-tile-3-8",
-          "label": "N Edge",
-          "direction": "north",
-          "type": "normal",
-          "x": 449,
-          "y": 3
-        },
-        {
-          "id": "desert-west-wing-ws",
-          "roomId": "desert-palace-tile-3-8",
-          "label": "WS",
-          "direction": "south",
-          "type": "normal",
-          "x": 289,
-          "y": 392
-        },
-        {
-          "id": "desert-west-s",
-          "roomId": "desert-palace-tile-3-8",
-          "label": "S",
-          "direction": "south",
-          "type": "normal",
-          "x": 127,
-          "y": 483
-        },
-        {
-          "id": "desert-west-lobby-es",
-          "roomId": "desert-palace-tile-3-8",
-          "label": "ES",
-          "direction": "south",
-          "type": "normal",
-          "x": 221,
-          "y": 392
-        },
-        {
-          "id": "desert-west-lobby-nw",
-          "roomId": "desert-palace-tile-3-8",
-          "label": "NW",
-          "direction": "west",
-          "type": "normal",
-          "x": 127,
-          "y": 304
-        },
-        {
-          "id": "desert-fairy-fountain-sw",
-          "roomId": "desert-palace-tile-3-8",
-          "label": "SW",
-          "direction": "west",
-          "type": "normal",
-          "x": 127,
-          "y": 222
-        }
-      ]
-    },
-    {
       "id": "desert-palace-tile-4-8",
       "name": "Desert Main Lobby (4,8)",
       "dungeonId": "desert-palace",
@@ -514,6 +460,60 @@ export const DesertPalaceGenerated = {
           "type": "normal",
           "x": 510,
           "y": 144
+        }
+      ]
+    },
+    {
+      "id": "desert-palace-tile-5-7",
+      "name": "Desert Cannonball (5,7)",
+      "dungeonId": "desert-palace",
+      "originalDungeonId": "desert-palace",
+      "previewImageUrl": "/assets/krisdavie/rooms/desert-palace/desert-palace-tile-5-7.png",
+      "doors": [
+        {
+          "id": "desert-cannonball-s",
+          "roomId": "desert-palace-tile-5-7",
+          "label": "S",
+          "direction": "south",
+          "type": "normal",
+          "x": 384,
+          "y": 479
+        },
+        {
+          "id": "desert-arrow-pot-corner-s-edge",
+          "roomId": "desert-palace-tile-5-7",
+          "label": "S Edge",
+          "direction": "south",
+          "type": "normal",
+          "x": 128,
+          "y": 510
+        },
+        {
+          "id": "desert-arrow-pot-corner-w-edge",
+          "roomId": "desert-palace-tile-5-7",
+          "label": "W Edge",
+          "direction": "west",
+          "type": "normal",
+          "x": 2,
+          "y": 337
+        },
+        {
+          "id": "desert-arrow-pot-corner-nw",
+          "roomId": "desert-palace-tile-5-7",
+          "label": "NW",
+          "direction": "west",
+          "type": "normal",
+          "x": 127,
+          "y": 306
+        },
+        {
+          "id": "desert-trap-room-sw",
+          "roomId": "desert-palace-tile-5-7",
+          "label": "SW",
+          "direction": "west",
+          "type": "normal",
+          "x": 127,
+          "y": 223
         }
       ]
     },

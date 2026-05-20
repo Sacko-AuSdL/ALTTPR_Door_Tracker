@@ -1,0 +1,341 @@
+{
+  "include": [
+    {
+      "tile": [
+        0,
+        3
+      ],
+      "dungeonId": "castle-tower",
+      "roomName": "Tower Antechamber"
+    },
+    {
+      "tile": [
+        0,
+        4
+      ],
+      "dungeonId": "castle-tower",
+      "roomName": "Tower Push Statue"
+    },
+    {
+      "tile": [
+        8,
+        13
+      ],
+      "dungeonId": "eastern-palace",
+      "roomName": "Eastern Single Eyegore"
+    },
+    {
+      "tile": [
+        9,
+        13
+      ],
+      "dungeonId": "eastern-palace",
+      "roomName": "Eastern False Switches"
+    },
+    {
+      "tile": [
+        10,
+        13
+      ],
+      "dungeonId": "eastern-palace",
+      "roomName": "Eastern Attic Start"
+    },
+    {
+      "tile": [
+        13,
+        1
+      ],
+      "dungeonId": "ganons-tower",
+      "roomName": "GT Brightly Lit Hall"
+    },
+    {
+      "tile": [
+        12,
+        4
+      ],
+      "dungeonId": "ganons-tower",
+      "roomName": "GT Frozen Over"
+    },
+    {
+      "tile": [
+        11,
+        5
+      ],
+      "dungeonId": "ganons-tower",
+      "roomName": "GT Hidden Spikes"
+    },
+    {
+      "tile": [
+        12,
+        5
+      ],
+      "dungeonId": "ganons-tower",
+      "roomName": "GT Cannonball Bridge"
+    },
+    {
+      "tile": [
+        13,
+        5
+      ],
+      "dungeonId": "ganons-tower",
+      "roomName": "GT Gauntlet 1"
+    },
+    {
+      "tile": [
+        11,
+        6
+      ],
+      "dungeonId": "ganons-tower",
+      "roomName": "GT Crystal Paths"
+    },
+    {
+      "tile": [
+        12,
+        6
+      ],
+      "dungeonId": "ganons-tower",
+      "roomName": "GT Beam Dash"
+    },
+    {
+      "tile": [
+        13,
+        6
+      ],
+      "dungeonId": "ganons-tower",
+      "roomName": "GT Gauntlet 4"
+    },
+    {
+      "tile": [
+        5,
+        9
+      ],
+      "dungeonId": "ganons-tower",
+      "roomName": "GT Conveyor Bridge"
+    },
+    {
+      "tile": [
+        5,
+        10
+      ],
+      "dungeonId": "ganons-tower",
+      "roomName": "GT Wizzrobes 1"
+    },
+    {
+      "tile": [
+        2,
+        0
+      ],
+      "dungeonId": "hyrule-castle",
+      "roomName": "Sewers Pull Switch"
+    },
+    {
+      "tile": [
+        2,
+        2
+      ],
+      "dungeonId": "hyrule-castle",
+      "roomName": "Sewers Water"
+    },
+    {
+      "tile": [
+        1,
+        4
+      ],
+      "dungeonId": "hyrule-castle",
+      "roomName": "Sewers Behind Tapestry"
+    },
+    {
+      "tile": [
+        2,
+        4
+      ],
+      "dungeonId": "hyrule-castle",
+      "roomName": "Sewers Rope Room"
+    },
+    {
+      "tile": [
+        0,
+        5
+      ],
+      "dungeonId": "hyrule-castle",
+      "roomName": "Hyrule Castle West Hall"
+    },
+    {
+      "tile": [
+        0,
+        7
+      ],
+      "dungeonId": "hyrule-castle",
+      "roomName": "Hyrule Dungeon Staircase"
+    },
+    {
+      "tile": [
+        14,
+        4
+      ],
+      "dungeonId": "ice-palace",
+      "roomName": "Ice Bomb Jump"
+    },
+    {
+      "tile": [
+        14,
+        6
+      ],
+      "dungeonId": "ice-palace",
+      "roomName": "Ice Pengator Trap"
+    },
+    {
+      "tile": [
+        15,
+        7
+      ],
+      "dungeonId": "ice-palace",
+      "roomName": "Ice Hookshot Ledge"
+    },
+    {
+      "tile": [
+        14,
+        8
+      ],
+      "dungeonId": "ice-palace",
+      "roomName": "Ice Lonely Freezor"
+    },
+    {
+      "tile": [
+        15,
+        10
+      ],
+      "dungeonId": "ice-palace",
+      "roomName": "Ice Catwalk"
+    },
+    {
+      "tile": [
+        15,
+        11
+      ],
+      "dungeonId": "ice-palace",
+      "roomName": "Ice Refill"
+    },
+    {
+      "tile": [
+        1,
+        9
+      ],
+      "dungeonId": "misery-mire",
+      "roomName": "Mire Falling Foes"
+    },
+    {
+      "tile": [
+        2,
+        9
+      ],
+      "dungeonId": "misery-mire",
+      "roomName": "Mire Tall Dark and Roomy"
+    },
+    {
+      "tile": [
+        3,
+        9
+      ],
+      "dungeonId": "misery-mire",
+      "roomName": "Mire Dark Shooters"
+    },
+    {
+      "tile": [
+        0,
+        10
+      ],
+      "dungeonId": "misery-mire",
+      "roomName": "Mire Firesnake Skip"
+    },
+    {
+      "tile": [
+        3,
+        10
+      ],
+      "dungeonId": "misery-mire",
+      "roomName": "Mire Bent Bridge"
+    },
+    {
+      "tile": [
+        2,
+        13
+      ],
+      "dungeonId": "misery-mire",
+      "roomName": "Mire 2"
+    },
+    {
+      "tile": [
+        11,
+        1
+      ],
+      "dungeonId": "palace-of-darkness",
+      "roomName": "PoD Mimics 2"
+    },
+    {
+      "tile": [
+        11,
+        3
+      ],
+      "dungeonId": "palace-of-darkness",
+      "roomName": "PoD Conveyor"
+    },
+    {
+      "tile": [
+        11,
+        4
+      ],
+      "dungeonId": "palace-of-darkness",
+      "roomName": "PoD Mimics 1"
+    },
+    {
+      "tile": [
+        9,
+        4
+      ],
+      "dungeonId": "skull-woods",
+      "roomName": "Skull Star Pits"
+    },
+    {
+      "tile": [
+        4,
+        6
+      ],
+      "dungeonId": "thieves-town",
+      "roomName": "Thieves Attic"
+    },
+    {
+      "tile": [
+        4,
+        11
+      ],
+      "dungeonId": "turtle-rock",
+      "roomName": "TR Final Abyss"
+    },
+    {
+      "tile": [
+        5,
+        11
+      ],
+      "dungeonId": "turtle-rock",
+      "roomName": "TR Dark Ride"
+    },
+    {
+      "tile": [
+        4,
+        12
+      ],
+      "dungeonId": "turtle-rock",
+      "roomName": "TR Crystal Maze"
+    },
+    {
+      "tile": [
+        7,
+        12
+      ],
+      "dungeonId": "turtle-rock",
+      "roomName": "TR Torches Ledge"
+    }
+  ],
+  "ignore": []
+}

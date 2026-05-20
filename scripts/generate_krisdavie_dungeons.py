@@ -81,6 +81,12 @@ def main() -> None:
         help="Source tile size in pixels.",
     )
 
+    parser.add_argument(
+        "--manual-missing-tiles-review",
+        default="scripts/manual_missing_tiles_review.json",
+        help="Path to manual missing tile review JSON.",
+    )
+
     args = parser.parse_args()
 
     source_root = Path(args.source).resolve()
@@ -101,6 +107,12 @@ def main() -> None:
     dungeons = build_dungeons(
         vanilla_layout_optimized=vanilla_layout_optimized,
         door_coordinates=door_coordinates,
+    )
+
+    apply_manual_missing_tiles(
+        dungeons=dungeons,
+        door_coordinates=door_coordinates,
+        review_path=Path(args.manual_missing_tiles_review).resolve(),
     )
 
     if args.crop_tiles:
@@ -353,6 +365,120 @@ def make_unique_id(base_id: str, used_ids: set[str]) -> str:
     used_ids.add(candidate)
     return candidate
 
+def apply_manual_missing_tiles(
+        dungeons: list[dict[str, Any]],
+        door_coordinates: dict[tuple[int, int], list[dict[str, Any]]],
+        review_path: Path,
+) -> None:
+    if not review_path.exists():
+        print(f"Manual missing tile review not found, skipping: {review_path}")
+        return
+
+    review_data = json.loads(review_path.read_text(encoding="utf-8"))
+    include_entries = review_data.get("include", [])
+
+    if not include_entries:
+        print("No manual missing tiles to include.")
+        return
+
+    used_door_ids = collect_used_door_ids(dungeons)
+    rooms_by_id = collect_room_ids(dungeons)
+
+    added_count = 0
+
+    for entry in include_entries:
+        tile = entry.get("tile")
+        dungeon_id = entry.get("dungeonId")
+        room_name = entry.get("roomName")
+
+        if not isinstance(tile, list) or len(tile) != 2:
+            print(f"Skipping invalid manual tile entry: {entry}")
+            continue
+
+        if not isinstance(dungeon_id, str) or not dungeon_id:
+            print(f"Skipping manual tile without dungeonId: {entry}")
+            continue
+
+        tile_x = int(tile[0])
+        tile_y = int(tile[1])
+        tile_coord = (tile_x, tile_y)
+
+        raw_doors = door_coordinates.get(tile_coord)
+
+        if not raw_doors:
+            print(f"Skipping manual tile without door coordinates: {tile_coord}")
+            continue
+
+        dungeon = find_dungeon_by_id(dungeons, dungeon_id)
+
+        if not dungeon:
+            print(f"Skipping manual tile for unknown dungeon: {dungeon_id} {tile_coord}")
+            continue
+
+        room_id = f"{dungeon_id}-tile-{tile_x}-{tile_y}"
+
+        if room_id in rooms_by_id:
+            continue
+
+        room = {
+            "id": room_id,
+            "name": str(room_name) if room_name else derive_room_name(raw_doors, tile_coord),
+            "dungeonId": dungeon_id,
+            "originalDungeonId": dungeon_id,
+            "previewImageUrl": f"/assets/krisdavie/rooms/{dungeon_id}/{room_id}.png",
+            "doors": [
+                build_door(
+                    raw_door=raw_door,
+                    room_id=room_id,
+                    used_door_ids=used_door_ids,
+                )
+                for raw_door in raw_doors
+            ],
+        }
+
+        dungeon["rooms"].append(room)
+        rooms_by_id.add(room_id)
+        added_count += 1
+
+    for dungeon in dungeons:
+        dungeon["rooms"] = sorted(
+            dungeon["rooms"],
+            key=lambda room: room["id"],
+        )
+
+    print(f"Added {added_count} manual missing tiles.")
+
+
+def collect_used_door_ids(dungeons: list[dict[str, Any]]) -> set[str]:
+    used_door_ids: set[str] = set()
+
+    for dungeon in dungeons:
+        for room in dungeon["rooms"]:
+            for door in room["doors"]:
+                used_door_ids.add(door["id"])
+
+    return used_door_ids
+
+
+def collect_room_ids(dungeons: list[dict[str, Any]]) -> set[str]:
+    room_ids: set[str] = set()
+
+    for dungeon in dungeons:
+        for room in dungeon["rooms"]:
+            room_ids.add(room["id"])
+
+    return room_ids
+
+
+def find_dungeon_by_id(
+        dungeons: list[dict[str, Any]],
+        dungeon_id: str,
+) -> dict[str, Any] | None:
+    for dungeon in dungeons:
+        if dungeon["id"] == dungeon_id:
+            return dungeon
+
+    return None
 
 def write_typescript_file(output_path: Path, dungeons: list[dict[str, Any]]) -> None:
     output_path.parent.mkdir(parents=True, exist_ok=True)

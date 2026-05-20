@@ -5,33 +5,6 @@ export const PalaceOfDarknessGenerated = {
   "name": "Palace of Darkness",
   "rooms": [
     {
-      "id": "palace-of-darkness-tile-9-0",
-      "name": "PoD Shooter Room (9,0)",
-      "dungeonId": "palace-of-darkness",
-      "originalDungeonId": "palace-of-darkness",
-      "previewImageUrl": "/assets/krisdavie/rooms/palace-of-darkness/palace-of-darkness-tile-9-0.png",
-      "doors": [
-        {
-          "id": "pod-shooter-room-up-stairs",
-          "roomId": "palace-of-darkness-tile-9-0",
-          "label": "Up Stairs",
-          "direction": "stairs",
-          "type": "stair",
-          "x": 128,
-          "y": 49
-        },
-        {
-          "id": "pod-warp-room-up-stairs",
-          "roomId": "palace-of-darkness-tile-9-0",
-          "label": "Up Stairs",
-          "direction": "stairs",
-          "type": "stair",
-          "x": 384,
-          "y": 49
-        }
-      ]
-    },
-    {
       "id": "palace-of-darkness-tile-10-0",
       "name": "PoD Basement Ledge (10,0)",
       "dungeonId": "palace-of-darkness",
@@ -64,105 +37,6 @@ export const PalaceOfDarknessGenerated = {
           "type": "drop",
           "x": 385,
           "y": 226
-        }
-      ]
-    },
-    {
-      "id": "palace-of-darkness-tile-11-0",
-      "name": "PoD Dark Pegs (11,0)",
-      "dungeonId": "palace-of-darkness",
-      "originalDungeonId": "palace-of-darkness",
-      "previewImageUrl": "/assets/krisdavie/rooms/palace-of-darkness/palace-of-darkness-tile-11-0.png",
-      "doors": [
-        {
-          "id": "pod-dark-pegs-up-ladder",
-          "roomId": "palace-of-darkness-tile-11-0",
-          "label": "Up Ladder",
-          "direction": "stairs",
-          "type": "stair",
-          "x": 408,
-          "y": 106
-        },
-        {
-          "id": "pod-dark-pegs-wn",
-          "roomId": "palace-of-darkness-tile-11-0",
-          "label": "WN",
-          "direction": "north",
-          "type": "normal",
-          "x": 289,
-          "y": 135
-        },
-        {
-          "id": "pod-lonely-turtle-sw",
-          "roomId": "palace-of-darkness-tile-11-0",
-          "label": "SW",
-          "direction": "west",
-          "type": "normal",
-          "x": 127,
-          "y": 222
-        },
-        {
-          "id": "pod-lonely-turtle-en",
-          "roomId": "palace-of-darkness-tile-11-0",
-          "label": "EN",
-          "direction": "north",
-          "type": "normal",
-          "x": 220,
-          "y": 135
-        },
-        {
-          "id": "pod-turtle-party-es",
-          "roomId": "palace-of-darkness-tile-11-0",
-          "label": "ES",
-          "direction": "south",
-          "type": "normal",
-          "x": 223,
-          "y": 392
-        },
-        {
-          "id": "pod-turtle-party-nw",
-          "roomId": "palace-of-darkness-tile-11-0",
-          "label": "NW",
-          "direction": "west",
-          "type": "normal",
-          "x": 127,
-          "y": 304
-        },
-        {
-          "id": "pod-callback-ws",
-          "roomId": "palace-of-darkness-tile-11-0",
-          "label": "WS",
-          "direction": "south",
-          "type": "normal",
-          "x": 289,
-          "y": 391
-        }
-      ]
-    },
-    {
-      "id": "palace-of-darkness-tile-9-1",
-      "name": "PoD Dark Maze (9,1)",
-      "dungeonId": "palace-of-darkness",
-      "originalDungeonId": "palace-of-darkness",
-      "previewImageUrl": "/assets/krisdavie/rooms/palace-of-darkness/palace-of-darkness-tile-9-1.png",
-      "doors": [
-        {
-          "id": "pod-dark-maze-en",
-          "roomId": "palace-of-darkness-tile-9-1",
-          "label": "EN",
-          "direction": "east",
-          "type": "normal",
-          "x": 477,
-          "y": 136
-        },
-        {
-          "id": "pod-dark-maze-e",
-          "roomId": "palace-of-darkness-tile-9-1",
-          "label": "E",
-          "direction": "east",
-          "type": "normal",
-          "x": 474,
-          "y": 264
         }
       ]
     },
@@ -325,51 +199,6 @@ export const PalaceOfDarknessGenerated = {
           "type": "normal",
           "x": 474,
           "y": 392
-        }
-      ]
-    },
-    {
-      "id": "palace-of-darkness-tile-11-2",
-      "name": "PoD Sexy Statue (11,2)",
-      "dungeonId": "palace-of-darkness",
-      "originalDungeonId": "palace-of-darkness",
-      "previewImageUrl": "/assets/krisdavie/rooms/palace-of-darkness/palace-of-darkness-tile-11-2.png",
-      "doors": [
-        {
-          "id": "pod-sexy-statue-w",
-          "roomId": "palace-of-darkness-tile-11-2",
-          "label": "W",
-          "direction": "west",
-          "type": "normal",
-          "x": 57,
-          "y": 265
-        },
-        {
-          "id": "pod-sexy-statue-nw",
-          "roomId": "palace-of-darkness-tile-11-2",
-          "label": "NW",
-          "direction": "north",
-          "type": "normal",
-          "x": 127,
-          "y": 48
-        },
-        {
-          "id": "pod-map-balcony-ws",
-          "roomId": "palace-of-darkness-tile-11-2",
-          "label": "WS",
-          "direction": "west",
-          "type": "normal",
-          "x": 38,
-          "y": 392
-        },
-        {
-          "id": "pod-map-balcony-south-stairs",
-          "roomId": "palace-of-darkness-tile-11-2",
-          "label": "South Stairs",
-          "direction": "stairs",
-          "type": "stair",
-          "x": 128,
-          "y": 479
         }
       ]
     },
@@ -586,6 +415,303 @@ export const PalaceOfDarknessGenerated = {
           "type": "normal",
           "x": 383,
           "y": 51
+        }
+      ]
+    },
+    {
+      "id": "palace-of-darkness-tile-11-0",
+      "name": "PoD Dark Pegs (11,0)",
+      "dungeonId": "palace-of-darkness",
+      "originalDungeonId": "palace-of-darkness",
+      "previewImageUrl": "/assets/krisdavie/rooms/palace-of-darkness/palace-of-darkness-tile-11-0.png",
+      "doors": [
+        {
+          "id": "pod-dark-pegs-up-ladder",
+          "roomId": "palace-of-darkness-tile-11-0",
+          "label": "Up Ladder",
+          "direction": "stairs",
+          "type": "stair",
+          "x": 408,
+          "y": 106
+        },
+        {
+          "id": "pod-dark-pegs-wn",
+          "roomId": "palace-of-darkness-tile-11-0",
+          "label": "WN",
+          "direction": "north",
+          "type": "normal",
+          "x": 289,
+          "y": 135
+        },
+        {
+          "id": "pod-lonely-turtle-sw",
+          "roomId": "palace-of-darkness-tile-11-0",
+          "label": "SW",
+          "direction": "west",
+          "type": "normal",
+          "x": 127,
+          "y": 222
+        },
+        {
+          "id": "pod-lonely-turtle-en",
+          "roomId": "palace-of-darkness-tile-11-0",
+          "label": "EN",
+          "direction": "north",
+          "type": "normal",
+          "x": 220,
+          "y": 135
+        },
+        {
+          "id": "pod-turtle-party-es",
+          "roomId": "palace-of-darkness-tile-11-0",
+          "label": "ES",
+          "direction": "south",
+          "type": "normal",
+          "x": 223,
+          "y": 392
+        },
+        {
+          "id": "pod-turtle-party-nw",
+          "roomId": "palace-of-darkness-tile-11-0",
+          "label": "NW",
+          "direction": "west",
+          "type": "normal",
+          "x": 127,
+          "y": 304
+        },
+        {
+          "id": "pod-callback-ws",
+          "roomId": "palace-of-darkness-tile-11-0",
+          "label": "WS",
+          "direction": "south",
+          "type": "normal",
+          "x": 289,
+          "y": 391
+        }
+      ]
+    },
+    {
+      "id": "palace-of-darkness-tile-11-1",
+      "name": "PoD Mimics 2",
+      "dungeonId": "palace-of-darkness",
+      "originalDungeonId": "palace-of-darkness",
+      "previewImageUrl": "/assets/krisdavie/rooms/palace-of-darkness/palace-of-darkness-tile-11-1.png",
+      "doors": [
+        {
+          "id": "pod-mimics-2-sw",
+          "roomId": "palace-of-darkness-tile-11-1",
+          "label": "SW",
+          "direction": "south",
+          "type": "normal",
+          "x": 127,
+          "y": 477
+        },
+        {
+          "id": "pod-mimics-2-nw",
+          "roomId": "palace-of-darkness-tile-11-1",
+          "label": "NW",
+          "direction": "west",
+          "type": "normal",
+          "x": 128,
+          "y": 304
+        },
+        {
+          "id": "pod-bow-statue-sw",
+          "roomId": "palace-of-darkness-tile-11-1",
+          "label": "SW",
+          "direction": "west",
+          "type": "normal",
+          "x": 127,
+          "y": 222
+        },
+        {
+          "id": "pod-bow-statue-down-ladder",
+          "roomId": "palace-of-darkness-tile-11-1",
+          "label": "Down Ladder",
+          "direction": "stairs",
+          "type": "stair",
+          "x": 394,
+          "y": 93
+        }
+      ]
+    },
+    {
+      "id": "palace-of-darkness-tile-11-2",
+      "name": "PoD Sexy Statue (11,2)",
+      "dungeonId": "palace-of-darkness",
+      "originalDungeonId": "palace-of-darkness",
+      "previewImageUrl": "/assets/krisdavie/rooms/palace-of-darkness/palace-of-darkness-tile-11-2.png",
+      "doors": [
+        {
+          "id": "pod-sexy-statue-w",
+          "roomId": "palace-of-darkness-tile-11-2",
+          "label": "W",
+          "direction": "west",
+          "type": "normal",
+          "x": 57,
+          "y": 265
+        },
+        {
+          "id": "pod-sexy-statue-nw",
+          "roomId": "palace-of-darkness-tile-11-2",
+          "label": "NW",
+          "direction": "north",
+          "type": "normal",
+          "x": 127,
+          "y": 48
+        },
+        {
+          "id": "pod-map-balcony-ws",
+          "roomId": "palace-of-darkness-tile-11-2",
+          "label": "WS",
+          "direction": "west",
+          "type": "normal",
+          "x": 38,
+          "y": 392
+        },
+        {
+          "id": "pod-map-balcony-south-stairs",
+          "roomId": "palace-of-darkness-tile-11-2",
+          "label": "South Stairs",
+          "direction": "stairs",
+          "type": "stair",
+          "x": 128,
+          "y": 479
+        }
+      ]
+    },
+    {
+      "id": "palace-of-darkness-tile-11-3",
+      "name": "PoD Conveyor",
+      "dungeonId": "palace-of-darkness",
+      "originalDungeonId": "palace-of-darkness",
+      "previewImageUrl": "/assets/krisdavie/rooms/palace-of-darkness/palace-of-darkness-tile-11-3.png",
+      "doors": [
+        {
+          "id": "pod-conveyor-north-stairs",
+          "roomId": "palace-of-darkness-tile-11-3",
+          "label": "North Stairs",
+          "direction": "stairs",
+          "type": "stair",
+          "x": 127,
+          "y": 48
+        },
+        {
+          "id": "pod-conveyor-sw",
+          "roomId": "palace-of-darkness-tile-11-3",
+          "label": "SW",
+          "direction": "south",
+          "type": "normal",
+          "x": 127,
+          "y": 480
+        }
+      ]
+    },
+    {
+      "id": "palace-of-darkness-tile-11-4",
+      "name": "PoD Mimics 1",
+      "dungeonId": "palace-of-darkness",
+      "originalDungeonId": "palace-of-darkness",
+      "previewImageUrl": "/assets/krisdavie/rooms/palace-of-darkness/palace-of-darkness-tile-11-4.png",
+      "doors": [
+        {
+          "id": "pod-mimics-1-nw",
+          "roomId": "palace-of-darkness-tile-11-4",
+          "label": "NW",
+          "direction": "north",
+          "type": "normal",
+          "x": 127,
+          "y": 48
+        },
+        {
+          "id": "pod-mimics-1-sw",
+          "roomId": "palace-of-darkness-tile-11-4",
+          "label": "SW",
+          "direction": "west",
+          "type": "normal",
+          "x": 128,
+          "y": 219
+        },
+        {
+          "id": "pod-jelly-hall-nw",
+          "roomId": "palace-of-darkness-tile-11-4",
+          "label": "NW",
+          "direction": "west",
+          "type": "normal",
+          "x": 127,
+          "y": 305
+        },
+        {
+          "id": "pod-jelly-hall-ne",
+          "roomId": "palace-of-darkness-tile-11-4",
+          "label": "NE",
+          "direction": "east",
+          "type": "normal",
+          "x": 384,
+          "y": 307
+        },
+        {
+          "id": "pod-warp-hint-se",
+          "roomId": "palace-of-darkness-tile-11-4",
+          "label": "SE",
+          "direction": "east",
+          "type": "normal",
+          "x": 384,
+          "y": 221
+        }
+      ]
+    },
+    {
+      "id": "palace-of-darkness-tile-9-0",
+      "name": "PoD Shooter Room (9,0)",
+      "dungeonId": "palace-of-darkness",
+      "originalDungeonId": "palace-of-darkness",
+      "previewImageUrl": "/assets/krisdavie/rooms/palace-of-darkness/palace-of-darkness-tile-9-0.png",
+      "doors": [
+        {
+          "id": "pod-shooter-room-up-stairs",
+          "roomId": "palace-of-darkness-tile-9-0",
+          "label": "Up Stairs",
+          "direction": "stairs",
+          "type": "stair",
+          "x": 128,
+          "y": 49
+        },
+        {
+          "id": "pod-warp-room-up-stairs",
+          "roomId": "palace-of-darkness-tile-9-0",
+          "label": "Up Stairs",
+          "direction": "stairs",
+          "type": "stair",
+          "x": 384,
+          "y": 49
+        }
+      ]
+    },
+    {
+      "id": "palace-of-darkness-tile-9-1",
+      "name": "PoD Dark Maze (9,1)",
+      "dungeonId": "palace-of-darkness",
+      "originalDungeonId": "palace-of-darkness",
+      "previewImageUrl": "/assets/krisdavie/rooms/palace-of-darkness/palace-of-darkness-tile-9-1.png",
+      "doors": [
+        {
+          "id": "pod-dark-maze-en",
+          "roomId": "palace-of-darkness-tile-9-1",
+          "label": "EN",
+          "direction": "east",
+          "type": "normal",
+          "x": 477,
+          "y": 136
+        },
+        {
+          "id": "pod-dark-maze-e",
+          "roomId": "palace-of-darkness-tile-9-1",
+          "label": "E",
+          "direction": "east",
+          "type": "normal",
+          "x": 474,
+          "y": 264
         }
       ]
     }
