@@ -276,26 +276,31 @@ export function DungeonGraph({ dungeon, allDungeons, runSettings,
             roomId,
         ]);
 
-        setNodes((currentNodes) => [
-            ...currentNodes,
-            {
-                id: room.id,
-                type: "room",
-                position: {
-                    x: 180 + currentNodes.length * 40,
-                    y: 180 + currentNodes.length * 40,
+        setNodes((currentNodes) => {
+            const position = getNewRoomPosition({
+                currentNodes,
+                selectedDoor,
+                tileSizePx: getTileSizePx(runSettings.tileSize),
+            });
+
+            return [
+                ...currentNodes,
+                {
+                    id: room.id,
+                    type: "room",
+                    position: position,
+                    data: {
+                        room,
+                        selectedDoorId: selectedDoor?.id,
+                        connectedDoorIds,
+                        doorConnectionMap,
+                        doorLabelMode: runSettings.doorLabelMode,
+                        onDoorClick: handleDoorClick,
+                        onRemoveRoom: handleRemoveRoom,
+                    },
                 },
-                data: {
-                    room,
-                    selectedDoorId: selectedDoor?.id,
-                    connectedDoorIds,
-                    doorConnectionMap,
-                    doorLabelMode: runSettings.doorLabelMode,
-                    onDoorClick: handleDoorClick,
-                    onRemoveRoom: handleRemoveRoom,
-                },
-            },
-        ]);
+            ];
+        });
     }
 
     const edges: Edge[] = useMemo(() => {
@@ -495,4 +500,128 @@ function createInitialRoomNodes(
                 onRemoveRoom: () => undefined,
             },
         }));
+}
+
+type GetNewRoomPositionInput = {
+    currentNodes: RoomFlowNode[];
+    selectedDoor: DungeonDoor | undefined;
+    tileSizePx: number;
+};
+
+function getNewRoomPosition({
+                                currentNodes,
+                                selectedDoor,
+                                tileSizePx,
+                            }: GetNewRoomPositionInput): GraphPosition {
+    const gap = 96;
+    const step = tileSizePx + gap;
+
+    const selectedDoorNode = selectedDoor
+        ? currentNodes.find((node) => node.id === selectedDoor.roomId)
+        : undefined;
+
+    let preferredPosition: GraphPosition;
+
+    if (selectedDoor && selectedDoorNode) {
+        const offset = getPlacementOffset(selectedDoor.direction, step);
+
+        preferredPosition = {
+            x: selectedDoorNode.position.x + offset.x,
+            y: selectedDoorNode.position.y + offset.y,
+        };
+    } else {
+        preferredPosition = getDefaultNewRoomPosition(currentNodes, step);
+    }
+
+    return findFreePosition({
+        preferredPosition,
+        currentNodes,
+        tileSizePx,
+        gap,
+    });
+}
+
+function getPlacementOffset(
+    direction: DungeonDoor["direction"],
+    step: number,
+): GraphPosition {
+    switch (direction) {
+        case "north":
+            return { x: 0, y: -step };
+        case "south":
+            return { x: 0, y: step };
+        case "west":
+            return { x: -step, y: 0 };
+        case "east":
+            return { x: step, y: 0 };
+        case "stairs":
+        case "drop":
+        default:
+            return { x: step, y: 0 };
+    }
+}
+
+function getDefaultNewRoomPosition(
+    currentNodes: RoomFlowNode[],
+    step: number,
+): GraphPosition {
+    if (currentNodes.length === 0) {
+        return { x: 100, y: 100 };
+    }
+
+    const rightMostX = Math.max(
+        ...currentNodes.map((node) => node.position.x),
+    );
+
+    const topMostY = Math.min(
+        ...currentNodes.map((node) => node.position.y),
+    );
+
+    return {
+        x: rightMostX + step,
+        y: topMostY,
+    };
+}
+
+type FindFreePositionInput = {
+    preferredPosition: GraphPosition;
+    currentNodes: RoomFlowNode[];
+    tileSizePx: number;
+    gap: number;
+};
+
+function findFreePosition({
+                              preferredPosition,
+                              currentNodes,
+                              tileSizePx,
+                              gap,
+                          }: FindFreePositionInput): GraphPosition {
+    const maxAttempts = 20;
+    const step = tileSizePx + gap;
+
+    for (let attempt = 0; attempt < maxAttempts; attempt += 1) {
+        const candidate = {
+            x: preferredPosition.x,
+            y: preferredPosition.y + attempt * step,
+        };
+
+        if (!isPositionOccupied(candidate, currentNodes, tileSizePx)) {
+            return candidate;
+        }
+    }
+
+    return preferredPosition;
+}
+
+function isPositionOccupied(
+    position: GraphPosition,
+    currentNodes: RoomFlowNode[],
+    tileSizePx: number,
+): boolean {
+    return currentNodes.some((node) => {
+        const xDistance = Math.abs(node.position.x - position.x);
+        const yDistance = Math.abs(node.position.y - position.y);
+
+        return xDistance < tileSizePx && yDistance < tileSizePx;
+    });
 }
