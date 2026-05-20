@@ -296,8 +296,8 @@ export const SkullWoodsGenerated = {
           "label": "S",
           "direction": "west",
           "type": "normal",
-          "x": 128,
-          "y": 250
+          "x": 135,
+          "y": 230
         },
         {
           "id": "skull-big-chest-n",
@@ -306,7 +306,7 @@ export const SkullWoodsGenerated = {
           "direction": "west",
           "type": "normal",
           "x": 127,
-          "y": 264
+          "y": 307
         }
       ]
     },

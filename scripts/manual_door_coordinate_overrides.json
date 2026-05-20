@@ -1,0 +1,16 @@
+{
+  "overrides": [
+    {
+      "doorId": "skull-big-chest-n",
+      "x": 127,
+      "y": 307,
+      "reason": "Move hotspot closer to visible Big Chest north door"
+    },
+    {
+      "doorId": "skull-pull-switch-s",
+      "x": 135,
+      "y": 230,
+      "reason": "Move hotspot closer to switch"
+    }
+  ]
+}

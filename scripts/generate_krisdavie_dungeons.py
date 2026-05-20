@@ -87,6 +87,12 @@ def main() -> None:
         help="Path to manual missing tile review JSON.",
     )
 
+    parser.add_argument(
+        "--manual-door-coordinate-overrides",
+        default="scripts/manual_door_coordinate_overrides.json",
+        help="Path to manual door coordinate overrides JSON.",
+    )
+
     args = parser.parse_args()
 
     source_root = Path(args.source).resolve()
@@ -104,15 +110,21 @@ def main() -> None:
     from data.doors_data import door_coordinates  # type: ignore
     from data.vanilla_data import vanilla_layout_optimized  # type: ignore
 
+    door_coordinate_overrides = load_door_coordinate_overrides(
+        Path(args.manual_door_coordinate_overrides).resolve(),
+    )
+
     dungeons = build_dungeons(
         vanilla_layout_optimized=vanilla_layout_optimized,
         door_coordinates=door_coordinates,
+        door_coordinate_overrides=door_coordinate_overrides,
     )
 
     apply_manual_missing_tiles(
         dungeons=dungeons,
         door_coordinates=door_coordinates,
         review_path=Path(args.manual_missing_tiles_review).resolve(),
+        door_coordinate_overrides=door_coordinate_overrides,
     )
 
     if args.crop_tiles:
@@ -142,6 +154,7 @@ def main() -> None:
 def build_dungeons(
         vanilla_layout_optimized: dict[str, Any],
         door_coordinates: dict[tuple[int, int], list[dict[str, Any]]],
+        door_coordinate_overrides: dict[str, dict[str, Any]],
 ) -> list[dict[str, Any]]:
     used_door_ids: set[str] = set()
     dungeons: list[dict[str, Any]] = []
@@ -176,6 +189,7 @@ def build_dungeons(
                     raw_door=raw_door,
                     room_id=room_id,
                     used_door_ids=used_door_ids,
+                    door_coordinate_overrides=door_coordinate_overrides,
                 )
                 for raw_door in raw_doors
             ]
@@ -201,15 +215,24 @@ def build_dungeons(
 
     return dungeons
 
-
 def build_door(
         raw_door: dict[str, Any],
         room_id: str,
         used_door_ids: set[str],
+        door_coordinate_overrides: dict[str, dict[str, Any]],
 ) -> dict[str, Any]:
     name = str(raw_door["name"])
     door_type = infer_door_type(name)
     door_id = make_unique_id(slugify(name), used_door_ids)
+
+    x = int(raw_door.get("x", 256))
+    y = int(raw_door.get("y", 256))
+
+    override = door_coordinate_overrides.get(door_id)
+
+    if override:
+        x = int(override.get("x", x))
+        y = int(override.get("y", y))
 
     return {
         "id": door_id,
@@ -217,10 +240,9 @@ def build_door(
         "label": derive_door_label(name),
         "direction": infer_door_direction(raw_door, door_type),
         "type": door_type,
-        "x": int(raw_door.get("x", 256)),
-        "y": int(raw_door.get("y", 256)),
+        "x": x,
+        "y": y,
     }
-
 
 def derive_room_name(raw_doors: list[dict[str, Any]], tile_coord: tuple[int, int]) -> str:
     first_door_name = str(raw_doors[0]["name"])
@@ -369,6 +391,7 @@ def apply_manual_missing_tiles(
         dungeons: list[dict[str, Any]],
         door_coordinates: dict[tuple[int, int], list[dict[str, Any]]],
         review_path: Path,
+        door_coordinate_overrides: dict[str, dict[str, Any]],
 ) -> None:
     if not review_path.exists():
         print(f"Manual missing tile review not found, skipping: {review_path}")
@@ -431,6 +454,7 @@ def apply_manual_missing_tiles(
                     raw_door=raw_door,
                     room_id=room_id,
                     used_door_ids=used_door_ids,
+                    door_coordinate_overrides=door_coordinate_overrides,
                 )
                 for raw_door in raw_doors
             ],
@@ -525,6 +549,20 @@ export const krisdavieDungeons = [
 
 def to_pascal_case(value: str) -> str:
     return "".join(part.capitalize() for part in value.split("-"))
+
+def load_door_coordinate_overrides(
+        override_path: Path,
+) -> dict[str, dict[str, Any]]:
+    if not override_path.exists():
+        return {}
+
+    raw_data = json.loads(override_path.read_text(encoding="utf-8"))
+
+    return {
+        str(entry["doorId"]): entry
+        for entry in raw_data.get("overrides", [])
+        if "doorId" in entry
+    }
 
 def crop_room_tiles(
         source_root: Path,
