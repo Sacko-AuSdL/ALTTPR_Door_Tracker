@@ -19,8 +19,22 @@ The goal is to make door tracking more visual and flexible than a fixed grid tra
 - Interactive graph powered by React Flow
 - Generated dungeon/tile data based on KrisDavie DoorTracker data
 - Real tile preview images generated from the source map
+- Complete door-coordinate tile coverage from the EG map
 - Door hotspots positioned directly on the tile images
 - Color-coded door connections
+- Door markers for important requirements:
+  - Somaria
+  - Lamp
+  - Blocked
+  - Bow
+  - Bomb
+  - Fire Rod
+- Marker icons can be set from a door hotspot menu
+- Marker icons can be removed by clicking the icon again
+- Configurable door label display:
+  - Full
+  - Compact
+  - Dots only
 - Configurable tile size:
   - Small
   - Medium
@@ -43,8 +57,11 @@ The goal is to make door tracking more visual and flexible than a fixed grid tra
 - Click a tile in the picker to add it.
 - Click one door hotspot, then another door hotspot, to create a connection.
 - Click an existing connection line to remove it.
+- Click a door hotspot to open the marker menu.
+- Choose a marker icon to mark the door requirement.
+- Click an existing marker icon to remove it again.
 - Drag tiles around the canvas to organize the current route.
-- Use the Run Settings panel to change door shuffle mode, entrance mode, and tile size.
+- Use the Run Settings panel to change door shuffle mode, entrance mode, tile size, and door label display.
 
 The tracker state is saved in browser LocalStorage.
 
@@ -102,6 +119,11 @@ Generated tile images are written to:
 public/assets/krisdavie/rooms/
 ```
 
+The generator also reads manually reviewed missing EG map tiles from:
+
+```text
+scripts/manual_missing_tiles_review.json
+```
 The generated files are committed so users and deployment builds do **not** need Python or the original KrisDavie repository.
 
 ## Deployment
