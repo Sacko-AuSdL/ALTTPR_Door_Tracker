@@ -1,24 +1,17 @@
 import type { DungeonDefinition } from "../../types/dungeon";
 import type { DoorConnection } from "../../types/tracker";
-import type { TrackerRunSettings } from "../../types/runSettings";
-import { DoorShuffleModes } from "../../types/runSettings";
 import type { RoomGroup } from "../../domain/roomGroups";
 import { AddTilePicker } from "./AddTilePicker";
-import { RunSettingsPanel } from "./RunSettingsPanel";
 
 type ConnectionPanelProps = {
     dungeon: DungeonDefinition;
     allDungeons: DungeonDefinition[];
     connections: DoorConnection[];
     roomGroups: RoomGroup[];
-    runSettings: TrackerRunSettings;
-    onRunSettingsChange: (settings: TrackerRunSettings) => void;
+    collapseAfterAdd: boolean;
     onAddRoom: (roomId: string) => void;
     onDeleteConnection: (connectionId: string) => void;
     onClearConnections: () => void;
-    onResetLayout: () => void;
-    onResetDungeon: () => void;
-    onResetRun: () => void;
 };
 
 export function ConnectionPanel({
@@ -26,60 +19,21 @@ export function ConnectionPanel({
                                     allDungeons,
                                     connections,
                                     roomGroups,
-                                    runSettings,
-                                    onRunSettingsChange,
+                                    collapseAfterAdd,
                                     onAddRoom,
                                     onDeleteConnection,
                                     onClearConnections,
-                                    onResetLayout,
-                                    onResetDungeon,
-                                    onResetRun,
                                 }: ConnectionPanelProps) {
     return (
         <div className="connection-panel">
             <div className="connection-panel__header">
                 <strong>Tracker</strong>
-
-                <div className="connection-panel__actions">
-                    <button
-                        type="button"
-                        className="connection-panel__button"
-                        onClick={onResetLayout}
-                    >
-                        Reset Layout
-                    </button>
-
-                    <button
-                        type="button"
-                        className="connection-panel__button"
-                        onClick={onResetDungeon}
-                    >
-                        Reset Dungeon
-                    </button>
-
-                    <button
-                        type="button"
-                        className="connection-panel__button connection-panel__button--danger"
-                        onClick={onResetRun}
-                    >
-                        Reset Run
-                    </button>
-                </div>
             </div>
-
-            <details className="connection-panel__section">
-                <summary>Run Settings</summary>
-
-                <RunSettingsPanel
-                    settings={runSettings}
-                    onChange={onRunSettingsChange}
-                />
-            </details>
 
             <AddTilePicker
                 roomGroups={roomGroups}
                 allDungeons={allDungeons}
-                collapseAfterAdd={runSettings.doorShuffleMode !== DoorShuffleModes.OwnDungeon}
+                collapseAfterAdd={collapseAfterAdd}
                 onAddRoom={onAddRoom}
             />
 

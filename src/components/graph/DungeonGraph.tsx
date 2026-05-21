@@ -16,32 +16,42 @@ import {
     type ComponentType,
     type CSSProperties,
 } from "react";
-import type { DungeonDefinition, DungeonDoor } from "../../types/dungeon";
-import type { DoorConnection, GraphPosition, PersistedTrackerState } from "../../types/tracker";
-import type { DoorMarkerMap, DoorMarkerType } from "../../types/doorMarker";
-import { ConnectionPanel } from "./ConnectionPanel";
-import { TrackerStatusBar } from "./TrackerStatusBar";
-import { RoomNode, type RoomFlowNode } from "./RoomNode";
-import { getStartingRoomIds } from "../../domain/startingRooms";
-import { groupRoomsByOriginalDungeon } from "../../domain/roomGroups";
-import { getAvailableRoomsForSettings } from "../../domain/roomPool";
-import { DoorLabelModes, getTileSizePx } from "../../types/runSettings";
-import type { TrackerRunSettings } from "../../types/runSettings";
-import { getConnectionColor } from "../../domain/connectionColors";
+import type {DungeonDefinition, DungeonDoor} from "../../types/dungeon";
+import type {DoorConnection, GraphPosition, PersistedTrackerState} from "../../types/tracker";
+import type {DoorMarkerMap, DoorMarkerType} from "../../types/doorMarker";
+import {ConnectionPanel} from "./ConnectionPanel";
+import {TrackerStatusBar} from "./TrackerStatusBar";
+import {RoomNode, type RoomFlowNode} from "./RoomNode";
+import {getStartingRoomIds} from "../../domain/startingRooms";
+import {groupRoomsByOriginalDungeon} from "../../domain/roomGroups";
+import {getAvailableRoomsForSettings} from "../../domain/roomPool";
+import {DoorLabelModes, DoorShuffleModes, getTileSizePx} from "../../types/runSettings";
+import type {TrackerRunSettings} from "../../types/runSettings";
+import {getConnectionColor} from "../../domain/connectionColors";
 
 type DungeonGraphProps = {
     dungeon: DungeonDefinition;
     allDungeons: DungeonDefinition[];
     runSettings: TrackerRunSettings;
-    onRunSettingsChange: (settings: TrackerRunSettings) => void;
+    onActionsReady?: (actions: DungeonGraphActions | null) => void;
+};
+
+export type DungeonGraphActions = {
+    resetLayout: () => void;
+    resetDungeon: () => void;
+    resetRun: () => void;
 };
 
 const nodeTypes: NodeTypes = {
     room: RoomNode as ComponentType<NodeProps>,
 };
 
-export function DungeonGraph({ dungeon, allDungeons, runSettings,
-                                 onRunSettingsChange, }: DungeonGraphProps) {
+export function DungeonGraph({
+                                 dungeon,
+                                 allDungeons,
+                                 runSettings,
+                                 onActionsReady,
+                             }: DungeonGraphProps) {
     const persistedState = useMemo(
         () => loadPersistedTrackerState(dungeon.id),
         [dungeon.id],
@@ -191,7 +201,7 @@ export function DungeonGraph({ dungeon, allDungeons, runSettings,
     const handleDoorMarkerChange = useCallback(
         (doorId: string, markerType: DoorMarkerType | undefined) => {
             setDoorMarkers((currentDoorMarkers) => {
-                const nextDoorMarkers = { ...currentDoorMarkers };
+                const nextDoorMarkers = {...currentDoorMarkers};
 
                 if (markerType) {
                     nextDoorMarkers[doorId] = markerType;
@@ -226,7 +236,7 @@ export function DungeonGraph({ dungeon, allDungeons, runSettings,
         );
 
         setDoorMarkers((currentDoorMarkers) => {
-            const nextDoorMarkers = { ...currentDoorMarkers };
+            const nextDoorMarkers = {...currentDoorMarkers};
             const room = allRooms.find((candidate) => candidate.id === roomId);
 
             room?.doors.forEach((door) => {
@@ -278,30 +288,44 @@ export function DungeonGraph({ dungeon, allDungeons, runSettings,
         setSelectedDoor(undefined);
     }
 
-    function resetLayout() {
+    const resetLayout = useCallback(() => {
         setNodes(createInitialRoomNodes(allDungeons, visibleRoomIds));
         setSelectedDoor(undefined);
-    }
+    }, [allDungeons, setNodes, visibleRoomIds]);
 
-    function resetDungeon() {
+    const resetDungeon = useCallback(() => {
         const startingRoomIds = getStartingRoomIds(dungeon, runSettings);
 
         clearPersistedTrackerState(dungeon.id);
         setVisibleRoomIds(startingRoomIds);
         setConnections([]);
+        setDoorMarkers({});
         setNodes(createInitialRoomNodes(allDungeons, startingRoomIds));
         setSelectedDoor(undefined);
-    }
+    }, [allDungeons, dungeon, runSettings, setNodes]);
 
-    function resetRun() {
+    const resetRun = useCallback(() => {
         const startingRoomIds = getStartingRoomIds(dungeon, runSettings);
 
         clearPersistedTrackerStates(allDungeons);
         setVisibleRoomIds(startingRoomIds);
         setConnections([]);
+        setDoorMarkers({});
         setNodes(createInitialRoomNodes(allDungeons, startingRoomIds));
         setSelectedDoor(undefined);
-    }
+    }, [allDungeons, dungeon, runSettings, setNodes]);
+
+    useEffect(() => {
+        onActionsReady?.({
+            resetLayout,
+            resetDungeon,
+            resetRun,
+        });
+
+        return () => {
+            onActionsReady?.(null);
+        };
+    }, [onActionsReady, resetLayout, resetDungeon, resetRun]);
 
     function addRoomToGraph(roomId: string) {
         if (!roomId || visibleRoomIds.includes(roomId)) {
@@ -396,7 +420,7 @@ export function DungeonGraph({ dungeon, allDungeons, runSettings,
                 nodeTypes={nodeTypes}
                 onNodesChange={onNodesChange}
                 nodesDraggable
-                defaultViewport={{ x: 0, y: 0, zoom: 1 }}
+                defaultViewport={{x: 0, y: 0, zoom: 1}}
                 onPaneClick={() => {
                     setSelectedDoor(undefined);
                 }}
@@ -405,8 +429,8 @@ export function DungeonGraph({ dungeon, allDungeons, runSettings,
                     deleteConnection(edge.id);
                 }}
             >
-                <Background />
-                <Controls />
+                <Background/>
+                <Controls/>
             </ReactFlow>
 
             <ConnectionPanel
@@ -414,14 +438,10 @@ export function DungeonGraph({ dungeon, allDungeons, runSettings,
                 allDungeons={allDungeons}
                 connections={connections}
                 roomGroups={hiddenRoomGroups}
-                runSettings={runSettings}
-                onRunSettingsChange={onRunSettingsChange}
+                collapseAfterAdd={runSettings.doorShuffleMode !== DoorShuffleModes.OwnDungeon}
                 onAddRoom={addRoomToGraph}
                 onDeleteConnection={deleteConnection}
                 onClearConnections={clearConnections}
-                onResetLayout={resetLayout}
-                onResetDungeon={resetDungeon}
-                onResetRun={resetRun}
             />
 
             <TrackerStatusBar
@@ -596,17 +616,17 @@ function getPlacementOffset(
 ): GraphPosition {
     switch (direction) {
         case "north":
-            return { x: 0, y: -step };
+            return {x: 0, y: -step};
         case "south":
-            return { x: 0, y: step };
+            return {x: 0, y: step};
         case "west":
-            return { x: -step, y: 0 };
+            return {x: -step, y: 0};
         case "east":
-            return { x: step, y: 0 };
+            return {x: step, y: 0};
         case "stairs":
         case "drop":
         default:
-            return { x: step, y: 0 };
+            return {x: step, y: 0};
     }
 }
 
@@ -615,7 +635,7 @@ function getDefaultNewRoomPosition(
     step: number,
 ): GraphPosition {
     if (currentNodes.length === 0) {
-        return { x: 100, y: 100 };
+        return {x: 100, y: 100};
     }
 
     const rightMostX = Math.max(

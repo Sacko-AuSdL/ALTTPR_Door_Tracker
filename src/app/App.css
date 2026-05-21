@@ -554,11 +554,20 @@
 .dungeon-tabs {
     flex: 0 0 auto;
     display: flex;
-    gap: 0.3rem;
+    align-items: center;
+    gap: 0.5rem;
     padding: 0.35rem 0.75rem;
-    overflow-x: auto;
+    overflow: visible;
     border-bottom: 1px solid #374151;
     background: #111827;
+}
+
+.dungeon-tabs__list {
+    flex: 1 1 auto;
+    min-width: 0;
+    display: flex;
+    gap: 0.3rem;
+    overflow-x: auto;
 }
 
 .dungeon-tabs__tab {
@@ -581,6 +590,88 @@
     border-color: #facc15;
     background: #854d0e;
     color: #fef3c7;
+}
+
+.dungeon-tabs__menus {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.tracker-menu {
+    position: relative;
+}
+
+.tracker-menu__trigger {
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    width: 2rem;
+    height: 2rem;
+    border: 1px solid #374151;
+    border-radius: 999px;
+    background: #1f2937;
+    color: #f9fafb;
+    list-style: none;
+    user-select: none;
+    appearance: none;
+}
+
+.tracker-menu__trigger:hover {
+    border-color: #60a5fa;
+    background: #1e3a8a;
+}
+
+.tracker-menu__content {
+    position: absolute;
+    top: calc(100% + 0.45rem);
+    right: 0;
+    z-index: 50;
+    display: grid;
+    gap: 0.5rem;
+    width: min(320px, calc(100vw - 1.5rem));
+    padding: 0.75rem;
+    border: 1px solid #374151;
+    border-radius: 0.75rem;
+    background: rgb(17 24 39 / 96%);
+    color: #e5e7eb;
+    box-shadow: 0 10px 24px rgb(0 0 0 / 35%);
+    backdrop-filter: blur(8px);
+}
+
+.tracker-menu__title {
+    color: #f9fafb;
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+
+.tracker-menu .run-settings-panel {
+    margin: 0;
+    padding: 0;
+    border-bottom: 0;
+}
+
+.tracker-menu__button {
+    cursor: pointer;
+    width: 100%;
+    padding: 0.45rem 0.55rem;
+    border: 1px solid #4b5563;
+    border-radius: 0.45rem;
+    background: #1f2937;
+    color: #f9fafb;
+    font-size: 0.8rem;
+    text-align: left;
+}
+
+.tracker-menu__button:hover {
+    border-color: #60a5fa;
+    background: #1e3a8a;
+}
+
+.tracker-menu__button--danger:hover {
+    border-color: #f87171;
+    background: #7f1d1d;
 }
 
 .room-tile-preview {

@@ -1,5 +1,8 @@
-import { useEffect, useState } from "react";
-import { DungeonGraph } from "../components/graph/DungeonGraph";
+import { Fragment, useCallback, useEffect, useRef, useState } from "react";
+import {
+    DungeonGraph,
+    type DungeonGraphActions,
+} from "../components/graph/DungeonGraph";
 import {
     dungeonCatalog,
     getDungeonById,
@@ -9,6 +12,8 @@ import {
     type PersistedRunSettings,
     type TrackerRunSettings,
 } from "../types/runSettings";
+import { TrackerActionsMenu } from "../components/settings/TrackerActionsMenu";
+import { TrackerOptionsMenu } from "../components/settings/TrackerOptionsMenu";
 import "./App.css";
 
 const RUN_SETTINGS_STORAGE_KEY = "alttpr-door-tracker:run-settings";
@@ -19,6 +24,15 @@ export default function App() {
     const [runSettings, setRunSettings] = useState<TrackerRunSettings>(() => {
         return loadPersistedRunSettings() ?? createDefaultRunSettings();
     });
+
+    const dungeonGraphActionsRef = useRef<DungeonGraphActions | null>(null);
+
+    const handleDungeonGraphActionsReady = useCallback(
+        (actions: DungeonGraphActions | null) => {
+            dungeonGraphActionsRef.current = actions;
+        },
+        [],
+    );
 
     useEffect(() => {
         savePersistedRunSettings(runSettings);
@@ -37,34 +51,47 @@ export default function App() {
             </header>
 
             <nav className="dungeon-tabs" aria-label="Dungeon selection">
-                {dungeonCatalog.map((dungeon) => {
-                    const isActive = dungeon.id === activeDungeonId;
+                <div className="dungeon-tabs__list">
+                    {dungeonCatalog.map((dungeon) => {
+                        const isActive = dungeon.id === activeDungeonId;
 
-                    return (
-                        <button
-                            key={dungeon.id}
-                            type="button"
-                            className={[
-                                "dungeon-tabs__tab",
-                                isActive ? "dungeon-tabs__tab--active" : "",
-                            ]
-                                .filter(Boolean)
-                                .join(" ")}
-                            onClick={() => setActiveDungeonId(dungeon.id)}
-                        >
-                            {dungeon.name.replace(" - Sample", "")}
-                        </button>
-                    );
-                })}
+                        return (
+                            <button
+                                key={dungeon.id}
+                                type="button"
+                                className={[
+                                    "dungeon-tabs__tab",
+                                    isActive ? "dungeon-tabs__tab--active" : "",
+                                ]
+                                    .filter(Boolean)
+                                    .join(" ")}
+                                onClick={() => setActiveDungeonId(dungeon.id)}
+                            >
+                                {dungeon.name.replace(" - Sample", "")}
+                            </button>
+                        );
+                    })}
+                </div>
+
+                <div className="dungeon-tabs__menus">
+                    <TrackerOptionsMenu settings={runSettings} onChange={setRunSettings}/>
+
+                    <TrackerActionsMenu
+                        onResetLayout={() => dungeonGraphActionsRef.current?.resetLayout()}
+                        onResetDungeon={() => dungeonGraphActionsRef.current?.resetDungeon()}
+                        onResetRun={() => dungeonGraphActionsRef.current?.resetRun()}
+                    />
+                </div>
             </nav>
 
-            <DungeonGraph
-                key={activeDungeon.id}
-                dungeon={activeDungeon}
-                allDungeons={dungeonCatalog}
-                runSettings={runSettings}
-                onRunSettingsChange={setRunSettings}
-            />
+            <Fragment key={activeDungeon.id}>
+                <DungeonGraph
+                    dungeon={activeDungeon}
+                    allDungeons={dungeonCatalog}
+                    runSettings={runSettings}
+                    onActionsReady={handleDungeonGraphActionsReady}
+                />
+            </Fragment>
         </main>
     );
 }
