@@ -1,7 +1,8 @@
 import { useMemo, useState } from "react";
+import { createPortal } from "react-dom";
 import type { RoomGroup } from "../../domain/roomGroups";
 import type { DungeonDefinition } from "../../types/dungeon";
-import { RoomTilePreview } from "./RoomTilePreview";
+import { RoomTilePreview, RoomTilePreviewSizes } from "./RoomTilePreview";
 
 type AddTilePickerProps = {
     roomGroups: RoomGroup[];
@@ -60,59 +61,86 @@ export function AddTilePicker({
                 <span>{selectableRooms.length} available</span>
             </div>
 
-            <div className="add-tile-picker__preview">
-                <RoomTilePreview room={previewRoom} allDungeons={allDungeons}/>
-            </div>
-
             {roomGroups.length === 0 ? (
                 <p className="add-tile-picker__empty">All tiles added.</p>
             ) : (
-                <div
-                    className="add-tile-picker__groups"
-                    onMouseLeave={() => setPreviewRoomId(undefined)}
-                >
-                    {roomGroups.map((group) => {
-                        const isExpanded = expandedDungeonIds.has(group.dungeonId);
+                <>
+                    <div
+                        className="add-tile-picker__groups"
+                        onMouseLeave={() => setPreviewRoomId(undefined)}
+                    >
+                        {roomGroups.map((group) => {
+                            const isExpanded = expandedDungeonIds.has(group.dungeonId);
 
-                        return (
-                            <section
-                                key={group.dungeonId}
-                                className="add-tile-picker__group"
-                            >
-                                <button
-                                    type="button"
-                                    className="add-tile-picker__group-toggle"
-                                    onClick={() => toggleDungeonGroup(group.dungeonId)}
+                            return (
+                                <section
+                                    key={group.dungeonId}
+                                    className="add-tile-picker__group"
                                 >
-                                    <span>
-                                        {isExpanded ? "▾" : "▸"} {group.dungeonName}
-                                    </span>
+                                    <button
+                                        type="button"
+                                        className="add-tile-picker__group-toggle"
+                                        onClick={() => toggleDungeonGroup(group.dungeonId)}
+                                    >
+                                        <span>
+                                            {isExpanded ? "▾" : "▸"} {group.dungeonName}
+                                        </span>
 
-                                    <span className="add-tile-picker__group-count">
-                                        {group.rooms.length}
-                                    </span>
-                                </button>
+                                        <span className="add-tile-picker__group-count">
+                                            {group.rooms.length}
+                                        </span>
+                                    </button>
 
-                                {isExpanded && (
-                                    <div className="add-tile-picker__rooms">
-                                        {group.rooms.map((room) => (
-                                            <button
-                                                key={room.id}
-                                                type="button"
-                                                className="add-tile-picker__room"
-                                                onMouseEnter={() => setPreviewRoomId(room.id)}
-                                                onFocus={() => setPreviewRoomId(room.id)}
-                                                onClick={() => addRoom(room.id)}
-                                            >
-                                                {room.name}
-                                            </button>
-                                        ))}
-                                    </div>
-                                )}
-                            </section>
-                        );
-                    })}
-                </div>
+                                    {isExpanded && (
+                                        <div className="add-tile-picker__rooms">
+                                            {group.rooms.map((room) => (
+                                                <button
+                                                    key={room.id}
+                                                    type="button"
+                                                    className="add-tile-picker__room"
+                                                    onMouseEnter={() => setPreviewRoomId(room.id)}
+                                                    onFocus={() => setPreviewRoomId(room.id)}
+                                                    onClick={() => addRoom(room.id)}
+                                                >
+                                                    <RoomTilePreview
+                                                        room={room}
+                                                        allDungeons={allDungeons}
+                                                        size={RoomTilePreviewSizes.Thumbnail}
+                                                    />
+
+                                                    <span className="add-tile-picker__room-info">
+                                                        <span className="add-tile-picker__room-name">
+                                                            {room.name}
+                                                        </span>
+
+                                                        <span className="add-tile-picker__room-meta">
+                                                            {room.doors.length} doors
+                                                        </span>
+                                                    </span>
+                                                </button>
+                                            ))}
+                                        </div>
+                                    )}
+                                </section>
+                            );
+                        })}
+                    </div>
+
+                    {previewRoom
+                        ? createPortal(
+                            (
+                                <div className="add-tile-picker__preview-flyout">
+                                    <RoomTilePreview
+                                        room={previewRoom}
+                                        allDungeons={allDungeons}
+                                        size={RoomTilePreviewSizes.Large}
+                                    />
+                                </div>
+                            ) as unknown as Parameters<typeof createPortal>[0],
+                            document.body,
+                        )
+                        : null}
+                </>
             )}
         </section>
     );

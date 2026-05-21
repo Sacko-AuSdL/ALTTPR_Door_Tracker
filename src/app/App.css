@@ -674,120 +674,31 @@
     background: #7f1d1d;
 }
 
-.room-tile-preview {
-    display: grid;
-    grid-template-columns: 72px 1fr;
-    gap: 0.65rem;
-    align-items: center;
-
-    height: 104px;
-    padding: 0.55rem;
-    border: 1px solid #374151;
-    border-radius: 0.5rem;
-    background: #111827;
-    text-align: left;
-    overflow: hidden;
-}
-
-.room-tile-preview--empty {
-    color: #9ca3af;
-    font-size: 0.8rem;
-}
-
-.room-tile-preview__image {
-    display: grid;
-    place-items: center;
-    width: 72px;
-    height: 72px;
-    border: 1px dashed #4b5563;
-    border-radius: 0.4rem;
-    overflow: hidden;
-    color: #6b7280;
-    font-size: 0.7rem;
-    text-align: center;
-}
-
-.room-tile-preview__image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.room-tile-preview__content {
-    min-width: 0;
-    overflow: hidden;
-}
-
-.room-tile-preview__dungeon {
-    color: #9ca3af;
-    font-size: 0.7rem;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.room-tile-preview__name {
-    color: #f9fafb;
-    font-size: 0.9rem;
-    font-weight: 700;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.room-tile-preview__doors {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.25rem;
-    margin-top: 0.35rem;
-    max-height: 2.8rem;
-    overflow: hidden;
-}
-
-.room-tile-preview__doors span {
-    flex: 0 0 auto;
-    padding: 0.1rem 0.35rem;
-    border: 1px solid #4b5563;
-    border-radius: 999px;
-    color: #d1d5db;
-    font-size: 0.7rem;
-}
-
 .connection-panel__button:disabled {
     cursor: not-allowed;
     opacity: 0.45;
 }
 
 .add-tile-picker {
-    display: grid;
-    gap: 0.6rem;
-    padding: 0.75rem 0;
-    border-bottom: 1px solid #374151;
+    position: relative;
 }
 
 .add-tile-picker__header {
     display: flex;
-    align-items: center;
+    align-items: baseline;
     justify-content: space-between;
     gap: 0.75rem;
+    margin-bottom: 0.65rem;
+}
+
+.add-tile-picker__header strong {
     color: #f9fafb;
-    font-size: 0.9rem;
+    font-size: 1rem;
 }
 
 .add-tile-picker__header span {
     color: #9ca3af;
-    font-size: 0.75rem;
-    font-weight: 400;
-}
-
-.add-tile-picker__preview {
-    position: sticky;
-    top: 0;
-    z-index: 20;
-
-    padding-bottom: 0.4rem;
-    background: rgb(17 24 39 / 96%);
-    backdrop-filter: blur(8px);
+    font-size: 0.8rem;
 }
 
 .add-tile-picker__groups {
@@ -797,68 +708,192 @@
 
 .add-tile-picker__group {
     display: grid;
-    gap: 0.35rem;
+    gap: 0.4rem;
 }
 
 .add-tile-picker__group-toggle {
     cursor: pointer;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 0.75rem;
-
-    width: 100%;
+    gap: 0.5rem;
     padding: 0.45rem 0.55rem;
-
     border: 1px solid #374151;
-    border-radius: 0.45rem;
+    border-radius: 0.5rem;
     background: #111827;
     color: #e5e7eb;
-
+    font: inherit;
     font-size: 0.8rem;
-    font-weight: 700;
     text-align: left;
 }
 
-.add-tile-picker__group-toggle:hover {
+.add-tile-picker__group-toggle:hover,
+.add-tile-picker__group-toggle:focus-visible {
     border-color: #60a5fa;
-    background: #1e3a8a;
+    background: #1f2937;
 }
 
 .add-tile-picker__group-count {
     color: #9ca3af;
     font-size: 0.75rem;
-    font-weight: 400;
 }
 
 .add-tile-picker__rooms {
     display: grid;
-    gap: 0.3rem;
-    padding-left: 0.6rem;
+    gap: 0.45rem;
+    padding-left: 0.25rem;
 }
 
 .add-tile-picker__room {
     cursor: pointer;
     width: 100%;
-    padding: 0.4rem 0.5rem;
+    display: grid;
+    grid-template-columns: 56px minmax(0, 1fr);
+    gap: 0.65rem;
+    align-items: center;
+    padding: 0.4rem;
     border: 1px solid #374151;
-    border-radius: 0.45rem;
-    background: #1f2937;
-    color: #f9fafb;
-    font-size: 0.8rem;
+    border-radius: 0.65rem;
+    background: rgb(17 24 39 / 70%);
+    color: inherit;
+    font: inherit;
     text-align: left;
 }
 
 .add-tile-picker__room:hover,
-.add-tile-picker__room:focus {
-    border-color: #facc15;
-    background: #854d0e;
-    outline: none;
+.add-tile-picker__room:focus-visible {
+    border-color: #60a5fa;
+    background: rgb(37 99 235 / 18%);
 }
 
-.add-tile-picker__empty {
-    margin: 0;
-    color: #9ca3af;
+.add-tile-picker__room-info {
+    min-width: 0;
+    display: grid;
+    gap: 0.15rem;
+}
+
+.add-tile-picker__room-name {
+    overflow: hidden;
+    color: #f9fafb;
     font-size: 0.8rem;
-    text-align: left;
+    font-weight: 700;
+    line-height: 1.15;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.add-tile-picker__room-meta {
+    color: #9ca3af;
+    font-size: 0.7rem;
+}
+
+.room-tile-preview {
+    box-sizing: border-box;
+    overflow: hidden;
+    border: 1px solid #374151;
+    border-radius: 0.55rem;
+    background: #020617;
+}
+
+.room-tile-preview--thumbnail {
+    width: 56px;
+    height: 56px;
+}
+
+.room-tile-preview--large {
+    width: 224px;
+}
+
+.room-tile-preview__image {
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    background: #020617;
+}
+
+.room-tile-preview--thumbnail .room-tile-preview__image {
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+}
+
+.room-tile-preview--large {
+    width: 320px;
+}
+
+.room-tile-preview--large .room-tile-preview__image {
+    width: 320px;
+    height: 320px;
+    border-bottom: 1px solid #374151;
+}
+
+.room-tile-preview__image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    image-rendering: pixelated;
+}
+
+.room-tile-preview__content {
+    display: grid;
+    gap: 0.25rem;
+    padding: 0.5rem;
+}
+
+.room-tile-preview__dungeon {
+    overflow: hidden;
+    color: #9ca3af;
+    font-size: 0.7rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.room-tile-preview__name {
+    overflow: hidden;
+    color: #f9fafb;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.room-tile-preview__doors {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+}
+
+.room-tile-preview__doors span {
+    flex: 0 0 auto;
+    padding: 0.1rem 0.3rem;
+    border: 1px solid #4b5563;
+    border-radius: 999px;
+    color: #d1d5db;
+    font-size: 0.65rem;
+}
+
+.add-tile-picker__preview-flyout {
+    position: fixed;
+    top: 6rem;
+    right: 390px;
+    z-index: 9999;
+    display: grid;
+    padding: 0.5rem;
+    border: 1px solid #374151;
+    border-radius: 0.75rem;
+    background: rgb(17 24 39 / 96%);
+    box-shadow: 0 10px 24px rgb(0 0 0 / 45%);
+    pointer-events: none;
+}
+
+.add-tile-picker__preview-title {
+    display: none;
+}
+
+@media (max-width: 1200px) {
+    .add-tile-picker__preview-flyout {
+        display: none;
+    }
 }

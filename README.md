@@ -47,13 +47,15 @@ The goal is to make door tracking more visual and flexible than a fixed grid tra
   - Vanilla / Shuffled entrances
 - LocalStorage persistence
 - Reset layout, reset dungeon, reset run
-- Add Tile picker with grouped dungeon accordion and hover preview
+- Add Tile picker with grouped dungeon accordion, inline tile thumbnails, and large hover preview
+- Tracker options menu in the dungeon tab bar
+- Tracker actions menu for layout, dungeon, and run resets
 
 ## Usage
 
 - Select a dungeon tab.
 - Use the Add Tile panel to add rooms to the current graph.
-- Hover a tile in the picker to preview it.
+- Scan the inline tile thumbnails and hover a tile to open a larger preview.
 - Click a tile in the picker to add it.
 - Click one door hotspot, then another door hotspot, to create a connection.
 - Click an existing connection line to remove it.
@@ -61,7 +63,8 @@ The goal is to make door tracking more visual and flexible than a fixed grid tra
 - Choose a marker icon to mark the door requirement.
 - Click an existing marker icon to remove it again.
 - Drag tiles around the canvas to organize the current route.
-- Use the Run Settings panel to change door shuffle mode, entrance mode, tile size, and door label display.
+- Use the tracker options menu in the dungeon tab bar to change door shuffle mode, entrance mode, tile size, and door label display.
+- Use the tracker actions menu to rearrange rooms, reset the current dungeon, or reset all dungeon states.
 
 The tracker state is saved in browser LocalStorage.
 
