@@ -20,6 +20,7 @@ import type {DungeonDefinition, DungeonDoor} from "../../types/dungeon";
 import type {DoorConnection, GraphPosition, PersistedTrackerState} from "../../types/tracker";
 import type {DoorMarkerMap, DoorMarkerType} from "../../types/doorMarker";
 import {ConnectionPanel} from "./ConnectionPanel";
+import { ConnectionEdge } from "./ConnectionEdge";
 import {TrackerStatusBar} from "./TrackerStatusBar";
 import {RoomNode, type RoomFlowNode} from "./RoomNode";
 import {getStartingRoomIds} from "../../domain/startingRooms";
@@ -44,6 +45,10 @@ export type DungeonGraphActions = {
 
 const nodeTypes: NodeTypes = {
     room: RoomNode as ComponentType<NodeProps>,
+};
+
+const edgeTypes = {
+    connection: ConnectionEdge,
 };
 
 export function DungeonGraph({
@@ -395,11 +400,11 @@ export function DungeonGraph({
                 target: toDoor.roomId,
                 sourceHandle: fromDoor.id,
                 targetHandle: toDoor.id,
-                type: "smoothstep",
+                type: "connection",
                 animated: false,
-                style: {
-                    stroke: color,
-                    strokeWidth: 3,
+                data: {
+                    color,
+                    laneOffset: getConnectionLaneOffset(index),
                 },
                 className: "door-edge",
             };
@@ -428,6 +433,7 @@ export function DungeonGraph({
                 nodes={nodes}
                 edges={edges}
                 nodeTypes={nodeTypes}
+                edgeTypes={edgeTypes}
                 onNodesChange={onNodesChange}
                 nodesDraggable
                 defaultViewport={{x: 0, y: 0, zoom: 1}}
@@ -736,4 +742,15 @@ function getUsedRoomIdsAcrossRun({
     });
 
     return [...usedRoomIds];
+}
+
+function getConnectionLaneOffset(index: number): number {
+    if (index === 0) {
+        return 0;
+    }
+
+    const lane = Math.floor((index + 1) / 2);
+    const direction = index % 2 === 0 ? -1 : 1;
+
+    return direction * lane * 18;
 }
