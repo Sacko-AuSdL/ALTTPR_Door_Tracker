@@ -4,6 +4,8 @@ import { BaseEdge } from "@xyflow/react";
 type ConnectionEdgeData = {
     color?: string;
     laneOffset?: number;
+    isHighlighted?: boolean;
+    isDimmed?: boolean;
 };
 
 export function ConnectionEdge({
@@ -18,6 +20,8 @@ export function ConnectionEdge({
     const connectionData = data as ConnectionEdgeData | undefined;
     const color = connectionData?.color ?? "#60a5fa";
     const laneOffset = connectionData?.laneOffset ?? 0;
+    const isHighlighted = connectionData?.isHighlighted ?? selected ?? false;
+    const isDimmed = connectionData?.isDimmed ?? false;
 
     const path = getOffsetCurvePath({
         sourceX,
@@ -29,14 +33,23 @@ export function ConnectionEdge({
 
     return (
         <>
+            <path
+                d={path}
+                fill="none"
+                stroke="transparent"
+                strokeWidth={18}
+                pointerEvents="stroke"
+            />
+
             <BaseEdge
                 id={`${id}-outline`}
                 path={path}
                 style={{
                     stroke: "rgba(2, 6, 23, 0.95)",
-                    strokeWidth: selected ? 10 : 8,
+                    strokeWidth: isHighlighted ? 12 : 8,
                     strokeLinecap: "round",
                     strokeLinejoin: "round",
+                    opacity: isDimmed ? 0.35 : 1,
                 }}
             />
 
@@ -45,11 +58,12 @@ export function ConnectionEdge({
                 path={path}
                 style={{
                     stroke: color,
-                    strokeWidth: selected ? 5 : 4,
+                    strokeWidth: isHighlighted ? 6 : 4,
                     strokeLinecap: "round",
                     strokeLinejoin: "round",
-                    filter: selected
-                        ? `drop-shadow(0 0 6px ${color})`
+                    opacity: isDimmed ? 0.3 : 1,
+                    filter: isHighlighted
+                        ? `drop-shadow(0 0 10px ${color})`
                         : `drop-shadow(0 0 2px ${color})`,
                 }}
             />

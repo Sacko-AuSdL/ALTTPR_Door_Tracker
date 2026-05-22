@@ -11,7 +11,8 @@ The goal is to make door tracking more visual and flexible than a fixed grid tra
 - move tiles freely on the canvas
 - remove tiles again when needed
 - save the current run state in browser local storage
-- support dungeon-specific and cross-dungeon tracking modes
+- support Beginner, Own Dungeon, and Cross Dungeon tracking modes
+- keep room tiles unique across the whole run
 
 ## Current Features
 
@@ -21,7 +22,8 @@ The goal is to make door tracking more visual and flexible than a fixed grid tra
 - Real tile preview images generated from the source map
 - Complete door-coordinate tile coverage from the EG map
 - Door hotspots positioned directly on the tile images
-- Color-coded door connections
+- Color-coded door connections with offset rendering to reduce overlap
+- Hovering a connection highlights the linked rooms and makes the connection easier to follow
 - Door markers for important requirements:
   - Somaria
   - Lamp
@@ -40,6 +42,7 @@ The goal is to make door tracking more visual and flexible than a fixed grid tra
   - Medium
   - Large
 - Dungeon tabs
+- Global room pool: each tile can only be used once across the whole run
 - Global run settings:
   - Beginner
   - Own Dungeon
@@ -57,7 +60,9 @@ The goal is to make door tracking more visual and flexible than a fixed grid tra
 - Use the Add Tile panel to add rooms to the current graph.
 - Scan the inline tile thumbnails and hover a tile to open a larger preview.
 - Click a tile in the picker to add it.
+- Each tile can only appear once across the whole run. Once added to any dungeon graph, it is removed from the global Add Tile pool.
 - Click one door hotspot, then another door hotspot, to create a connection.
+- Hover a connection line to highlight the linked rooms and make the connection easier to follow.
 - Click an existing connection line to remove it.
 - Click a door hotspot to open the marker menu.
 - Choose a marker icon to mark the door requirement.
@@ -67,6 +72,12 @@ The goal is to make door tracking more visual and flexible than a fixed grid tra
 - Use the tracker actions menu to rearrange rooms, reset the current dungeon, or reset all dungeon states.
 
 The tracker state is saved in browser LocalStorage.
+
+### Tracker actions
+
+- **Rearrange Rooms** resets the room layout for the active dungeon while keeping rooms, connections, and markers.
+- **Reset Current Dungeon** clears the active dungeon state and restores its starting rooms.
+- **Reset All Dungeons** clears all saved dungeon states for the current run.
 
 ## Development
 
@@ -133,6 +144,8 @@ Manual door hotspot coordinate corrections are read from:
 scripts/manual_door_coordinate_overrides.json
 ```
 These overrides are used to fine-tune individual door hotspot positions without editing generated files directly.
+
+Generated files should not be edited manually. Use the generator script, missing tile review file, or manual door coordinate overrides instead.
 
 The generated files are committed so users and deployment builds do **not** need Python or the original KrisDavie repository.
 

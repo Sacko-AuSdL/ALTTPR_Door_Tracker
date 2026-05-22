@@ -4,6 +4,7 @@ import {
     ReactFlow,
     useNodesState,
     type Edge,
+    type EdgeTypes,
     type NodeProps,
     type NodeTypes,
 } from "@xyflow/react";
@@ -49,7 +50,7 @@ const nodeTypes: NodeTypes = {
 
 const edgeTypes = {
     connection: ConnectionEdge,
-};
+} as unknown as EdgeTypes;
 
 export function DungeonGraph({
                                  dungeon,
@@ -61,6 +62,8 @@ export function DungeonGraph({
         () => loadPersistedTrackerState(dungeon.id),
         [dungeon.id],
     );
+
+    const [hoveredConnectionId, setHoveredConnectionId] = useState<string | undefined>();
 
     const [visibleRoomIds, setVisibleRoomIds] = useState<string[]>(() => {
         if (persistedState?.visibleRoomIds?.length) {
@@ -173,6 +176,34 @@ export function DungeonGraph({
         });
     }, [connections, doorMarkers, dungeon.id, nodes, visibleRoomIds]);
 
+    const highlightedConnectionRoomIds = useMemo(() => {
+        if (!hoveredConnectionId) {
+            return new Set<string>();
+        }
+
+        const hoveredConnection = connections.find(
+            (connection) => connection.id === hoveredConnectionId,
+        );
+
+        if (!hoveredConnection) {
+            return new Set<string>();
+        }
+
+        const fromDoor = findDoorById(allDungeons, hoveredConnection.fromDoorId);
+        const toDoor = findDoorById(allDungeons, hoveredConnection.toDoorId);
+
+        return new Set([fromDoor.roomId, toDoor.roomId]);
+    }, [allDungeons, connections, hoveredConnectionId]);
+
+    useEffect(() => {
+        if (
+            hoveredConnectionId &&
+            !connections.some((connection) => connection.id === hoveredConnectionId)
+        ) {
+            setHoveredConnectionId(undefined);
+        }
+    }, [connections, hoveredConnectionId]);
+
     const handleDoorClick = useCallback(
         (door: DungeonDoor) => {
             if (!selectedDoor) {
@@ -264,21 +295,28 @@ export function DungeonGraph({
 
     useEffect(() => {
         setNodes((currentNodes) =>
-            currentNodes.map((node) => ({
-                ...node,
-                data: {
-                    ...node.data,
-                    selectedDoorId: selectedDoor?.id,
-                    connectedDoorIds,
-                    doorConnectionMap,
-                    doorLabelMode: runSettings.doorLabelMode,
-                    doorMarkers,
-                    onDoorClick: handleDoorClick,
-                    onDoorMarkerChange: handleDoorMarkerChange,
-                    onDoorSelectionClear: clearSelectedDoor,
-                    onRemoveRoom: handleRemoveRoom,
-                },
-            })),
+            currentNodes.map((node) => {
+                const isConnectionHighlighted = highlightedConnectionRoomIds.has(node.id);
+
+                return {
+                    ...node,
+                    className: isConnectionHighlighted
+                        ? "react-flow-node--connection-highlighted"
+                        : undefined,
+                    data: {
+                        ...node.data,
+                        selectedDoorId: selectedDoor?.id,
+                        connectedDoorIds,
+                        doorConnectionMap,
+                        doorLabelMode: runSettings.doorLabelMode,
+                        doorMarkers,
+                        onDoorClick: handleDoorClick,
+                        onDoorMarkerChange: handleDoorMarkerChange,
+                        onDoorSelectionClear: clearSelectedDoor,
+                        onRemoveRoom: handleRemoveRoom,
+                    },
+                };
+            }),
         );
     }, [
         connectedDoorIds,
@@ -287,6 +325,7 @@ export function DungeonGraph({
         handleDoorClick,
         handleDoorMarkerChange,
         handleRemoveRoom,
+        highlightedConnectionRoomIds,
         runSettings.doorLabelMode,
         selectedDoor?.id,
         setNodes,
@@ -405,11 +444,15 @@ export function DungeonGraph({
                 data: {
                     color,
                     laneOffset: getConnectionLaneOffset(index),
+                    isHighlighted: hoveredConnectionId === connection.id,
+                    isDimmed:
+                        hoveredConnectionId !== undefined &&
+                        hoveredConnectionId !== connection.id,
                 },
                 className: "door-edge",
             };
         });
-    }, [connections, allDungeons]);
+    }, [connections, allDungeons, hoveredConnectionId]);
 
     const selectedDoorLabel = useMemo(() => {
         if (!selectedDoor) {
@@ -443,6 +486,12 @@ export function DungeonGraph({
                 onEdgeClick={(event, edge) => {
                     event.stopPropagation();
                     deleteConnection(edge.id);
+                }}
+                onEdgeMouseEnter={(_, edge) => {
+                    setHoveredConnectionId(edge.id);
+                }}
+                onEdgeMouseLeave={() => {
+                    setHoveredConnectionId(undefined);
                 }}
             >
                 <Background/>
