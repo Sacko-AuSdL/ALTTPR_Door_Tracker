@@ -9,6 +9,7 @@ type GetAvailableRoomsInput = {
     activeDungeon: DungeonDefinition;
     allDungeons: DungeonDefinition[];
     visibleRoomIds: string[];
+    excludedRoomIds?: string[];
     settings: TrackerRunSettings;
 };
 
@@ -16,6 +17,7 @@ export function getAvailableRoomsForSettings({
                                                  activeDungeon,
                                                  allDungeons,
                                                  visibleRoomIds,
+                                                 excludedRoomIds,
                                                  settings,
                                              }: GetAvailableRoomsInput): DungeonRoom[] {
     const rooms = getRoomsForDoorShuffleMode({
@@ -24,7 +26,7 @@ export function getAvailableRoomsForSettings({
         settings,
     });
 
-    return removeVisibleRooms(rooms, visibleRoomIds);
+    return removeExcludedRooms(rooms, excludedRoomIds ?? visibleRoomIds);
 }
 
 type GetRoomsForDoorShuffleModeInput = {
@@ -59,12 +61,11 @@ function getRoomsForDoorShuffleMode({
     }
 }
 
-
-function removeVisibleRooms(
+function removeExcludedRooms(
     rooms: DungeonRoom[],
-    visibleRoomIds: string[],
+    excludedRoomIds: string[],
 ): DungeonRoom[] {
-    const visibleRoomIdSet = new Set(visibleRoomIds);
+    const excludedRoomIdSet = new Set(excludedRoomIds);
 
-    return rooms.filter((room) => !visibleRoomIdSet.has(room.id));
+    return rooms.filter((room) => !excludedRoomIdSet.has(room.id));
 }

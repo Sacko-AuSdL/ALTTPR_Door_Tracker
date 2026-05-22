@@ -134,14 +134,24 @@ export function DungeonGraph({
         return allDungeons.flatMap((candidateDungeon) => candidateDungeon.rooms);
     }, [allDungeons]);
 
+    const globallyUsedRoomIds = useMemo(() => {
+        return getUsedRoomIdsAcrossRun({
+            activeDungeonId: dungeon.id,
+            activeVisibleRoomIds: visibleRoomIds,
+            allDungeons,
+            runSettings,
+        });
+    }, [allDungeons, dungeon.id, runSettings, visibleRoomIds]);
+
     const hiddenRooms = useMemo(() => {
         return getAvailableRoomsForSettings({
             activeDungeon: dungeon,
             allDungeons,
             visibleRoomIds,
+            excludedRoomIds: globallyUsedRoomIds,
             settings: runSettings,
         });
-    }, [allDungeons, dungeon, visibleRoomIds, runSettings]);
+    }, [allDungeons, dungeon, globallyUsedRoomIds, runSettings, visibleRoomIds]);
 
     const hiddenRoomGroups = useMemo(() => {
         return groupRoomsByOriginalDungeon(hiddenRooms, allDungeons);
@@ -328,7 +338,7 @@ export function DungeonGraph({
     }, [onActionsReady, resetLayout, resetDungeon, resetRun]);
 
     function addRoomToGraph(roomId: string) {
-        if (!roomId || visibleRoomIds.includes(roomId)) {
+        if (!roomId || globallyUsedRoomIds.includes(roomId)) {
             return;
         }
 
@@ -693,4 +703,37 @@ function isPositionOccupied(
 
         return xDistance < tileSizePx && yDistance < tileSizePx;
     });
+}
+
+function getUsedRoomIdsAcrossRun({
+                                     activeDungeonId,
+                                     activeVisibleRoomIds,
+                                     allDungeons,
+                                     runSettings,
+                                 }: {
+    activeDungeonId: string;
+    activeVisibleRoomIds: string[];
+    allDungeons: DungeonDefinition[];
+    runSettings: TrackerRunSettings;
+}): string[] {
+    const usedRoomIds = new Set(activeVisibleRoomIds);
+
+    allDungeons.forEach((candidateDungeon) => {
+        if (candidateDungeon.id === activeDungeonId) {
+            return;
+        }
+
+        const persistedState = loadPersistedTrackerState(candidateDungeon.id);
+
+        const visibleRoomIds =
+            persistedState?.visibleRoomIds?.length
+                ? persistedState.visibleRoomIds
+                : getStartingRoomIds(candidateDungeon, runSettings);
+
+        visibleRoomIds.forEach((roomId) => {
+            usedRoomIds.add(roomId);
+        });
+    });
+
+    return [...usedRoomIds];
 }
